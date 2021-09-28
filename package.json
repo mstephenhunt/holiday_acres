@@ -22,7 +22,7 @@
     "lint-staged": ">=10"
   },
   "lint-staged": {
-    "*.{js,json,css,scss,html,md,py}": [
+    "*.{js,json,css,scss,html,md}": [
       "prettier --check"
     ],
     "*.{js,css,md}": "prettier --write"
