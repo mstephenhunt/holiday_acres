@@ -1,1 +1,3 @@
-yarn lint-staged && yarn check --integrity
+npm test
+
+echo "BLAH"
