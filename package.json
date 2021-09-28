@@ -25,7 +25,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-  "*.{js,json,css,scss,html,md}": [
+  "*.{js,json,css,scss,html,md,py}": [
     "prettier --check"
   ]
   },
