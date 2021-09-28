@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "prettier --check .",
+    "lint:fix": "prettier --write .",
     "prepare": "husky install"
   },
   "repository": {
@@ -18,15 +19,13 @@
   },
   "homepage": "https://github.com/mstephenhunt/holiday_acres#readme",
   "dependencies": {
-    "lint-staged": "11.1.2"
-  },
-  "husky": {
-    "precommit": "lint-staged"
+    "lint-staged": ">=10"
   },
   "lint-staged": {
     "*.{js,json,css,scss,html,md,py}": [
       "prettier --check"
-    ]
+    ],
+    "*.{js,css,md}": "prettier --write"
   },
   "devDependencies": {
     "husky": "7.0.2",
