@@ -25,3 +25,13 @@ To setup precommit hook, run `yarn` to install node packages and `pip install -r
 ### Initial DB migration
 
 Currently only setup to use SQLite. Run `python manage.py migrate` to put in base tables.
+
+### Create dummy initial admin account
+
+```bash
+
+python manage.py createsuperuser --email admin@example.com --username admin
+
+```
+
+Using password "testing".
