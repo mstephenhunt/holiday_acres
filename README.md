@@ -20,4 +20,4 @@ $ which python .../holiday_acres/ha_venv/bin/python
 
 ## Setting up precommit hook
 
-To setup precommit hook, run `yarn` to install node packages.
+To setup precommit hook, run `yarn` to install node packages and `pip install -r requirements.txt`.
