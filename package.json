@@ -25,7 +25,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*": "echo 'something'"
+    "*": "prettier --check"
   },
   "devDependencies": {
     "prettier": "2.4.1"
