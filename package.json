@@ -1,0 +1,33 @@
+{
+  "name": "holiday_acres",
+  "version": "1.0.0",
+  "description": "## Installing `virtualenv`",
+  "main": "index.js",
+  "scripts": {
+    "lint": "prettier --check ."
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mstephenhunt/holiday_acres.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mstephenhunt/holiday_acres/issues"
+  },
+  "homepage": "https://github.com/mstephenhunt/holiday_acres#readme",
+  "dependencies": {
+    "husky": "7.0.2",
+    "lint-staged": "11.1.2"
+  },
+  "husky": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*": "echo 'something'"
+  },
+  "devDependencies": {
+    "prettier": "2.4.1"
+  }
+}
