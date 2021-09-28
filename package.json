@@ -25,7 +25,9 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*": "prettier --check"
+  "*.{js,json,css,scss,html,md}": [
+    "prettier --check"
+  ]
   },
   "devDependencies": {
     "prettier": "2.4.1"
