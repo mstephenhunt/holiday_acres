@@ -4,7 +4,8 @@
   "description": "## Installing `virtualenv`",
   "main": "index.js",
   "scripts": {
-    "lint": "prettier --check ."
+    "lint": "prettier --check .",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
