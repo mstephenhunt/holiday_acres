@@ -12,9 +12,21 @@ On Mac install, if you get the error:
 
 You may need to [create a symlink from the OS certs to python](https://github.com/python-poetry/poetry/issues/680#issuecomment-743921693).
 
-### Setting up precommit hook
+### Yarn JS Package Installation
 
-To setup precommit hook, run `yarn` to install node packages and `pip install -r requirements.txt`.
+[yarn](https://classic.yarnpkg.com/lang/en/docs/install/) is used to manage JS packages used for linting and pre-commit hooks. This can usually be installed directly via `npm`:
+
+```bash
+npm install --global yarn
+```
+
+After installing `yarn`, simply run:
+
+```bash
+$ yarn
+```
+
+to install the required JS packages.
 
 ## Django Setup
 
