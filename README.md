@@ -1,26 +1,34 @@
-# Setup
+## Package Management Setup
 
-### Installing `virtualenv`
+### Poetry Python Package Management
 
-```bash
-$ pip3 install virtualenv
-$ virtualenv -p python3.9 venv_ha
-$ ls
-./          .git/       README.md
-../         .gitignore  venv_ha/
-```
+[Python Poetry](https://python-poetry.org/docs/) is used for package management. That link will bring you to the instructions page for installing for Windows or Unix.
 
-### Using this `virtualenv`
+On Mac install, if you get the error:
 
 ```bash
-$ source ./venv_ha/bin/activate
-$ which python .../holiday_acres/ha_venv/bin/python
-
+[SSL: CERTIFICATE_VERIFY_FAILED]
 ```
 
-### Setting up precommit hook
+You may need to [create a symlink from the OS certs to python](https://github.com/python-poetry/poetry/issues/680#issuecomment-743921693).
 
-To setup precommit hook, run `yarn` to install node packages and `pip install -r requirements.txt`.
+### Yarn JS Package Installation
+
+[yarn](https://classic.yarnpkg.com/lang/en/docs/install/) is used to manage JS packages used for linting and pre-commit hooks. This can usually be installed directly via `npm`:
+
+```bash
+npm install --global yarn
+```
+
+After installing `yarn`, simply run:
+
+```bash
+$ yarn
+```
+
+to install the required JS packages.
+
+## Django Setup
 
 ### Initial DB migration
 
