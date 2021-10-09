@@ -4,28 +4,34 @@ from django.db import models
 class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=200)
+    # USER DATA
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
 
 
 class Paddock(models.Model):
-    name = models.CharField(max_length=200)
-    paddock_name = models.CharField(max_length=200)
-    horse = models.CharField(max_length=200)
-    tier = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # PADDOCK DATA
+    paddock_name = models.CharField(max_length=200)
+    paddock_tier = models.IntegerField()
 
 
 class Horse(models.Model):
-    name = models.CharField(max_length=200)
-    # one-to-many relation (many horses to one paddock)
-    paddock_name = models.CharField(max_length=200)
-    # one-to-many relation (many horses to one owner)
-    owner = models.CharField(max_length=200)
-    tier = models.IntegerField()
-    age = models.IntegerField()
-    feed = models.CharField(max_length=200)
-    misc_notes = models.TextField()
-    health = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # DB RELATIONSHIPS
+    # one-to-many relation (one paddock to many horses)
+    paddock = models.ForeignKey(
+        Paddock, related_name="horses", on_delete=models.CASCADE
+    )
+    # one-to-many relation (one user to many horses)
+    user = models.ForeignKey(User, related_name="horses", on_delete=models.CASCADE)
+    # HORSE DATA
+    name = models.CharField(max_length=200)
+    age = models.IntegerField()
+    tier = models.IntegerField()
+    feed = models.CharField(max_length=200)
+    health = models.TextField()
+    misc_notes = models.TextField()
