@@ -2,6 +2,7 @@ import pytest
 
 from holiday_acres_api.models import User
 
+
 """
 Can create and fetch basic user in DB
 """
