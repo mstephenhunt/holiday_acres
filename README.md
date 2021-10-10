@@ -4,6 +4,8 @@
 
 [Python Poetry](https://python-poetry.org/docs/) is used for package management. That link will bring you to the instructions page for installing for Windows or Unix.
 
+Depending on your system's `python --version` you may need to update in order to install the correct version of `poetry`. It's best if you're in python 3.9
+
 On Mac install, if you get the error:
 
 ```bash
@@ -32,13 +34,13 @@ to install the required JS packages.
 
 ### Initial DB migration
 
-Currently only setup to use SQLite. Run `python manage.py migrate` to put in base tables.
+Currently only setup to use SQLite. Run `poetry run manage.py migrate` to put in base tables.
 
 ### Create dummy initial admin account
 
 ```bash
 
-python manage.py createsuperuser --email admin@example.com --username admin
+poetry run manage.py createsuperuser --email admin@example.com --username admin
 
 ```
 
