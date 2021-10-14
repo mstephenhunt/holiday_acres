@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import SET_DEFAULT, SET_NULL
 
 
 class User(models.Model):
@@ -23,11 +24,9 @@ class Horse(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # DB RELATIONSHIPS
     # one-to-many relation (one paddock to many horses)
-    paddock = models.ForeignKey(
-        Paddock, related_name="horses", on_delete=models.CASCADE
-    )
+    paddock = models.ForeignKey(Paddock, related_name="horses", on_delete=SET_NULL)
     # one-to-many relation (one user to many horses)
-    user = models.ForeignKey(User, related_name="horses", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="horses", on_delete=SET_NULL)
     # HORSE DATA
     name = models.CharField(max_length=200)
     age = models.IntegerField()
