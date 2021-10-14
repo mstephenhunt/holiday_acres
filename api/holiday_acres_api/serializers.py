@@ -5,13 +5,13 @@ from holiday_acres_api.models import User, Paddock, Horse
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["name"]
+        fields = ["first_name", "last_name", "email"]
 
 
 class PaddockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paddock
-        fields = ["paddock_name", "horse", "tier"]
+        fields = ["paddock_name", "paddock_tier"]
 
 
 # https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
@@ -22,11 +22,13 @@ class HorseSerializer(serializers.ModelSerializer):
         # instead of hardcoding all of the fields, would a function make more sense?
         fields = [
             "name",
-            "paddock_name",
-            "owner",
-            "tier",
+            "user",
             "age",
             "feed",
             "misc_notes",
             "health",
+            # tier will limit which paddocks may be selected
+            "tier",
+            # paddock will select a specific paddock
+            "paddock",
         ]
