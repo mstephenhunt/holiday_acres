@@ -10,7 +10,7 @@ Can create and fetch basic user in DB
 
 @pytest.mark.django_db
 def test_user_create():
-    user = User(name="Testy McTesterson")
+    user = User(first_name="Testy McTesterson")
     user.save()
 
     # Should only be one user in DB
@@ -20,4 +20,4 @@ def test_user_create():
     db_user = User.objects.all()[:1].get()
 
     # Check name
-    assert db_user.name == "Testy McTesterson"
+    assert db_user.first_name == "Testy McTesterson"
