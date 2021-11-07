@@ -25,4 +25,6 @@ router.register(r"horses", views.HorseViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("users/", include("django.contrib.auth.urls")),
+    path("users/register", views.register_account_request),
 ]
