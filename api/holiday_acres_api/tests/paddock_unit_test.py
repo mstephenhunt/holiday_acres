@@ -1,6 +1,6 @@
 import pytest
 
-from holiday_acres_api.models import Paddock
+from holiday_acres_api.models.Paddocks import Paddock
 
 
 """

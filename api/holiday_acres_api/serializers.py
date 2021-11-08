@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from holiday_acres_api.models import User, Paddock, Horse
+from holiday_acres_api.models.Users import User
+from holiday_acres_api.models.Paddocks import Paddock
+from holiday_acres_api.models.Horses import Horse
 
 
 class UserSerializer(serializers.ModelSerializer):

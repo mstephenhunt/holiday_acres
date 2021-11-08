@@ -1,22 +1,7 @@
 from django.db import models
+from .Users import User
+from .Paddocks import Paddock
 from django.db.models.deletion import SET_DEFAULT, SET_NULL
-
-
-class User(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    # USER DATA
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
-
-
-class Paddock(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    # PADDOCK DATA
-    paddock_name = models.CharField(max_length=200)
-    paddock_tier = models.IntegerField()
 
 
 class Horse(models.Model):
