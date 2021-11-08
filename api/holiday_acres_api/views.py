@@ -9,7 +9,7 @@ from holiday_acres_api.models import User, Paddock, Horse
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
-
+# dummy change
 class UserViewSet(viewsets.ModelViewSet):
     """
     Dummy endpoint to return all user models in the DB
