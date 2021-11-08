@@ -5,9 +5,7 @@ from holiday_acres_api.serializers import (
     PaddockSerializer,
     HorseSerializer,
 )
-from holiday_acres_api.models.Users import User
-from holiday_acres_api.models.Paddocks import Paddock
-from holiday_acres_api.models.Horses import Horse
+from holiday_acres_api.models import User, Paddock, Horse
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
