@@ -1,7 +1,9 @@
 function responseTimeout(milliseconds: number) {
   return new Promise<Response>((resolve) => {
     setTimeout(() => {
-      resolve(new Response(null, { status: 408, statusText: 'UI fetch timeout' }));
+      resolve(
+        new Response(null, { status: 408, statusText: "UI fetch timeout" })
+      );
     }, milliseconds);
   });
 }
@@ -12,4 +14,4 @@ export const fetcher = async (path: string): Promise<Response> => {
 
   // Promise.race used for either timeout or request resolution
   return Promise.race([fetch(url.toString(), {}), responseTimeout(timeout)]);
-}
+};
