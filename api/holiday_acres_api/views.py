@@ -71,3 +71,10 @@ def register_account_request(request):
 
     response.status_code = 200
     return response
+
+@api_view(["GET"])
+def health_check(request):
+    response = HttpResponse()
+    response.status_code = 200
+
+    return response
