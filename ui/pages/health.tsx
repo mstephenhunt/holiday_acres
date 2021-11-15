@@ -8,12 +8,6 @@ import { useEffect } from 'react';
 export default function health() {
   const { data, error } = useSWR("/api/health", fetcher);
 
-  useEffect(() => {
-    // Every second, call health endpoint
-    const timer = setTimeout(() => console.log("Hello, World!"), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div>
       <p>Dummy health page</p>

@@ -10,7 +10,7 @@ function responseTimeout(milliseconds: number) {
 
 /**
  * Docs for fetch(): https://developer.mozilla.org/en-US/docs/Web/API/fetch
- */ 
+ */
 export const fetcher = async (path: string): Promise<Response> => {
   const timeout = 5000;
   const url = `http://localhost:8000${path}`;
