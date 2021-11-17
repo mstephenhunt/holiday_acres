@@ -1,3 +1,21 @@
+# UI
+
+## Installing Packages
+
+```bash
+~/holiday_acres$ nvm use
+~/holiday_acres$ cd ui
+~/holiday_acres/ui$ yarn
+```
+
+## Starting NextJS App
+
+```bash
+~/holiday_acres/ui$ yarn dev
+```
+
+# API
+
 ## Package Management Setup
 
 ### Poetry Python Package Management
