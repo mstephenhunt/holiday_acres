@@ -76,7 +76,7 @@ def register_account_request(request):
 
 @api_view(["GET"])
 def health_check(request):
-    response = JsonResponse({ 'current_datetime': datetime.now() })
+    response = JsonResponse({"current_datetime": datetime.now()})
     response.status_code = 200
 
     return response

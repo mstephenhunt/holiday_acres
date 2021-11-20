@@ -18,7 +18,7 @@ export default function health() {
     message = `Error loading health page: ${error}`;
   } else if (!data) {
     message = 'loading...';
-  } else if (!error && data) {
+  } else if (!error && data && data.current_datetime) {
     message = `Health check loaded, current date time: ${data.current_datetime}`
   }
 
