@@ -7,7 +7,8 @@ from holiday_acres_api.serializers import (
 )
 from holiday_acres_api.models import User, Paddock, Horse
 from rest_framework.decorators import api_view
-from django.http import HttpResponse
+from django.http import JsonResponse
+from datetime import datetime
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -70,4 +71,12 @@ def register_account_request(request):
     # TODO
 
     response.status_code = 200
+    return response
+
+
+@api_view(["GET"])
+def health_check(request):
+    response = JsonResponse({"current_datetime": datetime.now()})
+    response.status_code = 200
+
     return response
