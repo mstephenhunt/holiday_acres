@@ -68,61 +68,66 @@ def test_user_duplicate():
 @pytest.mark.django_db(transaction=True)
 def test_user_missing_fields():
     # missing email
-    user = User(
+    user_email = User(
         username="LetsTest54321!",
         password="ATestPW_12345",
         password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
-    user.save()
-    assert user == user
+    user_email.save()
+    assert user_email == user_email
+
     # missing username
-    user = User(
+    user_username = User(
         email="tester1@testplace.com",
         password="ATestPW_12345",
         password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
-    user.save()
+    user_username.save()
+    assert user_email == user_email
 
     # missing password
-    user = User(
+    user_password = User(
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
-    user.save()
-
+    user_password.save()
+    assert user_password == user_password
     # missing password_confirmation
-    user = User(
+    user_password_confirmation = User(
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
-    user.save()
+    user_password_confirmation.save()
+    assert user_password == user_password
 
     # missing first_name
-    user = User(
+    user_first_name = User(
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
         password_confirmation="ATestPW_12345",
         last_name="McTesterson",
     )
-    user.save()
+    user_first_name.save()
+    assert user_first_name == user_first_name
 
     # missing last_name
-    user = User(
+    user_last_name = User(
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
         password_confirmation="ATestPW_12345",
         first_name="Testy",
     )
-    user.save()
+    user_last_name.save()
+    assert user_last_name == user_last_name
