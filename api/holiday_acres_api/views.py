@@ -76,26 +76,6 @@ def register_account_request(request):
         response.write("Username already exists")
         return response
 
-    # Does the user submission contain all required fields?
-    # if username == "":
-    #     response.status_code = 500
-    #     response.write("username required")
-    # if password == "":
-    #     response.status_code = 500
-    #     response.write("password required")
-    # if password_confirmation == "":
-    #     response.status_code = 500
-    #     response.write("password confirmation required")
-    # if email == "":
-    #     response.status_code = 500
-    #     response.write("email required")
-    # if first_name == "":
-    #     response.status_code = 500
-    #     response.write("first name required")
-    # if last_name == "":
-    #     response.status_code = 500
-    #     response.write("last name required")
-
     # All good, create the user
     new_user = User.objects.create(
         email=email,
