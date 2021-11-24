@@ -1,5 +1,5 @@
 import * as React from "react";
-import Album from '../src/Album';
+import Album from "../src/Album";
 import Container from "@mui/material/Container";
 // import Typography from "@mui/material/Typography";
 // import Box from "@mui/material/Box";
