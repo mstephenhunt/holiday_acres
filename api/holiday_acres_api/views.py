@@ -56,7 +56,7 @@ def register_account_request(request):
         or "last_name" not in body
     ):
         response.status_code = 500
-        response.write("Missing required fields to register user")
+        response.reason_phrase = "Missing required fields to register user"
         return response
 
     username = body["username"]
@@ -69,7 +69,7 @@ def register_account_request(request):
     # If the passwords don't match, reject the creation
     if password != password_confirmation:
         response.status_code = 500
-        response.write("Password and password confirmation don't match")
+        response.reason_phrase = "Password and password confirmation don't match"
         return response
 
     # Does this user exist in the database?
@@ -79,7 +79,7 @@ def register_account_request(request):
         if user.username:
             print("username already exists, dude")
             response.status_code = 500
-            response.write("Username already exists")
+            response.reason_phrase = "Username already exists"
             return response
 
     # All good, create the user
