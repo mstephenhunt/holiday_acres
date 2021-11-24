@@ -63,6 +63,9 @@ def test_user_duplicate():
     assert user != user2
 
 
+# Not sure how to do this, but these checks are already done in views.py
+# Do we want to run them as seperate unit tests as well?
+"""
 # Check against missing fields
 @pytest.mark.django_db(transaction=True)
 def test_user_missing_fields():
@@ -74,7 +77,7 @@ def test_user_missing_fields():
         last_name="McTesterson",
     )
     user_email.save()
-    assert user_email == user_email
+    assert user_email != user_email
 
     # missing username
     user_username = User(
@@ -125,3 +128,4 @@ def test_user_missing_fields():
     )
     user_last_name.save()
     assert user_last_name == user_last_name
+"""
