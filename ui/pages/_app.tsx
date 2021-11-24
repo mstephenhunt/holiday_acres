@@ -1,26 +1,41 @@
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import type { AppProps } from "next/app";
-import Head from "next/head";
+import React from "react";
+import {
+  ThemeProvider,
+  createGenerateClassName,
+  StylesProvider,
+} from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import theme from "../src/theme";
 
-export default function MyApp(props: AppProps) {
+const generateClassName = createGenerateClassName({
+  productionPrefix: "myclasses-",
+});
+
+export default function MyApp(props) {
   const { Component, pageProps } = props;
+
+  const [key, setKey] = React.useState(0);
+
+  React.useEffect(() => {
+    setKey(1);
+  }, []);
+
+  React.useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
-    <React.Fragment>
-      <Head>
-        <title>Next App</title>
-        <link href="/favicon.ico" rel="icon" />
-        <meta
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-          name="viewport"
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </React.Fragment>
+    <StylesProvider key={key} generateClassName={generateClassName}>
+      <React.Fragment>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </React.Fragment>
+    </StylesProvider>
   );
 }
