@@ -60,6 +60,8 @@ def test_user_duplicate():
     )
     user2.save()
 
+    assert user != user2
+
 
 # Check against missing fields
 @pytest.mark.django_db(transaction=True)
