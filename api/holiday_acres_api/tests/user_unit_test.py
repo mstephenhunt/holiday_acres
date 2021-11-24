@@ -46,7 +46,6 @@ def test_user_duplicate():
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
@@ -56,7 +55,6 @@ def test_user_duplicate():
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
@@ -70,7 +68,6 @@ def test_user_missing_fields():
     user_email = User(
         username="LetsTest54321!",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
@@ -81,7 +78,6 @@ def test_user_missing_fields():
     user_username = User(
         email="tester1@testplace.com",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
@@ -92,7 +88,6 @@ def test_user_missing_fields():
     user_password = User(
         email="tester1@testplace.com",
         username="LetsTest54321!",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )
@@ -114,7 +109,6 @@ def test_user_missing_fields():
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         last_name="McTesterson",
     )
     user_first_name.save()
@@ -125,7 +119,6 @@ def test_user_missing_fields():
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
     )
     user_last_name.save()
