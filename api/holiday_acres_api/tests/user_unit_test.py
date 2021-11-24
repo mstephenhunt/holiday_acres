@@ -17,7 +17,6 @@ def test_user_create():
         email="tester1@testplace.com",
         username="LetsTest54321!",
         password="ATestPW_12345",
-        password_confirmation="ATestPW_12345",
         first_name="Testy",
         last_name="McTesterson",
     )

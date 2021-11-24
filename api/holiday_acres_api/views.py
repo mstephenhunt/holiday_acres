@@ -84,6 +84,7 @@ def register_account_request(request):
         first_name=first_name,
         last_name=last_name,
     )
+    new_user.save()
 
     print("New user created")
 
