@@ -51,6 +51,9 @@ def register_account_request(request):
         "username" not in body
         or "password" not in body
         or "password_confirmation" not in body
+        or "email" not in body
+        or "first_name" not in body
+        or "last_name" not in body
     ):
         response.status_code = 500
         response.write("Missing required fields to register user")
