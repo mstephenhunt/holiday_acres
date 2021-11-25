@@ -52,7 +52,7 @@ def test_duplicate_user():
         "/users/register", data, content_type="application/json"
     )
     response = register_account_request(request)
-    # register same duplicate user
+    # register duplicate user
     data = {
         "username": "test_username",
         "password": "12345",
@@ -61,9 +61,23 @@ def test_duplicate_user():
         "first_name": "Jon",
         "last_name": "hunt",
     }
-    request = RequestFactory().post(
+    request2 = RequestFactory().post(
         "/users/register", data, content_type="application/json"
     )
-    response = register_account_request(request)
+    response = register_account_request(request2)
     assert response.status_code == 500
     assert response.reason_phrase == "Username already exists"
+    # register a second, non-duplicate user
+    data = {
+        "username": "test_username2",
+        "password": "12345",
+        "password_confirmation": "12345",
+        "email": "anemailaddress",
+        "first_name": "Jon",
+        "last_name": "hunt",
+    }
+    request2 = RequestFactory().post(
+        "/users/register", data, content_type="application/json"
+    )
+    response = register_account_request(request2)
+    assert response.status_code == 200
