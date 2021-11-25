@@ -76,8 +76,8 @@ def test_duplicate_user():
         "first_name": "Jon",
         "last_name": "hunt",
     }
-    request2 = RequestFactory().post(
+    request3 = RequestFactory().post(
         "/users/register", data, content_type="application/json"
     )
-    response = register_account_request(request2)
+    response = register_account_request(request3)
     assert response.status_code == 200
