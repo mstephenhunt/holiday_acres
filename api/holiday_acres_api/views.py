@@ -74,7 +74,7 @@ def register_account_request(request):
 
     # Does this user exist in the database?
     queryset = User.objects.all()
-    # iterate through each User instance, check object.username
+    # iterate through each User instance, check object.username against username variable
     for user in queryset:
         if user.username == username:
             print("username already exists, dude")
@@ -92,7 +92,6 @@ def register_account_request(request):
     )
     new_user.save()
 
-    print("New user created")
-
     response.status_code = 200
+    response.reason_phrase == "New user created"
     return response
