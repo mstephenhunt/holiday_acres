@@ -44,7 +44,13 @@ def test_horse_relationships_create():
     test_paddock = Paddock(paddock_name="test_paddock", paddock_tier=9)
     test_paddock.save()
     # create instance for user relationship
-    test_user = User(first_name="Testy", last_name="McTesterson", email="user@haec.com")
+    test_user = User(
+        email="tester1@testplace.com",
+        username="LetsTest54321!",
+        password="ATestPW_12345",
+        first_name="Testy",
+        last_name="McTesterson",
+    )
     test_user.save()
     # create horse instance for testing
     horse = Horse(
