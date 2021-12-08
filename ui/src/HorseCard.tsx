@@ -1,6 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import HorseInfoHeading from './HorseInfoHeading';
 import GrainIcon from '@mui/icons-material/Grain';
@@ -36,6 +37,9 @@ export default function HorseCard(props: HorseCardProps) {
                 </CardContent>
               </Grid>
             </Grid>
+          </Grid>
+          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ display: 'flex', width: 0.95, borderBottom: 0.8, borderColor: '#C4C4C4', paddingTop: 1, paddingBottom: 1 }} />
           </Grid>
           <Grid item xs={12}>
             <GrainIcon />
