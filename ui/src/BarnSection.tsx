@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import HorseInfoCard from './HorseInfoCard';
+import HorseCard from './HorseCard';
 
 const mockResponse = {
   data: [{
@@ -105,16 +105,15 @@ export default function BarnSection() {
                 <Typography gutterBottom variant="h5" component="h2" style={{ fontWeight: 600 }}>
                   {barnSection.barnSection}
                 </Typography>
-
                 {/*Horse Cards*/}
-                <Grid container spacing={4}>
-                  {barnSection.horses.map((horse) => (
-                    <HorseInfoCard
-                      name={horse.name}
-                      id={horse.id}
-                      stall={horse.stall}
-                    />
-                  ))}
+                <Grid container spacing={3}>
+                {barnSection.horses.map((horse) => (
+                  <HorseCard
+                    name={horse.name}
+                    id={horse.id}
+                    stall={horse.stall}
+                  />
+                ))}
                 </Grid>
               </CardContent>
             </Card>
