@@ -15,6 +15,7 @@ export default function HorseInfoCard(props: HorseInfoCardProps) {
   return (
     <Grid item key={props.id} xs={12}>
       <Card sx={{ display: 'flex' }}>
+        {/*Horse Picture*/}
         <CardMedia
           component="img"
           sx={{ width: 80, height: 80, display: { xs: 'block' } }}

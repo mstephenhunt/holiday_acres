@@ -8,7 +8,7 @@ type HorseInfoHeadingProps = {
 
 export default function HorseInfoHeading(props: HorseInfoHeadingProps) {
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={0} alignItems="center">
       <Grid item xs={6}>
         <Typography component="h3" variant="h5">
           {props.name}
