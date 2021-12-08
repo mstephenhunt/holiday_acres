@@ -102,16 +102,18 @@ export default function BarnSection() {
             >
               {/*Barn Section Title*/}
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" style={{ fontWeight: 600 }}>
                   {barnSection.barnSection}
                 </Typography>
 
                 {/*Horse Cards*/}
                 <Grid container spacing={4}>
                   {barnSection.horses.map((horse) => (
-                    <Grid item key={horse.id} xs={12}>
-                      <HorseInfoCard name={horse.name}/>
-                    </Grid>
+                    <HorseInfoCard
+                      name={horse.name}
+                      id={horse.id}
+                      stall={horse.stall}
+                    />
                   ))}
                 </Grid>
               </CardContent>
