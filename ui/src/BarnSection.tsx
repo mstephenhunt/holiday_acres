@@ -1,10 +1,10 @@
-import * as React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import HorseInfoCard from './HorseInfoCard';
 
 const mockResponse = {
   data: [{
@@ -100,13 +100,20 @@ export default function BarnSection() {
                 flexDirection: "column",
               }}
             >
+              {/*Barn Section Title*/}
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
                   {barnSection.barnSection}
                 </Typography>
-                <Typography>
-                  Horse stuff here
-                </Typography>
+
+                {/*Horse Cards*/}
+                <Grid container spacing={4}>
+                  {barnSection.horses.map((horse) => (
+                    <Grid item key={horse.id} xs={12}>
+                      <HorseInfoCard name={horse.name}/>
+                    </Grid>
+                  ))}
+                </Grid>
               </CardContent>
             </Card>
           </Grid>
