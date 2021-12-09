@@ -1,10 +1,11 @@
-import * as React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import HorseCard from './HorseCard';
+import { Feed, FeedType, FeedUnit } from './types';
 
 const mockResponse = {
   data: [{
@@ -17,14 +18,18 @@ const mockResponse = {
         stall: 'Stall 1',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 2,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
+        }] as Feed[],
         specialInstructions: ''
       }, {
         id: 2,
@@ -32,14 +37,18 @@ const mockResponse = {
         stall: 'Stall 2',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 1,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
+        }] as Feed[],
         specialInstructions: ''
       }]
   }, {
@@ -52,14 +61,18 @@ const mockResponse = {
         stall: 'Stall 1',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 2,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
+        }] as Feed[],
         specialInstructions: ''
       }, {
         id: 2,
@@ -67,14 +80,18 @@ const mockResponse = {
         stall: 'Stall 2',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 1,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
+        }] as Feed[],
         specialInstructions: ''
       }]
   }],
@@ -100,13 +117,22 @@ export default function BarnSection() {
                 flexDirection: "column",
               }}
             >
+              {/*Barn Section Title*/}
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" style={{ fontWeight: 600 }}>
                   {barnSection.barnSection}
                 </Typography>
-                <Typography>
-                  Horse stuff here
-                </Typography>
+                {/*Horse Cards*/}
+                <Grid container spacing={3}>
+                {barnSection.horses.map((horse) => (
+                  <HorseCard
+                    name={horse.name}
+                    id={horse.id}
+                    stall={horse.stall}
+                    feed={horse.feed}
+                  />
+                ))}
+                </Grid>
               </CardContent>
             </Card>
           </Grid>
