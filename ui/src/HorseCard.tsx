@@ -17,7 +17,7 @@ type HorseCardProps = {
 export default function HorseCard(props: HorseCardProps) {
   return (
     <Grid item xs={12}>
-      <Card sx={{ display: 'flex' }}>
+      <Card sx={{ display: 'flex', padding: 1, boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
         <Grid container xs={12}>
           <Grid item xs={12}>
             <Grid container xs={12} direction="row">
@@ -41,7 +41,7 @@ export default function HorseCard(props: HorseCardProps) {
             </Grid>
           </Grid>
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ display: 'flex', width: 0.95, borderBottom: 0.8, borderColor: '#C4C4C4', paddingTop: 1, paddingBottom: 1 }} />
+            <Box sx={{ display: 'flex', width: 0.95, borderBottom: 0.8, borderColor: '#C4C4C4', marginTop: 0.5, marginBottom: 0.5 }} />
           </Grid>
           <Grid item xs={12}>
             {props.feed.map((feed) => (
