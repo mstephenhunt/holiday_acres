@@ -4,12 +4,14 @@ import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import HorseInfoHeading from './HorseInfoHeading';
-import GrainIcon from '@mui/icons-material/Grain';
+import { Feed } from './types';
+import HorseFeed from './HorseFeed';
 
 type HorseCardProps = {
   id: number;
   name: string;
   stall: string;
+  feed: Feed[];
 }
 
 export default function HorseCard(props: HorseCardProps) {
@@ -42,7 +44,13 @@ export default function HorseCard(props: HorseCardProps) {
             <Box sx={{ display: 'flex', width: 0.95, borderBottom: 0.8, borderColor: '#C4C4C4', paddingTop: 1, paddingBottom: 1 }} />
           </Grid>
           <Grid item xs={12}>
-            <GrainIcon />
+            {props.feed.map((feed) => (
+              <HorseFeed
+                type={feed.type}
+                amount={feed.amount}
+                unit={feed.unit}
+              />
+            ))}
           </Grid>
         </Grid>
       </Card>

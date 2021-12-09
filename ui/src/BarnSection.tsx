@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HorseCard from './HorseCard';
+import { Feed, FeedType, FeedUnit } from './types';
 
 const mockResponse = {
   data: [{
@@ -17,14 +18,14 @@ const mockResponse = {
         stall: 'Stall 1',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 2,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }] as Feed[],
         specialInstructions: ''
       }, {
         id: 2,
@@ -32,14 +33,14 @@ const mockResponse = {
         stall: 'Stall 2',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 1,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }] as Feed[],
         specialInstructions: ''
       }]
   }, {
@@ -52,14 +53,14 @@ const mockResponse = {
         stall: 'Stall 1',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 2,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }] as Feed[],
         specialInstructions: ''
       }, {
         id: 2,
@@ -67,14 +68,14 @@ const mockResponse = {
         stall: 'Stall 2',
         picturePath: '',
         feed: [{
-          type: 'PELLETS',
+          type: FeedType.PELLETS,
           amount: 1,
-          unit: 'SCOOP'
+          unit: FeedUnit.SCOOP
         }, {
-          type: 'FIBREMAX',
+          type: FeedType.FIBREMAX,
           amount: 0.5,
-          unit: 'SCOOP'
-        }],
+          unit: FeedUnit.SCOOP
+        }] as Feed[],
         specialInstructions: ''
       }]
   }],
@@ -112,6 +113,7 @@ export default function BarnSection() {
                     name={horse.name}
                     id={horse.id}
                     stall={horse.stall}
+                    feed={horse.feed}
                   />
                 ))}
                 </Grid>

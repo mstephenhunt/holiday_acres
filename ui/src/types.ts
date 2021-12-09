@@ -7,3 +7,14 @@ export enum FeedType {
   HAY_PELLETS,
   HAY_CUT
 };
+
+export enum FeedUnit {
+  SCOOP,
+  HANDFUL
+};
+
+export type Feed = {
+  type: FeedType,
+  amount?: number,
+  unit?: FeedUnit
+};
