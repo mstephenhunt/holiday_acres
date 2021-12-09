@@ -7,16 +7,41 @@ import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
 import BakeryDiningIcon from '@mui/icons-material/BakeryDining';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import CircleIcon from '@mui/icons-material/Circle';
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
-const feedTypeMap: Map<FeedType, string> = new Map([
-  [FeedType.PELLETS, 'GrainIcon'],
-  [FeedType.HAY_PELLETS, 'GrassIcon'],
-  [FeedType.HAY_CUT, 'ContentCutIcon'],
-  [FeedType.FIBREMAX, 'SpaIcon'],
-  [FeedType.ALFALFA, 'FormatColorFillIcon'],
-  [FeedType.CARB_SAFE, 'BakeryDiningIcon'],
-  [FeedType.OIL, 'OpacityIcon']
+const feedNameFormatMap: Map<FeedType, string> = new Map([
+  [FeedType.PELLETS, 'Pellets'],
+  [FeedType.HAY_PELLETS, 'Hay Pellets'],
+  [FeedType.HAY_CUT, 'Hay Cut'],
+  [FeedType.FIBREMAX, 'Fibremax'],
+  [FeedType.ALFALFA, 'PM Alfalfa'],
+  [FeedType.CARB_SAFE, 'Carb Safe'],
+  [FeedType.OIL, 'Oil']
 ]);
+
+function getFormattedFeedAmount(feedAmount?: number, feedUnit: FeedUnit): string {
+  if (feedUnit === undefined) {
+    return '';
+  } else if (feedUnit == FeedUnit.SCOOP) {
+    if (feedAmount > 1) {
+      return `${feedAmount} Scoops`;
+    } else {
+      return `${feedAmount} Scoop`;
+    }
+  } else if (feedUnit == FeedUnit.HANDFUL) {
+    if (feedAmount > 1) {
+      return `${feedAmount} Handfuls`;
+    } else {
+      return `${feedAmount} Handful`;
+    }
+  } else if (feedUnit == FeedUnit.FIRST_CUT) {
+    return 'First Cut';
+  } else if (feedUnit == FeedUnit.SECOND_CUT) {
+    return 'Second Cut';
+  }
+}
 
 function getIconForFeedType(feedType: FeedType) {
   if (feedType == FeedType.PELLETS) {
@@ -40,8 +65,26 @@ function getIconForFeedType(feedType: FeedType) {
 
 export default function HorseFeed(props: Feed) {
   const icon = getIconForFeedType(props.type);
+  const feedName = feedNameFormatMap.get(props.type) || 'Unknown Feed';
+  const feedAmount = getFormattedFeedAmount(props.amount, props.unit);
 
   return (
-    icon
+    <Grid container xs={12}>
+      <Grid item xs={7}>
+        <Box sx={{ borderRight: 1 }}>
+          <Grid container>
+            <Grid item xs={2}>
+              {icon}
+            </Grid>
+            <Grid item xs={10}>
+              <Typography>{feedName}</Typography>
+            </Grid>
+          </Grid>
+        </Box>
+      </Grid>
+      <Grid item xs={5}>
+        <Typography>{feedAmount}</Typography>
+      </Grid>
+    </Grid>
   );
 }

@@ -25,6 +25,10 @@ const mockResponse = {
           type: FeedType.FIBREMAX,
           amount: 0.5,
           unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
         }] as Feed[],
         specialInstructions: ''
       }, {
@@ -40,6 +44,10 @@ const mockResponse = {
           type: FeedType.FIBREMAX,
           amount: 0.5,
           unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
         }] as Feed[],
         specialInstructions: ''
       }]
@@ -60,6 +68,10 @@ const mockResponse = {
           type: FeedType.FIBREMAX,
           amount: 0.5,
           unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
         }] as Feed[],
         specialInstructions: ''
       }, {
@@ -75,6 +87,10 @@ const mockResponse = {
           type: FeedType.FIBREMAX,
           amount: 0.5,
           unit: FeedUnit.SCOOP
+        }, {
+          type: FeedType.HAY_CUT,
+          amount: undefined,
+          unit: FeedUnit.FIRST_CUT
         }] as Feed[],
         specialInstructions: ''
       }]

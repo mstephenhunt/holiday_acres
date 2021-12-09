@@ -10,11 +10,13 @@ export enum FeedType {
 
 export enum FeedUnit {
   SCOOP,
-  HANDFUL
+  HANDFUL,
+  FIRST_CUT,
+  SECOND_CUT
 };
 
 export type Feed = {
   type: FeedType,
   amount?: number,
-  unit?: FeedUnit
+  unit: FeedUnit
 };
