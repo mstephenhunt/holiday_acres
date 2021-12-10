@@ -1,6 +1,6 @@
 from django.db import models
 
-# from .Barns import Barn
+from .Barns import Barn
 
 """Along with these, we'll need to make a REQUIRED one-to-many relationship
 between Barn -> BarnSection and a REQUIRED one-to-many relationship with

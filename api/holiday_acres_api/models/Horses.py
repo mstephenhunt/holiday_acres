@@ -1,7 +1,7 @@
 from django.db import models
 from .Users import User
 from .Paddocks import Paddock
-from .Barn_sections import barn_section
+from .Barn_sections import Barn_section
 from django.db.models.deletion import SET_DEFAULT, SET_NULL
 
 

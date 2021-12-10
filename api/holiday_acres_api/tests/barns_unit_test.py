@@ -2,7 +2,7 @@ import pytest
 
 from holiday_acres_api.models.Barns import Barn
 
-# from holiday_acres_api.models.Barn_sections import Barn_section
+from holiday_acres_api.models.Barn_sections import Barn_section
 
 
 @pytest.mark.django_db
