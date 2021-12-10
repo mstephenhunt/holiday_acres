@@ -19,7 +19,7 @@ export default function HorseInfoHeading(props: HorseInfoHeadingProps) {
           alt={props.name}
         />
       </Grid>
-      <Grid item xs={6} sx={{ display: 'flex', marginBottom: 2, paddingLeft: 1.5, alignSelf: 'flex-end' }}>
+      <Grid item xs={6} sx={{ display: 'flex', marginBottom: 2, paddingLeft: 2, alignSelf: 'flex-end' }}>
         <Typography component="h4" variant="h4" sx={{ fontWeight: 600, height: 40 }}>
           {props.name}
         </Typography>
