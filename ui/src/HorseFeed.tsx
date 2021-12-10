@@ -71,7 +71,7 @@ export default function HorseFeed(props: Feed) {
   return (
     <Grid container xs={12}>
       <Grid item xs={7}>
-        <Box sx={{ borderRight: 1, height: 0.85, borderColor: '#C4C4C4' }}>
+        <Box sx={{ borderRight: 1, height: 0.75, borderColor: '#C4C4C4' }}>
           <Grid container>
             <Grid item xs={2}>
               {icon}
@@ -82,7 +82,7 @@ export default function HorseFeed(props: Feed) {
           </Grid>
         </Box>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={5} sx={{ color: '#606060' }}>
         <Typography sx={{ marginLeft: 1 }}>{feedAmount}</Typography>
       </Grid>
     </Grid>
