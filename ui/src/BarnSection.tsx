@@ -30,7 +30,7 @@ const mockResponse = {
           amount: undefined,
           unit: FeedUnit.FIRST_CUT
         }] as Feed[],
-        specialInstructions: ''
+        specialInstructions: 'These are some sample instructions'
       }, {
         id: 2,
         name: 'Tiger',
@@ -49,7 +49,7 @@ const mockResponse = {
           amount: undefined,
           unit: FeedUnit.FIRST_CUT
         }] as Feed[],
-        specialInstructions: ''
+        specialInstructions: undefined
       }]
   }, {
       id: 1, // use the section id here
@@ -73,7 +73,7 @@ const mockResponse = {
           amount: undefined,
           unit: FeedUnit.FIRST_CUT
         }] as Feed[],
-        specialInstructions: ''
+        specialInstructions: undefined
       }, {
         id: 2,
         name: 'Tiger',
@@ -92,7 +92,7 @@ const mockResponse = {
           amount: undefined,
           unit: FeedUnit.FIRST_CUT
         }] as Feed[],
-        specialInstructions: ''
+        specialInstructions: 'These are some sample instructions'
       }]
   }],
   metadata: {}
@@ -130,6 +130,7 @@ export default function BarnSection() {
                     id={horse.id}
                     stall={horse.stall}
                     feed={horse.feed}
+                    specialInstructions={horse.specialInstructions}
                   />
                 ))}
                 </Grid>
