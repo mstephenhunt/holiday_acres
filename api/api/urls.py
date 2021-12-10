@@ -21,6 +21,7 @@ router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
 router.register(r"paddocks", views.PaddockViewSet)
 router.register(r"horses", views.HorseViewSet)
+router.register(r"barn_sections", views.BarnSectionViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
@@ -28,4 +29,5 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("users/", include("django.contrib.auth.urls")),
     path("users/register", views.register_account_request),
+    path("api/main-page", views.main_page),
 ]

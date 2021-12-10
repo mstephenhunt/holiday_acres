@@ -5,8 +5,9 @@ from holiday_acres_api.serializers import (
     UserSerializer,
     PaddockSerializer,
     HorseSerializer,
+    BarnSectionSerializer,
 )
-from holiday_acres_api.models import User, Paddock, Horse
+from holiday_acres_api.models import User, Paddock, Horse, Barn_Section
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from datetime import datetime
@@ -37,6 +38,15 @@ class HorseViewSet(viewsets.ModelViewSet):
 
     queryset = Horse.objects.all()
     serializer_class = HorseSerializer
+
+
+class BarnSectionViewSet(viewsets.ModelViewSet):
+    """
+    Dummy endpoint to return all horse models in the DB
+    """
+
+    queryset = Barn_Section.objects.all()
+    serializer_class = BarnSectionSerializer
 
 
 @api_view(["POST"])
@@ -100,6 +110,14 @@ def register_account_request(request):
 
 @api_view(["GET"])
 def health_check(request):
+    response = JsonResponse({"current_datetime": datetime.now()})
+    response.status_code = 200
+
+    return response
+
+
+@api_view(["GET"])
+def main_page(request):
     response = JsonResponse({"current_datetime": datetime.now()})
     response.status_code = 200
 

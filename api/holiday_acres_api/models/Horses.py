@@ -18,6 +18,7 @@ class Horse(models.Model):
     name = models.CharField(max_length=200)
     age = models.IntegerField()
     tier = models.IntegerField()
-    feed = models.CharField(max_length=200)
+    # related_name = "feeds"
     health = models.TextField()
     misc_notes = models.TextField()
+    stall = models.TextField()

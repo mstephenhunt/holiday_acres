@@ -2,6 +2,7 @@ from rest_framework import serializers
 from holiday_acres_api.models.Users import User
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
+from holiday_acres_api.models.Barn_Sections import Barn_Section
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -31,6 +32,13 @@ class HorseSerializer(serializers.ModelSerializer):
             "health",
             # tier will limit which paddocks may be selected
             "tier",
-            # paddock will select a specific paddock
-            "paddock",
+            "stall",
         ]
+
+
+class BarnSectionSerializer(serializers.ModelSerializer):
+    horses = HorseSerializer(many=True)
+
+    class Meta:
+        model = Barn_Section
+        fields = ["name", "horses"]
