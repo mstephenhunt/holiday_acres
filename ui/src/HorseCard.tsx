@@ -12,7 +12,7 @@ type HorseCardProps = {
   name: string;
   stall: string;
   feed: Feed[];
-  specialInstuctions?: string;
+  specialInstructions?: string;
 }
 
 export default function HorseCard(props: HorseCardProps) {
@@ -40,14 +40,18 @@ export default function HorseCard(props: HorseCardProps) {
               />
             ))}
           </Grid>
+          { props.specialInstructions &&
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
               <Box sx={{ display: 'flex', width: 0.95, borderBottom: 0.8, borderColor: '#C4C4C4', marginTop: 0.5, marginBottom: 0.5 }} />
             </Grid>
+          }
+          { props.specialInstructions &&
             <Grid item xs={12}>
               <HorseSpecialInstructions
-                specialInstuctions='These are instructions'
+                specialInstructions={props.specialInstructions}
               />
             </Grid>
+          }
         </Grid>
       </Card>
     </Grid>
