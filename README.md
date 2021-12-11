@@ -64,6 +64,16 @@ poetry run manage.py createsuperuser --email admin@example.com --username admin
 
 Using password "testing".
 
+## Seeding DB
+
+After running the initial migration, run
+
+```bash
+~/holiday_acres/api$ poetry run python manage.py loaddata holiday_acres_api/seeds/0001_initial_seed.json
+```
+
+To seed the DB with initial data.
+
 ## Running Tests
 
 Tests are located in `~/api/holday_acres_api/tests`. To run them, you have to be in the `~/api` folder and then invoke command `poetry run pytest`.
