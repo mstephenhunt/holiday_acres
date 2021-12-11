@@ -4,141 +4,76 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import HorseCard from './HorseCard';
-import { Feed, FeedType, FeedUnit } from './types';
-
-const mockResponse = {
-  data: [{
-      id: 1, // use the section id here
-      barn: 'Old Barn',
-      barnSection: 'Wood Floor',
-      horses: [{
-        id: 1,
-        name: 'Kai',
-        stall: 'Stall 1',
-        picturePath: '',
-        feed: [{
-          type: FeedType.PELLETS,
-          amount: 2,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.FIBREMAX,
-          amount: 0.5,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.HAY_CUT,
-          amount: undefined,
-          unit: FeedUnit.FIRST_CUT
-        }] as Feed[],
-        specialInstructions: 'These are some sample instructions'
-      }, {
-        id: 2,
-        name: 'Tiger',
-        stall: 'Stall 2',
-        picturePath: '',
-        feed: [{
-          type: FeedType.PELLETS,
-          amount: 1,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.FIBREMAX,
-          amount: 0.5,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.HAY_CUT,
-          amount: undefined,
-          unit: FeedUnit.FIRST_CUT
-        }] as Feed[],
-        specialInstructions: undefined
-      }]
-  }, {
-      id: 1, // use the section id here
-      barn: 'Old Barn',
-      barnSection: 'Basement',
-      horses: [{
-        id: 1,
-        name: 'Kai',
-        stall: 'Stall 1',
-        picturePath: '',
-        feed: [{
-          type: FeedType.PELLETS,
-          amount: 2,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.FIBREMAX,
-          amount: 0.5,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.HAY_CUT,
-          amount: undefined,
-          unit: FeedUnit.FIRST_CUT
-        }] as Feed[],
-        specialInstructions: undefined
-      }, {
-        id: 2,
-        name: 'Tiger',
-        stall: 'Stall 2',
-        picturePath: '',
-        feed: [{
-          type: FeedType.PELLETS,
-          amount: 1,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.FIBREMAX,
-          amount: 0.5,
-          unit: FeedUnit.SCOOP
-        }, {
-          type: FeedType.HAY_CUT,
-          amount: undefined,
-          unit: FeedUnit.FIRST_CUT
-        }] as Feed[],
-        specialInstructions: 'These are some sample instructions'
-      }]
-  }],
-  metadata: {}
-}
-
+import HorseCard from "./HorseCard";
+import { Feed, FeedType, FeedUnit } from "./types";
+import { fetcher } from "./fetcher";
+import useSWR from "swr";
+import { useState, useEffect } from "react";
 
 export default function BarnSection() {
-  const data = mockResponse.data;
-  const error = null;
+  const [barnSections, setBarnSections] = useState();
 
-  const barnSections = data;
+  useEffect(() => {
+    if (!barnSections) {
+      getBarnSections();
+    }
+  });
 
-  return (
-    <Container sx={{ py: 2 }} maxWidth="md">
-      <Grid container spacing={4}>
-        {barnSections.map((barnSection) => (
-          <Grid item key={barnSection.id} xs={12}>
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {/*Barn Section Title*/}
-              <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2" style={{ fontWeight: 600 }}>
-                  {barnSection.barnSection}
-                </Typography>
-                {/*Horse Cards*/}
-                <Grid container spacing={3}>
-                {barnSection.horses.map((horse) => (
-                  <HorseCard
-                    name={horse.name}
-                    id={horse.id}
-                    stall={horse.stall}
-                    feed={horse.feed}
-                    specialInstructions={horse.specialInstructions}
-                  />
-                ))}
-                </Grid>
-              </CardContent>
-            </Card>
+  const getBarnSections = async () => {
+    const response = await fetch(
+      `http://localhost:8000/barn_sections/`.toString(),
+      {}
+    );
+    const barnSections = await response.json();
+
+    setBarnSections(barnSections);
+  };
+
+  if (!barnSections) {
+    return <h1>No Data</h1>;
+  } else {
+    return (
+      <Container sx={{ py: 2 }} maxWidth="md">
+        {barnSections != undefined && (
+          <Grid container spacing={4}>
+            {barnSections.map((barnSection) => (
+              <Grid item key={barnSection.id} xs={12}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  {/*Barn Section Title*/}
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                      style={{ fontWeight: 600 }}
+                    >
+                      {barnSection.barnSection}
+                    </Typography>
+                    {/*Horse Cards*/}
+                    <Grid container spacing={3}>
+                      {barnSection.horses.map((horse) => (
+                        <HorseCard
+                          name={horse.name}
+                          id={horse.id}
+                          stall={horse.stall}
+                          feed={horse.feed}
+                          specialInstructions={horse.specialInstructions}
+                        />
+                      ))}
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-    </Container>
-  );
+        )}
+      </Container>
+    );
+  }
 }
