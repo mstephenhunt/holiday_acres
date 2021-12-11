@@ -16,9 +16,4 @@ class Horse(models.Model):
     user = models.ForeignKey(User, related_name="horses", null=True, on_delete=SET_NULL)
     # HORSE DATA
     name = models.CharField(max_length=200)
-    age = models.IntegerField()
-    tier = models.IntegerField()
-    # related_name = "feeds"
-    health = models.TextField()
-    misc_notes = models.TextField()
     stall = models.TextField()
