@@ -20,7 +20,8 @@
     "react": "latest",
     "react-dom": "latest",
     "react-is": "latest",
-    "styled-components": "latest"
+    "styled-components": "latest",
+    "swr": "1.1.1"
   },
   "devDependencies": {
     "@types/react": "latest",
