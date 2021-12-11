@@ -39,5 +39,30 @@
       "name": "Tiger",
       "stall": "Stall 1"
     }
+  },
+  // Feed Models
+  {
+    "model": "holiday_acres_api.feed",
+    "pk": 1,
+    "fields": {
+      "created_at": "2021-12-11T15:36:09.227Z",
+      "updated_at": "2021-12-11T15:36:09.227Z",
+      "feed_type": "PELLETS",
+      "unit": "SCOOP",
+      "amount": 1,
+      "horse": 1
+    }
+  },
+  {
+    "model": "holiday_acres_api.feed",
+    "pk": 2,
+    "fields": {
+      "created_at": "2021-12-11T15:37:30.820Z",
+      "updated_at": "2021-12-11T15:37:30.820Z",
+      "feed_type": "FIBREMAX",
+      "unit": "SCOOP",
+      "amount": 0,
+      "horse": 1
+    }
   }
 ]
