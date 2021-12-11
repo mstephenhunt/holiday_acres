@@ -55,7 +55,7 @@ export default function BarnSection() {
                       component="h2"
                       style={{ fontWeight: 600 }}
                     >
-                      {barnSection.barnSection}
+                      {barnSection.name}
                     </Typography>
                     {/*Horse Cards*/}
                     <Grid container spacing={3}>
