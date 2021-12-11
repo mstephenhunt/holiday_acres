@@ -46,7 +46,7 @@
       "updated_at": "2021-12-11T15:36:09.227Z",
       "feed_type": "PELLETS",
       "unit": "SCOOP",
-      "amount": 1,
+      "amount": "1.00",
       "horse": 1
     }
   },
@@ -58,7 +58,7 @@
       "updated_at": "2021-12-11T15:37:30.820Z",
       "feed_type": "FIBREMAX",
       "unit": "SCOOP",
-      "amount": 0,
+      "amount": "0.5",
       "horse": 1
     }
   }

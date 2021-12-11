@@ -3,6 +3,7 @@ from holiday_acres_api.models.Users import User
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
 from holiday_acres_api.models.Barn_Sections import Barn_Section
+from holiday_acres_api.models.Feeds import Feed
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,23 +18,21 @@ class PaddockSerializer(serializers.ModelSerializer):
         fields = ["paddock_name", "paddock_tier"]
 
 
+class FeedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feed
+        fields = ["feed_type", "amount", "unit", "id"]
+
+
 # https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
 # some people have had this issue
 class HorseSerializer(serializers.ModelSerializer):
+    feed = FeedSerializer(many=True)
+
     class Meta:
         model = Horse
         # instead of hardcoding all of the fields, would a function make more sense?
-        fields = [
-            "name",
-            "user",
-            "age",
-            "feed",
-            "misc_notes",
-            "health",
-            # tier will limit which paddocks may be selected
-            "tier",
-            "stall",
-        ]
+        fields = ["id", "name", "user", "feed", "stall"]
 
 
 class BarnSectionSerializer(serializers.ModelSerializer):
@@ -41,4 +40,4 @@ class BarnSectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Barn_Section
-        fields = ["name", "horses"]
+        fields = ["id", "name", "horses"]

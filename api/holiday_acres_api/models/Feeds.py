@@ -1,6 +1,7 @@
 from django.db import models
 from .Horses import Horse
 from django.db.models.deletion import SET_NULL
+from django.utils.translation import gettext_lazy as _
 
 
 class Feed(models.Model):
@@ -10,20 +11,20 @@ class Feed(models.Model):
     """
 
     class FeedType(models.TextChoices):
-        PELLETS = ("PELLETS",)
-        HAY_PELLETS = ("HAY_PELLETS",)
-        HAY_CUT = ("HAY_CUT",)
-        FIBREMAX = ("FIBREMAX",)
-        ALFALFA = ("ALFALFA",)
-        CARB_SAFE = ("CARB_SAFE",)
-        OIL = "OIL"
-        NONE = ""
+        PELLETS = "PELLETS", _("PELLETS")
+        HAY_PELLETS = "HAY_PELLETS", _("HAY_PELLETS")
+        HAY_CUT = "HAY_CUT", _("HAY_CUT")
+        FIBREMAX = "FIBREMAX", _("FIBREMAX")
+        ALFALFA = "ALFALFA", _("ALFALFA")
+        CARB_SAFE = "CARB_SAFE", _("CARB_SAFE")
+        OIL = "OIL", _("OIL")
+        NONE = "", _("")
 
     class FeedUnit(models.TextChoices):
-        SCOOP = ("SCOOP",)
-        HANDFUL = ("HANDFUL",)
-        FIRST_CUT = ("FIRST_CUT",)
-        SECOND_CUT = "SECOND_CUT"
+        SCOOP = "SCOOP", _("SCOOP")
+        HANDFUL = "HANDFUL", _("HANDFUL")
+        FIRST_CUT = "FIRST_CUT", _("FIRST_CUT")
+        SECOND_CUT = "SECOND_CUT", _("SECOND_CUT")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
