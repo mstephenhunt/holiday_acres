@@ -1,7 +1,6 @@
 from django.db import models
 from .Horses import Horse
 from django.db.models.deletion import SET_NULL
-from django.utils.translation import gettext_lazy as _
 
 
 class Feed(models.Model):
@@ -33,6 +32,6 @@ class Feed(models.Model):
         max_length=200, choices=FeedType.choices, default=FeedType.NONE
     )
     unit = models.CharField(max_length=200, choices=FeedUnit.choices, blank=True)
-    amount = models.IntegerField(blank=True)
+    amount = DecimalField(blank=True, max_digits=5, decimal_places=2)
     # one-to-many relation (one user to many horses)
     horse = models.ForeignKey(Horse, related_name="feed", null=True, on_delete=SET_NULL)
