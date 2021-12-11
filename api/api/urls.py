@@ -21,6 +21,7 @@ router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
 router.register(r"paddocks", views.PaddockViewSet)
 router.register(r"horses", views.HorseViewSet)
+router.register(r"barn_sections", views.BarnSectionViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
