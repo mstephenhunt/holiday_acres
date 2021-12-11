@@ -114,11 +114,3 @@ def health_check(request):
     response.status_code = 200
 
     return response
-
-
-@api_view(["GET"])
-def main_page(request):
-    response = JsonResponse({"current_datetime": datetime.now()})
-    response.status_code = 200
-
-    return response
