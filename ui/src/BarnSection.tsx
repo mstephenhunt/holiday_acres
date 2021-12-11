@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HorseCard from "./HorseCard";
-import { Feed, FeedType, FeedUnit } from "./types";
+import { Feed, FeedType, FeedUnit, BarnSectionType } from "./types";
 import { fetcher } from "./fetcher";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
@@ -26,7 +26,9 @@ export default function BarnSection() {
     );
     const barnSections = await response.json();
 
-    setBarnSections(barnSections);
+    if (barnSections) {
+      setBarnSections(barnSections as BarnSectionType[]);
+    }
   };
 
   if (!barnSections) {

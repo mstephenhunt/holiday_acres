@@ -46,7 +46,13 @@ function getFormattedFeedAmount(
   }
 }
 
-function getIconForFeedType(feedType: FeedType) {
+/**
+ */
+function getIconForFeedType(input: FeedType) {
+  // For some reason, this was being evaluated as a string. Force-typing
+  // it to a FeedType
+  const feedType = FeedType[input];
+
   if (feedType == FeedType.PELLETS) {
     return <GrainIcon />;
   }
@@ -73,9 +79,12 @@ function getIconForFeedType(feedType: FeedType) {
 }
 
 export default function HorseFeed(props: Feed) {
-  const icon = getIconForFeedType(props.type);
-  const feedName = feedNameFormatMap.get(props.type) || "Unknown Feed";
-  const feedAmount = getFormattedFeedAmount(props.amount, props.unit);
+  // TODO: For some reason, the props aren't typed passed in which is breaking the helpers
+  // evaluating what their values are. They're being cast in this function but we shouldn't
+  // need to do that.
+  const icon = getIconForFeedType(props.feed_type as FeedType);
+  const feedName = feedNameFormatMap.get(FeedType[props.feed_type]) || "Unknown Feed";
+  const feedAmount = getFormattedFeedAmount(props.amount, FeedUnit[props.unit]);
 
   return (
     <Grid container xs={12}>

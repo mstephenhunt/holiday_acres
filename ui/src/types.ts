@@ -16,7 +16,21 @@ export enum FeedUnit {
 }
 
 export type Feed = {
-  type: FeedType;
+  id: number;
+  feed_type: FeedType;
   amount?: number;
   unit: FeedUnit;
+};
+
+export type Horse = {
+  id: number;
+  name: string;
+  feed: Feed[];
+  stall: string;
+};
+
+export type BarnSectionType = {
+  id: number,
+  name: string,
+  horses: Horse[];
 };

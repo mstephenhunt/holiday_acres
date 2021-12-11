@@ -48,7 +48,7 @@ export default function HorseCard(props: HorseCardProps) {
           <Grid item xs={12}>
             {props.feed.map((feed) => (
               <HorseFeed
-                type={feed.type}
+                feed_type={feed.feed_type}
                 amount={feed.amount}
                 unit={feed.unit}
               />
