@@ -16,5 +16,8 @@ export const fetcher = async (path: string): Promise<any> => {
   const url = `http://localhost:8000${path}`;
 
   // Promise.race used for either timeout or request resolution
-  return Promise.race([(await fetch(url.toString(), {})).json(), responseTimeout(timeout)]);
+  return Promise.race([
+    (await fetch(url.toString(), {})).json(),
+    responseTimeout(timeout),
+  ]);
 };

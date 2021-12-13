@@ -30,7 +30,7 @@ export type Horse = {
 };
 
 export type BarnSectionType = {
-  id: number,
-  name: string,
+  id: number;
+  name: string;
   horses: Horse[];
 };
