@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - 8080:8080
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  django:
+    build:
+      context: ./
+      dockerfile: ./api/Dockerfile
+    command: poetry run python ./app/api/manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+  react:
+    build:
+      context: ./
+      dockerfile: ./ui/Dockerfile
+    command: yarn --cwd ui dev
+    ports:
+      - 3000:3000

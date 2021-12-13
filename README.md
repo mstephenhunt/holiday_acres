@@ -77,3 +77,11 @@ To seed the DB with initial data.
 ## Running Tests
 
 Tests are located in `~/api/holday_acres_api/tests`. To run them, you have to be in the `~/api` folder and then invoke command `poetry run pytest`.
+
+## Building Docker Image
+
+```bash
+$ docker build -t imagename .
+$ docker-compose build --no-cache
+$ docker-compose up
+```
