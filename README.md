@@ -78,10 +78,10 @@ To seed the DB with initial data.
 
 Tests are located in `~/api/holday_acres_api/tests`. To run them, you have to be in the `~/api` folder and then invoke command `poetry run pytest`.
 
-## Building Docker Image
+## Making App Externally Accessable
 
-```bash
-$ docker build -t imagename .
-$ docker-compose build --no-cache
-$ docker-compose up
-```
+1. Install [ngrok](https://ngrok.com/download) and create an account
+2. Head over to the [ngrok token page](https://dashboard.ngrok.com/get-started/your-authtoken) and follow the instructions to set your ngrok token.
+3. [Install Docker](https://docs.docker.com/get-docker/)
+4. Start up Docker images with `docker-compose up`
+5. Run `ngrok` with `ngrok http 8080`
