@@ -15,3 +15,5 @@ COPY pyproject.toml /app
 RUN poetry cache clear --all pypi
 RUN poetry cache clear --all private
 RUN poetry install
+RUN poetry run python ./app/api/manage.py migrate
+RUN poetry run python ./app/api/manage.py loaddata ./app/api/holiday_acres_api/seeds/0001_initial_seed.json

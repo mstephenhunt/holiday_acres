@@ -21,19 +21,19 @@ const feedNameFormatMap: Map<FeedType, string> = new Map([
   [FeedType.OIL, "Oil"],
 ]);
 
-function getFormattedFeedAmount(
-  feedAmount?: number,
+function getFormattedFeedAmount(input: {
   feedUnit: FeedUnit
-): string {
-  if (feedUnit === undefined) {
-    return "";
-  } else if (feedUnit == FeedUnit.SCOOP) {
+  feedAmount?: number
+}): string {
+  const { feedUnit, feedAmount } = input;
+
+  if (feedUnit == FeedUnit.SCOOP && feedAmount) {
     if (feedAmount > 1) {
       return `${feedAmount} Scoops`;
     } else {
       return `${feedAmount} Scoop`;
     }
-  } else if (feedUnit == FeedUnit.HANDFUL) {
+  } else if (feedUnit == FeedUnit.HANDFUL && feedAmount) {
     if (feedAmount > 1) {
       return `${feedAmount} Handfuls`;
     } else {
@@ -43,15 +43,16 @@ function getFormattedFeedAmount(
     return "First Cut";
   } else if (feedUnit == FeedUnit.SECOND_CUT) {
     return "Second Cut";
+  } else {
+    return "";
   }
 }
 
-/**
- */
+
 function getIconForFeedType(input: FeedType) {
-  // For some reason, this was being evaluated as a string. Force-typing
+  // TODO For some reason, this was being evaluated as a string. Force-typing
   // it to a FeedType
-  const feedType = FeedType[input];
+  const feedType: FeedType = FeedType[input] as unknown as FeedType;
 
   if (feedType == FeedType.PELLETS) {
     return <GrainIcon />;
@@ -84,8 +85,9 @@ export default function HorseFeed(props: Feed) {
   // need to do that.
   const icon = getIconForFeedType(props.feed_type as FeedType);
   const feedName =
-    feedNameFormatMap.get(FeedType[props.feed_type]) || "Unknown Feed";
-  const feedAmount = getFormattedFeedAmount(props.amount, FeedUnit[props.unit]);
+    feedNameFormatMap.get(FeedType[props.feed_type] as unknown as FeedType) || "Unknown Feed";
+
+  const feedAmount = getFormattedFeedAmount({ feedAmount: props.amount, feedUnit: FeedUnit[props.unit] as unknown as FeedUnit});
 
   return (
     <Grid container xs={12}>

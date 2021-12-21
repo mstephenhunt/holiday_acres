@@ -27,6 +27,7 @@ export type Horse = {
   name: string;
   feed: Feed[];
   stall: string;
+  special_instructions?: string;
 };
 
 export type BarnSectionType = {
