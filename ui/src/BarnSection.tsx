@@ -11,7 +11,7 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 
 export default function BarnSection() {
-  const [barnSections, setBarnSections] = useState();
+  const [barnSections, setBarnSections] = useState<BarnSectionType[]>();
 
   useEffect(() => {
     if (!barnSections) {
@@ -21,7 +21,7 @@ export default function BarnSection() {
 
   const getBarnSections = async () => {
     const response = await fetch(
-      `http://localhost:8000/barn_sections/`.toString(),
+      `api/barn_sections/`.toString(),
       {}
     );
     const barnSections = await response.json();
