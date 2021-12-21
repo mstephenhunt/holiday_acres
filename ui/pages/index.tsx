@@ -5,7 +5,7 @@ import BarnSection from "../src/BarnSection";
 
 export default function Index() {
   return (
-    <Container disableGutters maxWidth="false">
+    <Container disableGutters>
       <ButtonAppBar />
       <BarnSection />
     </Container>

@@ -65,7 +65,7 @@ export default function BarnSection() {
                           id={horse.id}
                           stall={horse.stall}
                           feed={horse.feed}
-                          specialInstructions={horse.specialInstructions}
+                          specialInstructions={horse.special_instructions}
                         />
                       ))}
                     </Grid>
