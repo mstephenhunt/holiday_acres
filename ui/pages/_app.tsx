@@ -12,6 +12,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: "myclasses-",
 });
 
+// @ts-ignore
 export default function MyApp(props) {
   const { Component, pageProps } = props;
 
@@ -23,7 +24,7 @@ export default function MyApp(props) {
 
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
+    if (jssStyles && jssStyles.parentElement) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
