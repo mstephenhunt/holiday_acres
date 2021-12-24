@@ -23,8 +23,8 @@ services:
       - 8000:8000
   react:
     build:
-      context: ./
-      dockerfile: ./ui/Dockerfile
-    command: yarn --cwd ui dev
+      context: ./ui
+      dockerfile: ./Dockerfile
+    command: yarn start
     ports:
       - 3000:3000
