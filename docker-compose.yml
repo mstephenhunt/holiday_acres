@@ -14,11 +14,10 @@ services:
       - react
   django:
     container_name: django
-    hostname: django
     build:
-      context: ./
-      dockerfile: ./api/Dockerfile
-    command: poetry run python ./app/api/manage.py runserver 0.0.0.0:8000
+      context: ./api
+      dockerfile: ./Dockerfile
+    command: poetry run python ./manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
   react:
