@@ -13,14 +13,20 @@ print(f"\nRUNNING IN: {env('ENVIRONMENT')}\n")
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+db_name = ""
+if env("ENVIRONMENT") == "development":
+    db_name = BASE_DIR / env("DB_NAME")
+elif env("ENVIRONMENT" == "production"):
+    db_name = env("DB_NAME")
+
 DATABASES = {
     "default": {
         "ENGINE": env("DB_ENGINE"),
-        "NAME": BASE_DIR / env("DB_NAME"),
+        "NAME": db_name,
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PASSWORD"),
         "HOST": env("DB_HOST"),
-        "PORT": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 
