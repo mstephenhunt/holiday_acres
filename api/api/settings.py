@@ -16,7 +16,7 @@ print(f"\nRUNNING IN: {env('ENVIRONMENT')}\n")
 db_name = ""
 if env("ENVIRONMENT") == "development":
     db_name = BASE_DIR / env("DB_NAME")
-elif env("ENVIRONMENT" == "production"):
+elif env("ENVIRONMENT") == "production":
     db_name = env("DB_NAME")
 
 DATABASES = {
