@@ -50,6 +50,14 @@ to install the required JS packages.
 
 ## Django Setup
 
+### Environment Variables
+
+Copy the existing `.env.example` to `.env`
+
+```bash
+~/api$ cp .env.example .env
+```
+
 ### Initial DB migration
 
 Currently only setup to use SQLite. Run `poetry run manage.py migrate` to put in base tables.
