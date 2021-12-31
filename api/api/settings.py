@@ -39,11 +39,15 @@ DATABASES = {
 SECRET_KEY = "django-insecure-4cqg95p6md-4j4-q+c_b*n3&7#^!f@sg=@1-=85yvr2l_!69%6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if env("ENVIRONMENT") == "development":
+    DEBUG = True
+    CORS_ORIGIN_ALLOW_ALL = True
+    ALLOWED_HOSTS = ["*"]
+elif env("ENVIRONMENT") == "production":
+    DEBUG = False
+    CORS_ORIGIN_ALLOW_ALL = False
+    ALLOWED_HOSTS = ["django"]
 
-ALLOWED_HOSTS = ["django", "*"]
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
