@@ -11,13 +11,21 @@ export default function HorseDetails() {
   const id = query.id;
 
   const getHorse = async () => {
+    /**
+     * For some reason this page is loading against /horse/undefined a bunch
+     * before getting access to the id from the url ¯\_(ツ)_/¯
+     */
+    if (!id) {
+      return;
+    }
+
     const response = await fetch(
       `http://localhost:8000/api/horses/${id}/`.toString(),
       {}
     );
     const horse = await response.json();
 
-    if (horse) {
+    if (horse && horse.detail !== 'Not found.') {
       setHorse(horse as Horse);
     }
   };
@@ -31,18 +39,18 @@ export default function HorseDetails() {
   if (!horse) {
     return <h1>Loading...</h1>
   } else {
-  return (
-    <Container disableGutters>
-      <ButtonAppBar />
-      <Container sx={{ py: 2 }} maxWidth="md">
-        <HorseCard
-          name={horse.name}
-          id={horse.id}
-          stall={horse.stall}
-          feed={horse.feed}
-          specialInstructions={horse.special_instructions}
-        />
-      </Container>
-    </Container>)
+    return (
+      <Container disableGutters>
+        <ButtonAppBar />
+        <Container sx={{ py: 2 }} maxWidth="md">
+          <HorseCard
+            name={horse.name}
+            id={horse.id}
+            stall={horse.stall}
+            feed={horse.feed}
+            specialInstructions={horse.special_instructions}
+          />
+        </Container>
+      </Container>)
   }
 }
