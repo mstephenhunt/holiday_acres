@@ -54,7 +54,6 @@ export default function HorseInfoDetailsHeading(props: HorseInfoDetailsHeadingPr
               {props.stall}
             </Typography>
           </Grid>
-
         </Grid>
       </Grid>
     </Grid>
