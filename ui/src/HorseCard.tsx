@@ -2,6 +2,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
+import CardActionArea from "@mui/material/CardActionArea";
 import HorseInfoHeading from "./HorseInfoHeading";
 import { Feed } from "./types";
 import HorseFeed from "./HorseFeed";
@@ -25,42 +26,16 @@ export default function HorseCard(props: HorseCardProps) {
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
         }}
       >
-        <Grid container direction="row">
-          <Grid item xs={12}>
-            <HorseInfoHeading
-              name={props.name}
-              stall={props.stall}
-              imagePath="some junk"
-            />
-          </Grid>
-          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-            <Box
-              sx={{
-                display: "flex",
-                width: 0.95,
-                borderBottom: 0.8,
-                borderColor: "#C4C4C4",
-                marginTop: 0.5,
-                marginBottom: 0.5,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            {props.feed.map((feed) => (
-              <HorseFeed
-                id={feed.id}
-                feed_type={feed.feed_type}
-                amount={feed.amount}
-                unit={feed.unit}
+        <CardActionArea href={`/horse/${props.id}`}>
+          <Grid container direction="row">
+            <Grid item xs={12}>
+              <HorseInfoHeading
+                name={props.name}
+                stall={props.stall}
+                imagePath="some junk"
               />
-            ))}
-          </Grid>
-          {props.specialInstructions && (
-            <Grid
-              item
-              xs={12}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
+            </Grid>
+            <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
                   display: "flex",
@@ -72,15 +47,43 @@ export default function HorseCard(props: HorseCardProps) {
                 }}
               />
             </Grid>
-          )}
-          {props.specialInstructions && (
             <Grid item xs={12}>
-              <HorseSpecialInstructions
-                specialInstructions={props.specialInstructions}
-              />
+              {props.feed.map((feed) => (
+                <HorseFeed
+                  id={feed.id}
+                  feed_type={feed.feed_type}
+                  amount={feed.amount}
+                  unit={feed.unit}
+                />
+              ))}
             </Grid>
-          )}
-        </Grid>
+            {props.specialInstructions && (
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: 0.95,
+                    borderBottom: 0.8,
+                    borderColor: "#C4C4C4",
+                    marginTop: 0.5,
+                    marginBottom: 0.5,
+                  }}
+                />
+              </Grid>
+            )}
+            {props.specialInstructions && (
+              <Grid item xs={12}>
+                <HorseSpecialInstructions
+                  specialInstructions={props.specialInstructions}
+                />
+              </Grid>
+            )}
+          </Grid>
+        </CardActionArea>
       </Card>
     </Grid>
   );
