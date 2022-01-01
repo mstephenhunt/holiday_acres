@@ -25,6 +25,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
       <Grid container direction="row">
         <Grid item xs={12}>
           <HorseInfoDetailsHeading
+            id={props.id}
             name={props.name}
             stall={props.stall}
             imagePath="some junk"
