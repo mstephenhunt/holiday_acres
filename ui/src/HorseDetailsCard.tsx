@@ -1,4 +1,5 @@
 import HorseInfoDetailsHeading from './HorseInfoDetailsHeading';
+import HorseFeed from './HorseFeed';
 import { Feed } from "./types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -40,6 +41,16 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
               marginBottom: 0.5,
             }}
           />
+        </Grid>
+        <Grid item xs={12}>
+          {props.feed.map((feed) => (
+            <HorseFeed
+              id={feed.id}
+              feed_type={feed.feed_type}
+              amount={feed.amount}
+              unit={feed.unit}
+            />
+          ))}
         </Grid>
       </Grid>
     </Card>
