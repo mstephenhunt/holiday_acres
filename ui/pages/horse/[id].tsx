@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Container from "@mui/material/Container";
 import ButtonAppBar from "../../src/ButtonAppBar";
-import HorseCard from "../../src/HorseCard";
+import HorseDetailsCard from "../../src/HorseDetailsCard";
 import { Horse } from '../../src/types';
 import { useState, useEffect } from "react";
 
@@ -43,9 +43,9 @@ export default function HorseDetails() {
       <Container disableGutters>
         <ButtonAppBar />
         <Container sx={{ py: 2 }} maxWidth="md">
-          <HorseCard
-            name={horse.name}
+          <HorseDetailsCard
             id={horse.id}
+            name={horse.name}
             stall={horse.stall}
             feed={horse.feed}
             specialInstructions={horse.special_instructions}
