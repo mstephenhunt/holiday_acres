@@ -18,9 +18,10 @@ from rest_framework import routers
 from holiday_acres_api import views
 
 router = routers.DefaultRouter()
-router.register(r"users", views.UserViewSet)
-router.register(r"paddocks", views.PaddockViewSet)
-router.register(r"horses", views.HorseViewSet)
+# Removed these since we don't need them public
+# router.register(r"users", views.UserViewSet)
+# router.register(r"paddocks", views.PaddockViewSet)
+router.register(r"api/horses", views.HorseViewSet)
 router.register(r"api/barn_sections", views.BarnSectionViewSet)
 
 urlpatterns = [

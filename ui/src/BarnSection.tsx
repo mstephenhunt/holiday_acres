@@ -21,7 +21,7 @@ export default function BarnSection() {
 
   const getBarnSections = async () => {
     const response = await fetch(
-      `api/barn_sections/`.toString(),
+      `http://localhost:8000/api/barn_sections/`.toString(),
       {}
     );
     const barnSections = await response.json();
@@ -32,7 +32,7 @@ export default function BarnSection() {
   };
 
   if (!barnSections) {
-    return <h1>No Data</h1>;
+    return <h1>Loading...</h1>;
   } else {
     return (
       <Container sx={{ py: 2 }} maxWidth="md">
