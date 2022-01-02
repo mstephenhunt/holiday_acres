@@ -51,7 +51,7 @@ export default function HorseInfoDetailsHeading(
             {props.edit === false && (
               <Button
                 variant="outlined"
-                href={`http://localhost:3000/horse/edit/${props.id}/`}
+                href={`${process.env.NEXT_PUBLIC_BASE_API_URL}/horse/edit/${props.id}/`}
               >
                 Edit
               </Button>
@@ -59,7 +59,7 @@ export default function HorseInfoDetailsHeading(
             {props.edit === true && (
               <Button
                 variant="contained"
-                href={`http://localhost:3000/horse/${props.id}/`}
+                href={`${process.env.NEXT_PUBLIC_BASE_API_URL}/horse/${props.id}/`}
               >
                 Save
               </Button>
