@@ -45,6 +45,7 @@ export default function HorseDetails() {
         <Container sx={{ py: 2 }} maxWidth="md">
           <HorseDetailsCard
             id={horse.id}
+            edit={false}
             name={horse.name}
             stall={horse.stall}
             feed={horse.feed}

@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 
 type HorseDetailsCardProps = {
   id: number;
+  edit: boolean;
   name: string;
   stall: string;
   feed: Feed[];
@@ -26,6 +27,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
         <Grid item xs={12}>
           <HorseInfoDetailsHeading
             id={props.id}
+            edit={props.edit}
             name={props.name}
             stall={props.stall}
             imagePath="some junk"

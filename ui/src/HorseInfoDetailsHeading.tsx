@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 
 type HorseInfoDetailsHeadingProps = {
   id: number;
+  edit: boolean;
   name: string;
   stall: string;
   imagePath: string;
@@ -45,7 +46,13 @@ export default function HorseInfoDetailsHeading(props: HorseInfoDetailsHeadingPr
       <Grid item xs={3} sx={{ display: "flex" }}>
         <Grid container>
           <Grid item>
-            <Button variant="outlined" href={`http://localhost:3000/horse/edit/${props.id}/`}>Edit</Button>
+            { props.edit === false &&
+              <Button variant="outlined" href={`http://localhost:3000/horse/edit/${props.id}/`}>Edit</Button>
+            }
+            {
+              props.edit === true &&
+              <Button variant="contained" href={`http://localhost:3000/horse/${props.id}/`}>Save</Button>
+            }
           </Grid>
           <Grid item sx={{ alignSelf: "flex-end", }}>
             <Typography
