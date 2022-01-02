@@ -1,4 +1,5 @@
 import HorseInfoDetailsHeading from "./HorseInfoDetailsHeading";
+import HorseSpecialInstructions from "./HorseSpecialInstructions";
 import HorseFeed from "./HorseFeed";
 import { Feed } from "./types";
 import Card from "@mui/material/Card";
@@ -15,6 +16,8 @@ type HorseDetailsCardProps = {
 };
 
 export default function HorseDetailsCard(props: HorseDetailsCardProps) {
+  const specialInstructions = props.specialInstructions ? props.specialInstructions : 'None';
+
   return (
     <Card
       sx={{
@@ -54,6 +57,27 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
               unit={feed.unit}
             />
           ))}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              width: 0.95,
+              borderBottom: 0.8,
+              borderColor: "#C4C4C4",
+              marginTop: 0.5,
+              marginBottom: 0.5,
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <HorseSpecialInstructions
+            specialInstructions={specialInstructions}
+          />
         </Grid>
       </Grid>
     </Card>
