@@ -1,5 +1,5 @@
-import HorseInfoDetailsHeading from './HorseInfoDetailsHeading';
-import HorseFeed from './HorseFeed';
+import HorseInfoDetailsHeading from "./HorseInfoDetailsHeading";
+import HorseFeed from "./HorseFeed";
 import { Feed } from "./types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";

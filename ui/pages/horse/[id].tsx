@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import Container from "@mui/material/Container";
 import ButtonAppBar from "../../src/ButtonAppBar";
 import HorseDetailsCard from "../../src/HorseDetailsCard";
-import { Horse } from '../../src/types';
-import { fetcher } from '../../src/fetcher';
+import { Horse } from "../../src/types";
+import { fetcher } from "../../src/fetcher";
 import { useState, useEffect } from "react";
 
 export default function HorseDetails() {
@@ -23,7 +23,7 @@ export default function HorseDetails() {
     const response = await fetcher(`/api/horses/${id}/`);
     const horse = await response.json();
 
-    if (horse && horse.detail !== 'Not found.') {
+    if (horse && horse.detail !== "Not found.") {
       setHorse(horse as Horse);
     }
   };
@@ -35,7 +35,7 @@ export default function HorseDetails() {
   });
 
   if (!horse) {
-    return <h1>Loading...</h1>
+    return <h1>Loading...</h1>;
   } else {
     return (
       <Container disableGutters>
@@ -50,6 +50,7 @@ export default function HorseDetails() {
             specialInstructions={horse.special_instructions}
           />
         </Container>
-      </Container>)
+      </Container>
+    );
   }
 }

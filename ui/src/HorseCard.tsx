@@ -35,7 +35,11 @@ export default function HorseCard(props: HorseCardProps) {
                 imagePath="some junk"
               />
             </Grid>
-            <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <Grid
+              item
+              xs={12}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <Box
                 sx={{
                   display: "flex",

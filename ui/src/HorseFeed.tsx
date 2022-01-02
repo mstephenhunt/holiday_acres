@@ -22,8 +22,8 @@ const feedNameFormatMap: Map<FeedType, string> = new Map([
 ]);
 
 function getFormattedFeedAmount(input: {
-  feedUnit: FeedUnit
-  feedAmount?: number
+  feedUnit: FeedUnit;
+  feedAmount?: number;
 }): string {
   const { feedUnit, feedAmount } = input;
 
@@ -47,7 +47,6 @@ function getFormattedFeedAmount(input: {
     return "";
   }
 }
-
 
 function getIconForFeedType(input: FeedType) {
   // TODO For some reason, this was being evaluated as a string. Force-typing
@@ -85,9 +84,13 @@ export default function HorseFeed(props: Feed) {
   // need to do that.
   const icon = getIconForFeedType(props.feed_type as FeedType);
   const feedName =
-    feedNameFormatMap.get(FeedType[props.feed_type] as unknown as FeedType) || "Unknown Feed";
+    feedNameFormatMap.get(FeedType[props.feed_type] as unknown as FeedType) ||
+    "Unknown Feed";
 
-  const feedAmount = getFormattedFeedAmount({ feedAmount: props.amount, feedUnit: FeedUnit[props.unit] as unknown as FeedUnit});
+  const feedAmount = getFormattedFeedAmount({
+    feedAmount: props.amount,
+    feedUnit: FeedUnit[props.unit] as unknown as FeedUnit,
+  });
 
   return (
     <Grid container xs={12}>

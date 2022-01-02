@@ -11,7 +11,9 @@ type HorseInfoDetailsHeadingProps = {
   imagePath: string;
 };
 
-export default function HorseInfoDetailsHeading(props: HorseInfoDetailsHeadingProps) {
+export default function HorseInfoDetailsHeading(
+  props: HorseInfoDetailsHeadingProps
+) {
   return (
     <Grid container spacing={0}>
       <Grid item xs={3}>
@@ -46,19 +48,25 @@ export default function HorseInfoDetailsHeading(props: HorseInfoDetailsHeadingPr
       <Grid item xs={3} sx={{ display: "flex" }}>
         <Grid container>
           <Grid item>
-            { props.edit === false &&
-              <Button variant="outlined" href={`http://localhost:3000/horse/edit/${props.id}/`}>Edit</Button>
-            }
-            {
-              props.edit === true &&
-              <Button variant="contained" href={`http://localhost:3000/horse/${props.id}/`}>Save</Button>
-            }
+            {props.edit === false && (
+              <Button
+                variant="outlined"
+                href={`http://localhost:3000/horse/edit/${props.id}/`}
+              >
+                Edit
+              </Button>
+            )}
+            {props.edit === true && (
+              <Button
+                variant="contained"
+                href={`http://localhost:3000/horse/${props.id}/`}
+              >
+                Save
+              </Button>
+            )}
           </Grid>
-          <Grid item sx={{ alignSelf: "flex-end", }}>
-            <Typography
-              variant="subtitle1"
-              sx={{ height: 28 }}
-            >
+          <Grid item sx={{ alignSelf: "flex-end" }}>
+            <Typography variant="subtitle1" sx={{ height: 28 }}>
               {props.stall}
             </Typography>
           </Grid>
