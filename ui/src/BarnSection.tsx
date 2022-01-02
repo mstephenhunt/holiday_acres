@@ -20,10 +20,7 @@ export default function BarnSection() {
   });
 
   const getBarnSections = async () => {
-    const response = await fetch(
-      `http://localhost:8000/api/barn_sections/`.toString(),
-      {}
-    );
+    const response = await fetcher('/api/barn_sections/');
     const barnSections = await response.json();
 
     if (barnSections) {

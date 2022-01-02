@@ -4,6 +4,7 @@ import ButtonAppBar from "../../../src/ButtonAppBar";
 import HorseDetailsCard from "../../../src/HorseDetailsCard";
 import { Horse } from '../../../src/types';
 import { useState, useEffect } from "react";
+import { fetcher } from '../../../src/fetcher';
 
 export default function HorseEdit() {
   const [horse, setHorse] = useState<Horse>();
@@ -19,10 +20,7 @@ export default function HorseEdit() {
       return;
     }
 
-    const response = await fetch(
-      `http://localhost:8000/api/horses/${id}/`.toString(),
-      {}
-    );
+    const response = await fetcher(`/api/horses/${id}/`);
     const horse = await response.json();
 
     if (horse && horse.detail !== 'Not found.') {

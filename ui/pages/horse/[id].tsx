@@ -3,6 +3,7 @@ import Container from "@mui/material/Container";
 import ButtonAppBar from "../../src/ButtonAppBar";
 import HorseDetailsCard from "../../src/HorseDetailsCard";
 import { Horse } from '../../src/types';
+import { fetcher } from '../../src/fetcher';
 import { useState, useEffect } from "react";
 
 export default function HorseDetails() {
@@ -19,10 +20,7 @@ export default function HorseDetails() {
       return;
     }
 
-    const response = await fetch(
-      `http://localhost:8000/api/horses/${id}/`.toString(),
-      {}
-    );
+    const response = await fetcher(`/api/horses/${id}/`);
     const horse = await response.json();
 
     if (horse && horse.detail !== 'Not found.') {
