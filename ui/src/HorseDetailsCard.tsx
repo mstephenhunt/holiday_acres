@@ -1,6 +1,7 @@
 import HorseInfoDetailsHeading from "./HorseInfoDetailsHeading";
 import HorseSpecialInstructions from "./HorseSpecialInstructions";
 import HorseFeed from "./HorseFeed";
+import HorseFeedEditable from "./HorseFeedEditable";
 import { Feed } from "./types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -49,7 +50,8 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
           />
         </Grid>
         <Grid item xs={12}>
-          {props.feed.map((feed) => (
+          { !props.edit &&
+          props.feed.map((feed) => (
             <HorseFeed
               id={feed.id}
               feed_type={feed.feed_type}
@@ -57,6 +59,13 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
               unit={feed.unit}
             />
           ))}
+          { props.edit &&
+            props.feed.map((feed) => (
+              <HorseFeedEditable
+                feed={feed}
+              />
+            ))
+          }
         </Grid>
         <Grid
           item
