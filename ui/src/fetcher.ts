@@ -11,13 +11,12 @@ function responseTimeout(milliseconds: number) {
 /**
  * Docs for fetch(): https://developer.mozilla.org/en-US/docs/Web/API/fetch
  */
-export const fetcher = async (path: string): Promise<any> => {
+export const fetcher = async (path: string): Promise<Response> => {
   const timeout = 5000;
-  const url = `http://localhost:8000${path}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}${path}`;
+
+  console.log(url)
 
   // Promise.race used for either timeout or request resolution
-  return Promise.race([
-    (await fetch(url.toString(), {})).json(),
-    responseTimeout(timeout),
-  ]);
+  return Promise.race([fetch(url.toString(), {}), responseTimeout(timeout)]);
 };
