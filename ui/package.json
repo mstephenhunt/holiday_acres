@@ -15,6 +15,7 @@
     "@mui/icons-material": "5.2.0",
     "@mui/material": "latest",
     "@mui/styled-engine-sc": "latest",
+    "dotenv": "10.0.0",
     "next": "latest",
     "next-transpile-modules": "latest",
     "react": "latest",
