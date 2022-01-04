@@ -9,19 +9,19 @@ from holiday_acres_api.models.Feeds import Feed
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name", "email", "password"]
+        fields = ["id", "username", "first_name", "last_name", "email", "password"]
 
 
 class PaddockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paddock
-        fields = ["paddock_name", "paddock_tier"]
+        fields = ["id", "paddock_name", "paddock_tier"]
 
 
 class FeedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feed
-        fields = ["feed_type", "amount", "unit", "id"]
+        fields = ["id", "feed_type", "amount", "unit"]
 
 
 # https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
@@ -32,7 +32,7 @@ class HorseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Horse
         # instead of hardcoding all of the fields, would a function make more sense?
-        fields = ["id", "name", "user", "feed", "stall"]
+        fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
 
 
 class BarnSectionSerializer(serializers.ModelSerializer):
