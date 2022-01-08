@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Feed, FeedType } from "./types";
+import { FeedType } from "./types";
 import { feedTypeToLabelMap } from './feedHelpers';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
@@ -9,14 +9,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 
 type HorseFeedEditableComponentProps = {
-  feed?: Feed;
+  setFeedLabel: React.Dispatch<React.SetStateAction<string>>,
+  feedLabel: string;
+  feedType?: FeedType;
 }
 
 export default function HorseFeedEditable(props: HorseFeedEditableComponentProps) {
-  const [feedLabel, setFeedLabel] = React.useState<string>('');
-
   const handleFeedTypeChange = (event: SelectChangeEvent) => {
-    setFeedLabel(event.target.value as string);
+    props.setFeedLabel(event.target.value as string);
   };
 
   return (
@@ -28,7 +28,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
-              value={feedLabel}
+              value={props.feedLabel}
               label="Feed Type"
               onChange={handleFeedTypeChange}
             >
