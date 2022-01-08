@@ -18,11 +18,20 @@ type HorseDetailsCardProps = {
 };
 
 export default function HorseDetailsCard(props: HorseDetailsCardProps) {
-  // Since there's a list of feed that this horse has, we need a handler for each one
+  // Since there's a list of feed that this horse has, we need a handler for each horse/field
   const feedLabelHandlers = props.feed.map(() => {
     const [feedLabel, setFeedLabel] = React.useState<string>('');
+    const [feedAmount, setFeedAmount] = React.useState<number>(-1);
+    const [feedUnit, setFeedUnit] = React.useState<string>('');
 
-    return { feedLabel, setFeedLabel }
+    return {
+      feedLabel,
+      setFeedLabel,
+      feedAmount,
+      setFeedAmount,
+      feedUnit,
+      setFeedUnit
+    }
   });
 
   const specialInstructions = props.specialInstructions ? props.specialInstructions : 'None';
@@ -71,7 +80,11 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
             props.feed.map((feed, index) => (
               <HorseFeedEditable
                 setFeedLabel={feedLabelHandlers[index].setFeedLabel}
+                setFeedAmount={feedLabelHandlers[index].setFeedAmount}
+                setFeedUnit={feedLabelHandlers[index].setFeedUnit}
                 feedLabel={feedLabelHandlers[index].feedLabel}
+                feedUnit={feedLabelHandlers[index].feedUnit}
+                feedAmount={feedLabelHandlers[index].feedAmount}
                 feedType={feed.feed_type}
               />
             ))

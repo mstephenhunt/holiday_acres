@@ -11,13 +11,21 @@ import TextField from '@mui/material/TextField';
 
 type HorseFeedEditableComponentProps = {
   setFeedLabel: React.Dispatch<React.SetStateAction<string>>,
+  setFeedAmount: React.Dispatch<React.SetStateAction<number>>,
+  setFeedUnit: React.Dispatch<React.SetStateAction<string>>,
   feedLabel: string;
+  feedAmount: number;
+  feedUnit: string;
   feedType?: FeedType;
 }
 
 export default function HorseFeedEditable(props: HorseFeedEditableComponentProps) {
   const handleFeedTypeChange = (event: SelectChangeEvent) => {
     props.setFeedLabel(event.target.value as string);
+  };
+
+  const handleFeedUnitChange = (event: SelectChangeEvent) => {
+    props.setFeedUnit(event.target.value as string);
   };
 
   return (
@@ -61,9 +69,9 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
-              value={props.feedLabel}
+              value={props.feedUnit}
               label="Unit"
-              onChange={handleFeedTypeChange}
+              onChange={handleFeedUnitChange}
             >
               <MenuItem value={FeedUnit.SCOOP}>{feedUnitToLabelMap.get(FeedUnit.SCOOP)}</MenuItem>
               <MenuItem value={FeedUnit.HANDFUL}>{feedUnitToLabelMap.get(FeedUnit.HANDFUL)}</MenuItem>
