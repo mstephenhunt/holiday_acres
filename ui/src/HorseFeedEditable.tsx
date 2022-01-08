@@ -24,6 +24,10 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
     props.setFeedLabel(event.target.value as string);
   };
 
+  const handleFeedAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.setFeedAmount(event.target.valueAsNumber);
+  }
+
   const handleFeedUnitChange = (event: SelectChangeEvent) => {
     props.setFeedUnit(event.target.value as string);
   };
@@ -57,9 +61,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
           id="outlined-number"
           label="Amt"
           type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          onChange={handleFeedAmountChange}
         />
       </Grid>
       <Grid item xs={5}>
