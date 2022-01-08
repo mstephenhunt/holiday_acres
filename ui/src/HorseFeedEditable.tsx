@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { FeedType } from "./types";
-import { feedTypeToLabelMap } from './feedHelpers';
+import { FeedType, FeedUnit } from "./types";
+import { feedTypeToLabelMap, feedUnitToLabelMap } from './feedHelpers';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 type HorseFeedEditableComponentProps = {
   setFeedLabel: React.Dispatch<React.SetStateAction<string>>,
@@ -24,7 +25,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
       <Grid item xs={5}>
         <Box>
           <FormControl fullWidth>
-            <InputLabel id="feed-select-label">Feed</InputLabel>
+            <InputLabel>Feed</InputLabel>
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
@@ -39,6 +40,35 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
               <MenuItem value={FeedType.ALFALFA}>{feedTypeToLabelMap.get(FeedType.ALFALFA)}</MenuItem>
               <MenuItem value={FeedType.CARB_SAFE}>{feedTypeToLabelMap.get(FeedType.CARB_SAFE)}</MenuItem>
               <MenuItem value={FeedType.OIL}>{feedTypeToLabelMap.get(FeedType.OIL)}</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </Grid>
+      <Grid item xs={2}>
+        <TextField
+          id="outlined-number"
+          label="Amt"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Grid>
+      <Grid item xs={5}>
+        <Box>
+          <FormControl fullWidth>
+            <InputLabel>Unit</InputLabel>
+            <Select
+              labelId="feed-select-label"
+              // id="demo-simple-select" // what is this for?
+              value={props.feedLabel}
+              label="Unit"
+              onChange={handleFeedTypeChange}
+            >
+              <MenuItem value={FeedUnit.SCOOP}>{feedUnitToLabelMap.get(FeedUnit.SCOOP)}</MenuItem>
+              <MenuItem value={FeedUnit.HANDFUL}>{feedUnitToLabelMap.get(FeedUnit.HANDFUL)}</MenuItem>
+              <MenuItem value={FeedUnit.FIRST_CUT}>{feedUnitToLabelMap.get(FeedUnit.FIRST_CUT)}</MenuItem>
+              <MenuItem value={FeedUnit.SECOND_CUT}>{feedUnitToLabelMap.get(FeedUnit.SECOND_CUT)}</MenuItem>
             </Select>
           </FormControl>
         </Box>
