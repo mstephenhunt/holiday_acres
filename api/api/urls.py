@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 # router.register(r"users", views.UserViewSet)
 # router.register(r"paddocks", views.PaddockViewSet)
 router.register(r"api/horses", views.HorseViewSet)
+# router.register(r"api/horses/update_horse", views.HorseViewSet.update)
 router.register(r"api/barn_sections", views.BarnSectionViewSet)
 
 urlpatterns = [
