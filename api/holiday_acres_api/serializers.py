@@ -46,12 +46,15 @@ class HorseSerializer(serializers.ModelSerializer):
 
         horse.save()
 
-        # Nuke whatever feed is currently in the DB for this horse for it's feed
-        for current_feed in horse.feed.all():
-            current_feed.delete()
-
-        # If new feed was provided, put that in
+        # If new feed was provided, put that in by removing
+        # the old instance and creating a new instance
         if "feed" in data.keys():
+
+            # Nuke whatever feed is currently in the DB for this horse for it's feed
+            for current_feed in horse.feed.all():
+                current_feed.delete()
+
+            # Create new instance of feed from data
             for feed in data["feed"]:
                 Feed.objects.create(
                     horse=horse,
