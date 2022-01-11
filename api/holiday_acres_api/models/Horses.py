@@ -14,6 +14,7 @@ class Horse(models.Model):
     )
     # one-to-many relation (one user to many horses)
     user = models.ForeignKey(User, related_name="horses", null=True, on_delete=SET_NULL)
+    # relationship to Feeds (many horses to one feed)
     # HORSE DATA
     name = models.CharField(max_length=200)
     stall = models.TextField()

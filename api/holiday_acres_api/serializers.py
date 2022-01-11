@@ -34,6 +34,34 @@ class HorseSerializer(serializers.ModelSerializer):
         # instead of hardcoding all of the fields, would a function make more sense?
         fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
 
+    def update(self, horse, data):
+        if "name" in data.keys():
+            horse.name = data["name"]
+        if "user" in data.keys():
+            horse.user = data["user"]
+        if "stall" in data.keys():
+            horse.stall = data["stall"]
+        if "special_instructions" in data.keys():
+            horse.special_instructions = data["special_instructions"]
+
+        horse.save()
+
+        # Nuke whatever feed is currently in the DB for this horse for it's feed
+        for current_feed in horse.feed.all():
+            current_feed.delete()
+
+        # If new feed was provided, put that in
+        if "feed" in data.keys():
+            for feed in data["feed"]:
+                Feed.objects.create(
+                    horse=horse,
+                    feed_type=Feed.FeedType(feed["feed_type"]),
+                    unit=Feed.FeedUnit(feed["unit"]),
+                    amount=feed["amount"],
+                )
+
+        return horse
+
 
 class BarnSectionSerializer(serializers.ModelSerializer):
     horses = HorseSerializer(many=True)
