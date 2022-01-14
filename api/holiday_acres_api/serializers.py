@@ -50,15 +50,21 @@ class HorseSerializer(serializers.ModelSerializer):
         # the old instance and creating a new instance
         if "feed" in data.keys():
 
+            # validate feed amount
+            for feed in data["feed"]:
+                if feed["amount"] <= 0:
+                    print("Must be a positive value")
+                    return horse
+                if feed["amount"] >= 10:
+                    print("No Horse eats that much")
+                    return horse
+
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
                 current_feed.delete()
 
             # Create new instance of feed from data
             for feed in data["feed"]:
-                if feed["amount"] <= 0:
-                    print("Must be a positive value")
-
                 Feed.objects.create(
                     horse=horse,
                     feed_type=Feed.FeedType(feed["feed_type"]),
