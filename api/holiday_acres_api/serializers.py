@@ -50,13 +50,33 @@ class HorseSerializer(serializers.ModelSerializer):
         # the old instance and creating a new instance
         if "feed" in data.keys():
 
-            # validate feed amount
+            # validate feed amount, feed type, and unit
             for feed in data["feed"]:
                 if feed["amount"] <= 0:
                     print("Must be a positive value")
                     return horse
                 if feed["amount"] >= 10:
                     print("No Horse eats that much")
+                    return horse
+                if (
+                    feed["feed_type"] != "PELLETS"
+                    and "HAY_PELLETS"
+                    and "HAY_CUT"
+                    and "FIBREMAX"
+                    and "ALFALA"
+                    and "CARBSAFE"
+                    and "OIL"
+                    and "NONE"
+                ):
+                    print("Incorrect feed type")
+                    return horse
+                if (
+                    feed["unit"] != "SCOOP"
+                    and "HANDFUL"
+                    and "FIRST_CUT"
+                    and "SECOND_CUT"
+                ):
+                    print("Incorrect unit type")
                     return horse
 
             # Nuke whatever feed is currently in the DB for this horse for it's feed
