@@ -56,6 +56,9 @@ class HorseSerializer(serializers.ModelSerializer):
 
             # Create new instance of feed from data
             for feed in data["feed"]:
+                if feed["amount"] <= 0:
+                    print("Must be a positive value")
+
                 Feed.objects.create(
                     horse=horse,
                     feed_type=Feed.FeedType(feed["feed_type"]),
