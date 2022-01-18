@@ -66,7 +66,7 @@ class HorseSerializer(serializers.ModelSerializer):
                     print("Incorrect feed type")
                     return horse
                 # validate unit type
-                feed_unit_list = ["HANDFUL", "FIRST_CUT", "SECOND_CUT"]
+                feed_unit_list = ["HANDFUL", "SCOOP", "FIRST_CUT", "SECOND_CUT"]
                 if feed["unit"] not in feed_unit_list:
                     print("Incorrect unit type")
                     return horse
