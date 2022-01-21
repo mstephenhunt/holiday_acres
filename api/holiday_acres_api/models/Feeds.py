@@ -25,6 +25,7 @@ class Feed(models.Model):
         HANDFUL = "HANDFUL", _("HANDFUL")
         FIRST_CUT = "FIRST_CUT", _("FIRST_CUT")
         SECOND_CUT = "SECOND_CUT", _("SECOND_CUT")
+        CUP = "CUP", _("CUP")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
