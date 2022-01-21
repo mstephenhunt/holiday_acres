@@ -62,17 +62,23 @@ class HorseSerializer(serializers.ModelSerializer):
                     raise Exception("Amount must be a positive value")
                 if feed["feed_type"] == "OIL" and feed["unit"] not in "CUP":
                     raise Exception("Oil must be measured in Cups")
-            #     # validate feed type
-            #     feed_type_list = [
-            #         "PELLETS",
-            #         "HAY_PELLETS",
-            #         "FIBREMAX",
-            #         "ALFALA",
-            #         "CARBSAFE",
-            #         "OIL",
-            #         "HAY_CUT",
-            #         "NONE",
-            #     ]
+                if feed["feed_type"] == "NO_FEED":
+                    feed["amount"] = 0
+                    feed["unit"] = "SCOOP"
+                scoopable_feed = [
+                    "PELLETS",
+                    "HAY_PELLETS",
+                    "FIBREMAX",
+                    "ALFALFA",
+                    "CARB_SAFE",
+                ]
+                if feed["feed_type"] in scoopable_feed and feed["unit"] in [
+                    "FIRST_CUT",
+                    "SECOND_CUT",
+                ]:
+                    raise Exception(
+                        "1st Cut and 2nd Cut may not be used for feed other than hay"
+                    )
             #     if feed["feed_type"] not in feed_type_list:
             #         print("Incorrect feed type")
             #         return horse
