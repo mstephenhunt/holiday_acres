@@ -1,6 +1,7 @@
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render
 from rest_framework import viewsets
+from django.http import HttpResponse
 from holiday_acres_api.serializers import (
     UserSerializer,
     PaddockSerializer,

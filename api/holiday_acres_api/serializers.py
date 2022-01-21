@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django import HttpResponse
 from holiday_acres_api.models.Users import User
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
@@ -48,6 +49,7 @@ class HorseSerializer(serializers.ModelSerializer):
 
         # If new feed was provided, put that in by removing
         # the old instance and creating a new instance
+        response = HttpResponse()
         if "feed" in data.keys():
 
             for feed in data["feed"]:
@@ -69,7 +71,9 @@ class HorseSerializer(serializers.ModelSerializer):
                 feed_unit_list = ["HANDFUL", "SCOOP", "FIRST_CUT", "SECOND_CUT"]
                 if feed["unit"] not in feed_unit_list:
                     print("Incorrect unit type")
-                    return horse
+                    response.status_code = 500
+                    response.reason_phrase = "Incorrect unit type"
+                    return response
 
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
