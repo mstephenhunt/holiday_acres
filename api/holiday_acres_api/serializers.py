@@ -53,18 +53,6 @@ class HorseSerializer(serializers.ModelSerializer):
         if "feed" in data.keys():
 
             for feed in data["feed"]:
-                if feed["feed_type"] == "HAY_CUT" and feed["unit"] not in [
-                    "FIRST_CUT",
-                    "SECOND_CUT",
-                ]:
-                    raise Exception("Haycut must be 1st cut or 2nd cut")
-                if feed["amount"] < 0:
-                    raise Exception("Amount must be a positive value")
-                if feed["feed_type"] == "OIL" and feed["unit"] not in "CUP":
-                    raise Exception("Oil must be measured in Cups")
-                if feed["feed_type"] == "NO_FEED":
-                    feed["amount"] = 0
-                    feed["unit"] = "SCOOP"
                 scoopable_feed = [
                     "PELLETS",
                     "HAY_PELLETS",
@@ -72,13 +60,29 @@ class HorseSerializer(serializers.ModelSerializer):
                     "ALFALFA",
                     "CARB_SAFE",
                 ]
-                if feed["feed_type"] in scoopable_feed and feed["unit"] in [
+                # make sure amount is positive value
+                if feed["amount"] < 0:
+                    raise Exception("Amount must be a positive value")
+                # make sure 1st/2nd cut are only used for hay cut
+                if feed["feed_type"] == "HAY_CUT" and feed["unit"] not in [
                     "FIRST_CUT",
                     "SECOND_CUT",
                 ]:
-                    raise Exception(
-                        "1st Cut and 2nd Cut may not be used for feed other than hay"
-                    )
+                    raise Exception("Haycut must be 1st cut or 2nd cut")
+                # make sure scoopable feeds are measured in scoops and handfuls
+                if feed["feed_type"] in scoopable_feed and feed["unit"] in [
+                    "FIRST_CUT",
+                    "SECOND_CUT",
+                    "CUP",
+                ]:
+                    raise Exception("Must measure by scoop or handful")
+                # make sure oil is measured in cups
+                if feed["feed_type"] == "OIL" and feed["unit"] not in "CUP":
+                    raise Exception("Oil must be measured in Cups")
+                # default to 0 and scoop if feed_type = NONE
+                if feed["feed_type"] == "NONE":
+                    feed["amount"] = 0
+                    feed["unit"] = "SCOOP"
             #     if feed["feed_type"] not in feed_type_list:
             #         print("Incorrect feed type")
             #         return horse
