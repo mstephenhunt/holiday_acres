@@ -83,14 +83,6 @@ class HorseSerializer(serializers.ModelSerializer):
                 if feed["feed_type"] == "NONE":
                     feed["amount"] = 0
                     feed["unit"] = "SCOOP"
-            #     if feed["feed_type"] not in feed_type_list:
-            #         print("Incorrect feed type")
-            #         return horse
-            #     # validate unit type
-            #     feed_unit_list = ["HANDFUL", "SCOOP", "FIRST_CUT", "SECOND_CUT"]
-            #     if feed["unit"] not in feed_unit_list:
-            #         print("Incorrect unit type")
-            #         raise Exception("Incorrect unit type")
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
                 current_feed.delete()
