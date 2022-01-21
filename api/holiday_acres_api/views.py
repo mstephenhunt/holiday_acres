@@ -9,7 +9,7 @@ from holiday_acres_api.serializers import (
 )
 from holiday_acres_api.models import User, Paddock, Horse, Barn_Section
 from rest_framework.decorators import api_view
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from datetime import datetime
 
 
