@@ -51,12 +51,8 @@ def test_horse_relationships_create():
     # create horse instance for testing
     horse = Horse(
         name="Firebrand",
-        age=10,
-        tier=0,
-        feed="Lots of food",
-        health="Good",
-        misc_notes="Important things you should know about horses",
-        paddock=test_paddock,
+        stall="New Barn 3",
+        special_instructions="Important things you should know about horses",
         user=test_user,
     )
     horse.save()
@@ -68,5 +64,4 @@ def test_horse_relationships_create():
     db_horse = Horse.objects.all()[:1].get()
 
     # Check relationships
-    assert db_horse.paddock == test_paddock
     assert db_horse.user == test_user
