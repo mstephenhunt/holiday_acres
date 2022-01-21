@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django import HttpResponse
+from django.http import HttpResponse
 from holiday_acres_api.models.Users import User
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
@@ -53,28 +53,32 @@ class HorseSerializer(serializers.ModelSerializer):
         if "feed" in data.keys():
 
             for feed in data["feed"]:
-                # validate feed type
-                feed_type_list = [
-                    "PELLETS",
-                    "HAY_PELLETS",
-                    "HAY_CUT",
-                    "FIBREMAX",
-                    "ALFALA",
-                    "CARBSAFE",
-                    "OIL",
-                    "NONE",
-                ]
-                if feed["feed_type"] not in feed_type_list:
-                    print("Incorrect feed type")
-                    return horse
-                # validate unit type
-                feed_unit_list = ["HANDFUL", "SCOOP", "FIRST_CUT", "SECOND_CUT"]
-                if feed["unit"] not in feed_unit_list:
-                    print("Incorrect unit type")
-                    response.status_code = 500
-                    response.reason_phrase = "Incorrect unit type"
-                    return response
-
+                if feed["feed_type"] == "HAY_CUT" and feed["unit"] not in [
+                    "FIRST_CUT",
+                    "SECOND_CUT",
+                ]:
+                    raise Exception("Haycut must be 1st cut or 2nd cut")
+                if feed["amount"] < 0:
+                    raise Exception("Amount must be a positive value")
+            #     # validate feed type
+            #     feed_type_list = [
+            #         "PELLETS",
+            #         "HAY_PELLETS",
+            #         "HAY_CUT",
+            #         "FIBREMAX",
+            #         "ALFALA",
+            #         "CARBSAFE",
+            #         "OIL",
+            #         "NONE",
+            #     ]
+            #     if feed["feed_type"] not in feed_type_list:
+            #         print("Incorrect feed type")
+            #         return horse
+            #     # validate unit type
+            #     feed_unit_list = ["HANDFUL", "SCOOP", "FIRST_CUT", "SECOND_CUT"]
+            #     if feed["unit"] not in feed_unit_list:
+            #         print("Incorrect unit type")
+            #         raise Exception("Incorrect unit type")
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
                 current_feed.delete()
