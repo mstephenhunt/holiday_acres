@@ -7,6 +7,7 @@ import { Feed } from "./types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { fetcher, RequestType } from './fetcher';
 
 type HorseDetailsCardProps = {
   id: number;
@@ -33,6 +34,12 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
       setFeedUnit
     }
   });
+
+  const patchHorse = () => {
+    return fetcher('/api/horses', RequestType.PATCH, {
+
+    })
+  };
 
   const specialInstructions = props.specialInstructions ? props.specialInstructions : 'None';
 

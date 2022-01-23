@@ -17,10 +17,10 @@ export enum RequestType {
 /**
  * Docs for fetch(): https://developer.mozilla.org/en-US/docs/Web/API/fetch
  */
-export const fetcher = async (path: string, method=RequestType.GET): Promise<Response> => {
+export const fetcher = async (path: string, method=RequestType.GET, body?: object): Promise<Response> => {
   const timeout = 5000;
   const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}${path}`;
 
   // Promise.race used for either timeout or request resolution
-  return Promise.race([fetch(url.toString(), { method }), responseTimeout(timeout)]);
+  return Promise.race([fetch(url.toString(), { method, body: JSON.stringify(body) }), responseTimeout(timeout)]);
 };
