@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 export default function HorseSpecialInstructions(props: {
+  edit: boolean;
   specialInstructions: string;
 }) {
   return (

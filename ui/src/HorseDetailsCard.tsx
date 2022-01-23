@@ -111,6 +111,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
         </Grid>
         <Grid item xs={12}>
           <HorseSpecialInstructions
+            edit={props.edit}
             specialInstructions={specialInstructions}
           />
         </Grid>
