@@ -1,4 +1,5 @@
 import { FeedType, FeedUnit, Feed } from "./types";
+import { feedTypeToLabelMap } from './feedHelpers';
 import GrainIcon from "@mui/icons-material/Grain";
 import GrassIcon from "@mui/icons-material/Grass";
 import ContentCutIcon from "@mui/icons-material/ContentCut";
@@ -10,16 +11,6 @@ import CircleIcon from "@mui/icons-material/Circle";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
-const feedNameFormatMap: Map<FeedType, string> = new Map([
-  [FeedType.PELLETS, "Pellets"],
-  [FeedType.HAY_PELLETS, "Hay Pellets"],
-  [FeedType.HAY_CUT, "Hay Cut"],
-  [FeedType.FIBREMAX, "Fibremax"],
-  [FeedType.ALFALFA, "PM Alfalfa"],
-  [FeedType.CARB_SAFE, "Carb Safe"],
-  [FeedType.OIL, "Oil"],
-]);
 
 function getFormattedFeedAmount(input: {
   feedUnit: FeedUnit;
@@ -84,7 +75,7 @@ export default function HorseFeed(props: Feed) {
   // need to do that.
   const icon = getIconForFeedType(props.feed_type as FeedType);
   const feedName =
-    feedNameFormatMap.get(FeedType[props.feed_type] as unknown as FeedType) ||
+    feedTypeToLabelMap.get(FeedType[props.feed_type] as unknown as FeedType) ||
     "Unknown Feed";
 
   const feedAmount = getFormattedFeedAmount({

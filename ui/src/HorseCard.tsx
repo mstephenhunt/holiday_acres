@@ -1,7 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
-import CardMedia from "@mui/material/CardMedia";
 import CardActionArea from "@mui/material/CardActionArea";
 import HorseInfoHeading from "./HorseInfoHeading";
 import { Feed } from "./types";
@@ -82,6 +81,7 @@ export default function HorseCard(props: HorseCardProps) {
             {props.specialInstructions && (
               <Grid item xs={12}>
                 <HorseSpecialInstructions
+                  edit={false}
                   specialInstructions={props.specialInstructions}
                 />
               </Grid>
