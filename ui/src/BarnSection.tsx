@@ -3,11 +3,9 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import HorseCard from "./HorseCard";
-import { Feed, FeedType, FeedUnit, BarnSectionType } from "./types";
+import { BarnSectionType } from "./types";
 import { fetcher } from "./fetcher";
-import useSWR from "swr";
 import { useState, useEffect } from "react";
 
 export default function BarnSection() {
