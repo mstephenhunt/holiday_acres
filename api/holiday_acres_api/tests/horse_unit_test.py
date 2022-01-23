@@ -15,11 +15,8 @@ def test_horse_create():
     # create horse instance for testing
     horse = Horse(
         name="Firebrand",
-        age=10,
-        tier=0,
-        feed="Lots of food",
-        health="Good",
-        misc_notes="Important things you should know about horses",
+        stall="New Barn 3",
+        special_instructions="Important things you should know about horses",
     )
     horse.save()
 
@@ -31,11 +28,10 @@ def test_horse_create():
 
     # Check name
     assert db_horse.name == "Firebrand"
-    assert db_horse.age == 10
-    assert db_horse.tier == 0
-    assert db_horse.feed == "Lots of food"
-    assert db_horse.health == "Good"
-    assert db_horse.misc_notes == "Important things you should know about horses"
+    assert db_horse.stall == "New Barn 3"
+    assert (
+        db_horse.special_instructions == "Important things you should know about horses"
+    )
 
 
 @pytest.mark.django_db
@@ -55,12 +51,8 @@ def test_horse_relationships_create():
     # create horse instance for testing
     horse = Horse(
         name="Firebrand",
-        age=10,
-        tier=0,
-        feed="Lots of food",
-        health="Good",
-        misc_notes="Important things you should know about horses",
-        paddock=test_paddock,
+        stall="New Barn 3",
+        special_instructions="Important things you should know about horses",
         user=test_user,
     )
     horse.save()
@@ -72,5 +64,4 @@ def test_horse_relationships_create():
     db_horse = Horse.objects.all()[:1].get()
 
     # Check relationships
-    assert db_horse.paddock == test_paddock
     assert db_horse.user == test_user

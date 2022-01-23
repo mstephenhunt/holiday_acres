@@ -9,19 +9,19 @@ from holiday_acres_api.models.Feeds import Feed
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name", "email", "password"]
+        fields = ["id", "username", "first_name", "last_name", "email", "password"]
 
 
 class PaddockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paddock
-        fields = ["paddock_name", "paddock_tier"]
+        fields = ["id", "paddock_name", "paddock_tier"]
 
 
 class FeedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feed
-        fields = ["feed_type", "amount", "unit", "id"]
+        fields = ["id", "feed_type", "amount", "unit"]
 
 
 # https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
@@ -32,7 +32,38 @@ class HorseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Horse
         # instead of hardcoding all of the fields, would a function make more sense?
-        fields = ["id", "name", "user", "feed", "stall"]
+        fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
+
+    def update(self, horse, data):
+        if "name" in data.keys():
+            horse.name = data["name"]
+        if "user" in data.keys():
+            horse.user = data["user"]
+        if "stall" in data.keys():
+            horse.stall = data["stall"]
+        if "special_instructions" in data.keys():
+            horse.special_instructions = data["special_instructions"]
+
+        horse.save()
+
+        # If new feed was provided, put that in by removing
+        # the old instance and creating a new instance
+        if "feed" in data.keys():
+
+            # Nuke whatever feed is currently in the DB for this horse for it's feed
+            for current_feed in horse.feed.all():
+                current_feed.delete()
+
+            # Create new instance of feed from data
+            for feed in data["feed"]:
+                Feed.objects.create(
+                    horse=horse,
+                    feed_type=Feed.FeedType(feed["feed_type"]),
+                    unit=Feed.FeedUnit(feed["unit"]),
+                    amount=feed["amount"],
+                )
+
+        return horse
 
     def update(self, instance, validated_data):
         if "name" in validated_data.keys():
