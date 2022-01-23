@@ -96,7 +96,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
         <Grid
           item
           xs={12}
-          sx={{ display: "flex", justifyContent: "center" }}
+          sx={{ display: "flex", justifyContent: "center", paddingTop: '5px' }}
         >
           <Box
             sx={{

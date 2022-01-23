@@ -3,7 +3,6 @@ import { FeedType, FeedUnit } from "./types";
 import { feedTypeToLabelMap, feedUnitToLabelMap } from './feedHelpers';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
@@ -34,16 +33,14 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
   };
 
   return (
-    <Grid container sx={{ paddingTop: '10px' }}>
+    <Grid container sx={{ paddingTop: '5px' }}>
       <Grid item xs={5}>
         <Box>
           <FormControl fullWidth>
-            <InputLabel>Feed</InputLabel>
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
               value={props.feedLabel}
-              label="Feed Type"
               onChange={handleFeedTypeChange}
             >
               <MenuItem value={FeedType.PELLETS}>{feedTypeToLabelMap.get(FeedType.PELLETS)}</MenuItem>
@@ -60,7 +57,6 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
       <Grid item xs={2.5} sx={{ paddingLeft: '5px', paddingRight: '5px' }}>
         <TextField
           id="outlined-number"
-          label="Amt"
           value={props.feedAmount}
           type="number"
           onChange={handleFeedAmountChange}
@@ -69,12 +65,10 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
       <Grid item xs={4.5}>
         <Box>
           <FormControl fullWidth>
-            <InputLabel>Unit</InputLabel>
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
               value={props.feedUnit}
-              label="Unit"
               onChange={handleFeedUnitChange}
             >
               <MenuItem value={FeedUnit.SCOOP}>{feedUnitToLabelMap.get(FeedUnit.SCOOP)}</MenuItem>
