@@ -3,11 +3,10 @@ import HorseInfoDetailsHeading from "./HorseInfoDetailsHeading";
 import HorseSpecialInstructions from "./HorseSpecialInstructions";
 import HorseFeed from "./HorseFeed";
 import HorseFeedEditable from "./HorseFeedEditable";
-import { Feed } from "./types";
+import { Feed, FeedUnit, FeedType } from "./types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { fetcher, RequestType } from './fetcher';
 
 type HorseDetailsCardProps = {
   id: number;
@@ -20,12 +19,14 @@ type HorseDetailsCardProps = {
 
 export default function HorseDetailsCard(props: HorseDetailsCardProps) {
   // Since there's a list of feed that this horse has, we need a handler for each horse/field
-  const feedLabelHandlers = props.feed.map(() => {
-    const [feedLabel, setFeedLabel] = React.useState<string>('');
-    const [feedAmount, setFeedAmount] = React.useState<number>(-1);
-    const [feedUnit, setFeedUnit] = React.useState<string>('');
+  const feedLabelHandlers = props.feed.map((feed) => {
+    // These fields should be initialized to whatever is currently on the horse
+    const [feedLabel, setFeedLabel] = React.useState<FeedType>(feed.feed_type);
+    const [feedAmount, setFeedAmount] = React.useState<number | undefined>(feed.amount);
+    const [feedUnit, setFeedUnit] = React.useState<FeedUnit>(feed.unit);
 
     return {
+      id: feed.id,
       feedLabel,
       setFeedLabel,
       feedAmount,
@@ -80,6 +81,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
           { props.edit &&
             props.feed.map((feed, index) => (
               <HorseFeedEditable
+                id={feedLabelHandlers.id}
                 setFeedLabel={feedLabelHandlers[index].setFeedLabel}
                 setFeedAmount={feedLabelHandlers[index].setFeedAmount}
                 setFeedUnit={feedLabelHandlers[index].setFeedUnit}

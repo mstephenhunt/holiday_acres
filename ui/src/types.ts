@@ -1,18 +1,18 @@
 export enum FeedType {
-  PELLETS,
-  FIBREMAX,
-  ALFALFA,
-  CARB_SAFE,
-  OIL,
-  HAY_PELLETS,
-  HAY_CUT,
+  PELLETS = "PELLETS",
+  FIBREMAX = "FIBREMAX",
+  ALFALFA = "AFLALFA",
+  CARB_SAFE = "CARB_SAFE",
+  OIL = "OIL",
+  HAY_PELLETS = "HAY_PELLETS",
+  HAY_CUT = "HAY_CUT",
 }
 
 export enum FeedUnit {
-  SCOOP,
-  HANDFUL,
-  FIRST_CUT,
-  SECOND_CUT,
+  SCOOP = "SCOOP",
+  HANDFUL = "HANDFUL",
+  FIRST_CUT = "FIRST_CUT",
+  SECOND_CUT = "SECOND_CUT",
 }
 
 export type Feed = {

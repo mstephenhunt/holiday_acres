@@ -10,9 +10,10 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 
 type HorseFeedEditableComponentProps = {
-  setFeedLabel: React.Dispatch<React.SetStateAction<string>>,
-  setFeedAmount: React.Dispatch<React.SetStateAction<number>>,
-  setFeedUnit: React.Dispatch<React.SetStateAction<string>>,
+  id: number;
+  setFeedLabel: React.Dispatch<React.SetStateAction<FeedType>>,
+  setFeedAmount: React.Dispatch<React.SetStateAction<number | undefined>>,
+  setFeedUnit: React.Dispatch<React.SetStateAction<FeedUnit>>,
   feedLabel: string;
   feedAmount: number;
   feedUnit: string;
@@ -21,7 +22,7 @@ type HorseFeedEditableComponentProps = {
 
 export default function HorseFeedEditable(props: HorseFeedEditableComponentProps) {
   const handleFeedTypeChange = (event: SelectChangeEvent) => {
-    props.setFeedLabel(event.target.value as string);
+    props.setFeedLabel(event.target.value as FeedType);
   };
 
   const handleFeedAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,11 +30,11 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
   }
 
   const handleFeedUnitChange = (event: SelectChangeEvent) => {
-    props.setFeedUnit(event.target.value as string);
+    props.setFeedUnit(event.target.value as FeedUnit);
   };
 
   return (
-    <Grid container xs={12}>
+    <Grid container>
       <Grid item xs={5}>
         <Box>
           <FormControl fullWidth>
@@ -60,6 +61,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
         <TextField
           id="outlined-number"
           label="Amt"
+          value={props.feedAmount}
           type="number"
           onChange={handleFeedAmountChange}
         />
