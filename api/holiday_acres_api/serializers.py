@@ -79,10 +79,6 @@ class HorseSerializer(serializers.ModelSerializer):
                 # make sure oil is measured in cups
                 if feed["feed_type"] == "OIL" and feed["unit"] not in "CUP":
                     raise Exception("Oil must be measured in Cups")
-                # default to 0 and scoop if feed_type = NONE
-                if feed["feed_type"] == "NONE":
-                    feed["amount"] = 0
-                    feed["unit"] = "SCOOP"
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
                 current_feed.delete()
