@@ -21,7 +21,9 @@ class PaddockSerializer(serializers.ModelSerializer):
 class FeedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feed
-        fields = ["id", "feed_type", "amount", "unit"]
+        fields = ["id", "feed_type", "unit", "amount"]
+
+    amount = serializers.FloatField()
 
 
 # https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
