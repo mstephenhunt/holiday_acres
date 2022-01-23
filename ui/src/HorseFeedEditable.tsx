@@ -15,7 +15,7 @@ type HorseFeedEditableComponentProps = {
   setFeedAmount: React.Dispatch<React.SetStateAction<number | undefined>>,
   setFeedUnit: React.Dispatch<React.SetStateAction<FeedUnit>>,
   feedLabel: string;
-  feedAmount: number;
+  feedAmount: number | undefined;
   feedUnit: string;
   feedType?: FeedType;
 }
@@ -34,7 +34,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
   };
 
   return (
-    <Grid container>
+    <Grid container sx={{ paddingTop: '10px' }}>
       <Grid item xs={5}>
         <Box>
           <FormControl fullWidth>
@@ -57,7 +57,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
           </FormControl>
         </Box>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={2.5} sx={{ paddingLeft: '5px', paddingRight: '5px' }}>
         <TextField
           id="outlined-number"
           label="Amt"
@@ -66,7 +66,7 @@ export default function HorseFeedEditable(props: HorseFeedEditableComponentProps
           onChange={handleFeedAmountChange}
         />
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={4.5}>
         <Box>
           <FormControl fullWidth>
             <InputLabel>Unit</InputLabel>
