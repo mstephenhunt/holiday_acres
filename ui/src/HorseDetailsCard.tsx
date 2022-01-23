@@ -35,12 +35,6 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     }
   });
 
-  const patchHorse = () => {
-    return fetcher('/api/horses', RequestType.PATCH, {
-
-    })
-  };
-
   const specialInstructions = props.specialInstructions ? props.specialInstructions : 'None';
 
   return (
