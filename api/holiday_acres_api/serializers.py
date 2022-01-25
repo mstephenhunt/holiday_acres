@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.http import HttpResponse
 from holiday_acres_api.models.Users import User
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
@@ -50,8 +51,36 @@ class HorseSerializer(serializers.ModelSerializer):
 
         # If new feed was provided, put that in by removing
         # the old instance and creating a new instance
+        response = HttpResponse()
         if "feed" in data.keys():
 
+            for feed in data["feed"]:
+                scoopable_feed = [
+                    "PELLETS",
+                    "HAY_PELLETS",
+                    "FIBREMAX",
+                    "ALFALFA",
+                    "CARB_SAFE",
+                ]
+                # make sure amount is positive value
+                if feed["amount"] < 0:
+                    raise Exception("Amount must be a positive value")
+                # make sure 1st/2nd cut are only used for hay cut
+                if feed["feed_type"] == "HAY_CUT" and feed["unit"] not in [
+                    "FIRST_CUT",
+                    "SECOND_CUT",
+                ]:
+                    raise Exception("Haycut must be 1st cut or 2nd cut")
+                # make sure scoopable feeds are measured in scoops and handfuls
+                if feed["feed_type"] in scoopable_feed and feed["unit"] in [
+                    "FIRST_CUT",
+                    "SECOND_CUT",
+                    "CUP",
+                ]:
+                    raise Exception("Must measure by scoop or handful")
+                # make sure oil is measured in cups
+                if feed["feed_type"] == "OIL" and feed["unit"] not in "CUP":
+                    raise Exception("Oil must be measured in Cups")
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
                 current_feed.delete()
