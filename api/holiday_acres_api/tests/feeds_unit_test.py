@@ -57,24 +57,20 @@ def test_feed_create():
     assert str(exception_info.value) == "Oil must be measured in Cups"
     print(exception_info.value)
 
-    # # create feed instance
-    # new_feed = Feed(
-    #     feed_type="CARB_SAFE",
-    #     unit="SCOOP",
-    #     amount=1,
-    #     # horse=1
-    # )
-    # new_feed.save()
+    # create feed instance
+    new_feed = Feed(feed_type="CARB_SAFE", unit="SCOOP", amount=1, horse=horse)
 
-    # # Should only be one feed in DB
-    # assert Feed.objects.count() == 1
+    new_feed.save()
 
-    # # Get that horse -- also there's probably a better way to do this get()
-    # db_new_feed = Feed.objects.all()[:1].get()
+    # Should only be one feed in DB
+    assert Feed.objects.count() == 1
 
-    # # Check that db_new_feed values are consistent
+    # Get that horse -- also there's probably a better way to do this get()
+    db_new_feed = Feed.objects.all()[:1].get()
 
-    # assert db_new_feed.feed_type == "CARB_SAFE"
-    # assert db_new_feed.unit == "SCOOP"
-    # assert db_new_feed.amount == 1
-    # # assert db_new_feed.horse == 1
+    # Check that db_new_feed values are consistent
+
+    assert db_new_feed.feed_type == "CARB_SAFE"
+    assert db_new_feed.unit == "SCOOP"
+    assert db_new_feed.amount == 1
+    assert db_new_feed.horse == horse
