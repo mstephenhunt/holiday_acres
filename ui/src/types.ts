@@ -1,7 +1,7 @@
 export enum FeedType {
   PELLETS = "PELLETS",
   FIBREMAX = "FIBREMAX",
-  ALFALFA = "AFLALFA",
+  ALFALFA = "ALFALFA",
   CARB_SAFE = "CARB_SAFE",
   OIL = "OIL",
   HAY_PELLETS = "HAY_PELLETS",

@@ -81,7 +81,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
           { props.edit &&
             props.feed.map((feed, index) => (
               <HorseFeedEditable
-                id={feedLabelHandlers.id}
+                id={feed.id}
                 setFeedLabel={feedLabelHandlers[index].setFeedLabel}
                 setFeedAmount={feedLabelHandlers[index].setFeedAmount}
                 setFeedUnit={feedLabelHandlers[index].setFeedUnit}
