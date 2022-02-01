@@ -74,7 +74,7 @@ class HorseSerializer(serializers.ModelSerializer):
                 # make sure scoopable feeds are measured in scoops and handfuls
                 if feed["feed_type"] in scoopable_feed and feed["unit"] not in [
                     "HANDFUL",
-                    "SCOOPS",
+                    "SCOOP",
                 ]:
                     raise Exception("Must measure by scoop or handful")
                 # make sure oil is measured in cups
