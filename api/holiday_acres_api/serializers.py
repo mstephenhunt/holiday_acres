@@ -72,14 +72,13 @@ class HorseSerializer(serializers.ModelSerializer):
                 ]:
                     raise Exception("Haycut must be 1st cut or 2nd cut")
                 # make sure scoopable feeds are measured in scoops and handfuls
-                if feed["feed_type"] in scoopable_feed and feed["unit"] in [
-                    "FIRST_CUT",
-                    "SECOND_CUT",
-                    "CUP",
+                if feed["feed_type"] in scoopable_feed and feed["unit"] not in [
+                    "HANDFUL",
+                    "SCOOPS",
                 ]:
                     raise Exception("Must measure by scoop or handful")
                 # make sure oil is measured in cups
-                if feed["feed_type"] == "OIL" and feed["unit"] not in "CUP":
+                if feed["feed_type"] == "OIL" and feed["unit"] != "CUP":
                     raise Exception("Oil must be measured in Cups")
             # Nuke whatever feed is currently in the DB for this horse for it's feed
             for current_feed in horse.feed.all():
