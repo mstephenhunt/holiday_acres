@@ -25,10 +25,8 @@ def test_user_create():
     # Should only be one user in DB
     assert User.objects.count() == 1
 
-    # Get that user -- also there's probably a better way to do this get()
-    db_user = User.objects.all()[:1].get()
-    # I think this would work
-    # db_user = User.objects.FIRST()
+    # better way to get first object
+    db_user = User.objects.first()
 
     # Check User fields username, password, first_name, last_name, email
     assert db_user.username == "LetsTest54321!"
