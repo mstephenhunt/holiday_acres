@@ -19,7 +19,7 @@ from holiday_acres_api import views
 
 router = routers.DefaultRouter()
 # Removed these since we don't need them public
-# router.register(r"users", views.UserViewSet)
+router.register(r"users", views.UserViewSet)
 # router.register(r"paddocks", views.PaddockViewSet)
 router.register(r"api/horses", views.HorseViewSet)
 # router.register(r"api/horses/update_horse", views.HorseViewSet.update)

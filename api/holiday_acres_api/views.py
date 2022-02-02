@@ -68,8 +68,10 @@ def register_account_request(request):
         or "last_name" not in body
     ):
         response.status_code = 500
+        print(response.status_code)
+        # print error corresponding to missing information
         for field in body:
-            if field != "":
+            if field == "":
                 response.reason_phrase = (
                     f"Missing required field {field} to register user"
                 )
