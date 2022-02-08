@@ -69,6 +69,7 @@ def register_account_request(request):
     ):
         response.status_code = 500
         print(response.status_code)
+        # (still need to add verification of specific messages)
         # print error corresponding to missing information
         for field in body:
             print(f"Missing required field {field} to register user")
