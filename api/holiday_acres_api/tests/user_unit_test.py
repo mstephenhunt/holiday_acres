@@ -1,5 +1,7 @@
 import pytest
 
+from django.test import RequestFactory
+from holiday_acres_api.views import register_account_request
 from holiday_acres_api.models.Users import User
 
 """
@@ -48,6 +50,9 @@ def test_user_duplicate():
         last_name="McTesterson",
     )
     user.save()
+
+    assert user.email == "tester1@testplace.com"
+
     # duplicate user
     user2 = User(
         email="tester1@testplace.com",
@@ -58,7 +63,11 @@ def test_user_duplicate():
     )
     user2.save()
 
+    # assert response.status_code == 500
+    # assert response.reason_phrase == "Username already exists"
+
     assert user != user2
+    print(user.username, "does not equal", user2.username)
 
 
 # Not sure how to do this, but these checks are already done in views.py

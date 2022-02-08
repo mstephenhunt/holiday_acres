@@ -60,15 +60,7 @@ def test_duplicate_user():
         "/users/register", data, content_type="application/json"
     )
     response = register_account_request(request)
-    # register duplicate user
-    data = {
-        "username": "test_username",
-        "password": "12345",
-        "password_confirmation": "12345",
-        "email": "anemailaddress",
-        "first_name": "Jon",
-        "last_name": "hunt",
-    }
+    # register duplicate user with same "data" info
     request2 = RequestFactory().post(
         "/users/register", data, content_type="application/json"
     )
@@ -89,3 +81,6 @@ def test_duplicate_user():
     )
     response = register_account_request(request3)
     assert response.status_code == 200
+    for user in User.objects.all():
+        print(user.username)
+    print("non-duplicate user created", response.status_code)
