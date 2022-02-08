@@ -12,11 +12,19 @@ request = factory.post('/a/test/path/', data, content_type='application/json')
 
 @pytest.mark.django_db(transaction=True)
 def test_create_user_view():
-    request = RequestFactory().post("/users/register")
+    data = {
+        "username": "1234",
+        "email": "1234",
+        "first_name": "12345",
+        "last_name": "123456",
+    }
+    request = RequestFactory().post(
+        "/users/register", data, content_type="application/json"
+    )
     response = register_account_request(request)
 
     assert response.status_code == 500
-    assert response.reason_phrase == "Missing required fields to register user"
+    assert response.reason_phrase == "Missing required field(s) to register user"
 
 
 @pytest.mark.django_db(transaction=True)
