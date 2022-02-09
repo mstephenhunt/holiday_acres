@@ -1,5 +1,6 @@
 import pytest
 
+from holiday_acres_api.models.Users import User
 from django.test import RequestFactory
 from holiday_acres_api.views import register_account_request
 
