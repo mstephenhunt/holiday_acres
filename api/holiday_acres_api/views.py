@@ -119,5 +119,6 @@ def register_account_request(request):
 def health_check(request):
     response = JsonResponse({"current_datetime": datetime.now()})
     response.status_code = 200
+    response.reason_phrase = {"current_datetime": datetime.now()}
 
     return response

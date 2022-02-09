@@ -2,7 +2,8 @@ import pytest
 
 from holiday_acres_api.models.Users import User
 from django.test import RequestFactory
-from holiday_acres_api.views import register_account_request
+from holiday_acres_api.views import register_account_request, health_check
+from datetime import datetime
 
 """
 factory = RequestFactory()
@@ -85,3 +86,11 @@ def test_duplicate_user():
     for user in User.objects.all():
         print(user.username)
     print("non-duplicate user created", response.status_code)
+
+
+@pytest.mark.django_db(transaction=True)
+def test_health_check():
+    request = RequestFactory().get("/api/health")
+    response = health_check(request)
+    assert response.status_code == 200
+    assert response.reason_phrase == {"current_datetime": datetime.now()}
