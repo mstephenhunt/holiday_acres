@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Header, Body } from '@nestjs/common';
+import { Controller, Get, Post, Header, Body, Param } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 
 type CreateUserDto = {
@@ -16,9 +16,15 @@ type SerializedUser = {
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get('/user/test')
-  getHello(): string {
-    return 'yoyo';
+  @Get('/user/:id')
+  async getUser(@Param() params): Promise<SerializedUser> {
+    const user = await this.userService.getUser({ id: parseInt(params.id) });
+
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name
+    }
   }
 
   @Post('/user')
