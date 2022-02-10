@@ -1,4 +1,6 @@
 node_modules
+haec-user-service/node_modules
+haec-user-service/dist
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
