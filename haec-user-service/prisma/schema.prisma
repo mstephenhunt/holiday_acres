@@ -3,6 +3,11 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
