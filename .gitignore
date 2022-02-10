@@ -1,6 +1,11 @@
 node_modules
+
+# user service
 haec-user-service/node_modules
 haec-user-service/dist
+haec-user-service/prisma/dev.db
+haec-user-service/prisma/dev.db-journal
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
