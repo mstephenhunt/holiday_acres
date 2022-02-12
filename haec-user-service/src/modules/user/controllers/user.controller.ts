@@ -4,13 +4,13 @@ import { UserService } from '../services/user.service';
 type CreateUserDto = {
   email: string;
   name?: string;
-}
+};
 
 type SerializedUser = {
   id: number;
   email: string;
   name?: string;
-}
+};
 
 @Controller()
 export class UserController {
@@ -23,22 +23,24 @@ export class UserController {
     return {
       id: user.id,
       email: user.email,
-      name: user.name
-    }
+      name: user.name,
+    };
   }
 
   @Post('/user')
   @Header('content-type', 'application/json')
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<SerializedUser> {
+  async createUser(
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<SerializedUser> {
     const createdUser = await this.userService.createUser({
       email: createUserDto.email,
-      name: createUserDto.name
+      name: createUserDto.name,
     });
 
     return {
       id: createdUser.id,
       email: createdUser.email,
-      name: createdUser.name
-    }
+      name: createdUser.name,
+    };
   }
 }

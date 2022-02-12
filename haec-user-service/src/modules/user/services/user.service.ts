@@ -9,20 +9,20 @@ export class UserService {
   public async getUser(input: { id: number }): Promise<User> {
     return this.prisma.user.findUnique({
       where: {
-        id: input.id
-      }
+        id: input.id,
+      },
     });
   }
 
   public async createUser(input: {
-    email: string,
-    name?: string
+    email: string;
+    name?: string;
   }): Promise<User> {
     return this.prisma.user.create({
       data: {
         email: input.email,
-        name: input.name
-      }
+        name: input.name,
+      },
     });
   }
 }
