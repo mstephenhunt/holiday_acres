@@ -38,22 +38,22 @@ export class UserService {
   public async verifyUser(input: {
     email: string;
     password: string
-  }): Promise<void> {
+  }): Promise<boolean> {
     let user;
     try {
-      user = await this.prisma.user.findUnique({
+      const user = await this.prisma.user.findUnique({
         where: {
           email: input.email
         }
       });
+
+      if (await bcrypt.compare(input.password, user.hashedPass)) {
+        return true;
+      }
     } catch (error) {
-      throw new UnauthorizedException('Password and email don\'t match an account');
+      console.error(error);
     }
 
-    if (await bcrypt.compare(input.password, user.hashedPass)) {
-      return;
-    }
-
-    throw new UnauthorizedException('Password and email don\'t match an account');
+    return false;
   }
 }
