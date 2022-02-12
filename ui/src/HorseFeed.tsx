@@ -1,5 +1,5 @@
 import { FeedType, FeedUnit, Feed } from "./types";
-import { feedTypeToLabelMap } from './feedHelpers';
+import { feedTypeToLabelMap } from "./feedHelpers";
 import GrainIcon from "@mui/icons-material/Grain";
 import GrassIcon from "@mui/icons-material/Grass";
 import ContentCutIcon from "@mui/icons-material/ContentCut";

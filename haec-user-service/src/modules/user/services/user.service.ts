@@ -27,7 +27,7 @@ export class UserService {
       data: {
         email: input.email,
         name: input.name,
-        hashedPass: hashedPassword
+        hashedPass: hashedPassword,
       },
     });
   }
