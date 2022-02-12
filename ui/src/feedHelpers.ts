@@ -1,10 +1,10 @@
-import { FeedType, FeedUnit } from './types';
+import { FeedType, FeedUnit } from "./types";
 
 export const feedUnitToLabelMap: Map<FeedUnit, string> = new Map([
-  [FeedUnit.SCOOP, 'Scoop'],
-  [FeedUnit.HANDFUL, 'Handful'],
-  [FeedUnit.FIRST_CUT, 'First Cut'],
-  [FeedUnit.SECOND_CUT, 'Second Cut']
+  [FeedUnit.SCOOP, "Scoop"],
+  [FeedUnit.HANDFUL, "Handful"],
+  [FeedUnit.FIRST_CUT, "First Cut"],
+  [FeedUnit.SECOND_CUT, "Second Cut"],
 ]);
 
 export const feedTypeToLabelMap: Map<FeedType, string> = new Map([

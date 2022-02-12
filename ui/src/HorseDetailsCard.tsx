@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import HorseInfoDetailsHeading from "./HorseInfoDetailsHeading";
 import HorseSpecialInstructions from "./HorseSpecialInstructions";
 import HorseFeed from "./HorseFeed";
@@ -22,7 +22,9 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
   const feedLabelHandlers = props.feed.map((feed) => {
     // These fields should be initialized to whatever is currently on the horse
     const [feedLabel, setFeedLabel] = React.useState<FeedType>(feed.feed_type);
-    const [feedAmount, setFeedAmount] = React.useState<number | undefined>(feed.amount);
+    const [feedAmount, setFeedAmount] = React.useState<number | undefined>(
+      feed.amount
+    );
     const [feedUnit, setFeedUnit] = React.useState<FeedUnit>(feed.unit);
 
     return {
@@ -32,11 +34,13 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
       feedAmount,
       setFeedAmount,
       feedUnit,
-      setFeedUnit
-    }
+      setFeedUnit,
+    };
   });
 
-  const specialInstructions = props.specialInstructions ? props.specialInstructions : 'None';
+  const specialInstructions = props.specialInstructions
+    ? props.specialInstructions
+    : "None";
 
   return (
     <Card
@@ -69,16 +73,16 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
           />
         </Grid>
         <Grid item xs={12}>
-          { !props.edit &&
-          props.feed.map((feed) => (
-            <HorseFeed
-              id={feed.id}
-              feed_type={feed.feed_type}
-              amount={feed.amount}
-              unit={feed.unit}
-            />
-          ))}
-          { props.edit &&
+          {!props.edit &&
+            props.feed.map((feed) => (
+              <HorseFeed
+                id={feed.id}
+                feed_type={feed.feed_type}
+                amount={feed.amount}
+                unit={feed.unit}
+              />
+            ))}
+          {props.edit &&
             props.feed.map((feed, index) => (
               <HorseFeedEditable
                 id={feed.id}
@@ -90,13 +94,12 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
                 feedAmount={feedLabelHandlers[index].feedAmount}
                 feedType={feed.feed_type}
               />
-            ))
-          }
+            ))}
         </Grid>
         <Grid
           item
           xs={12}
-          sx={{ display: "flex", justifyContent: "center", paddingTop: '5px' }}
+          sx={{ display: "flex", justifyContent: "center", paddingTop: "5px" }}
         >
           <Box
             sx={{

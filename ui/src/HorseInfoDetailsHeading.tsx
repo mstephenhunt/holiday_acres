@@ -49,18 +49,12 @@ export default function HorseInfoDetailsHeading(
         <Grid container>
           <Grid item>
             {props.edit === false && (
-              <Button
-                variant="outlined"
-                href={`/horse/edit/${props.id}/`}
-              >
+              <Button variant="outlined" href={`/horse/edit/${props.id}/`}>
                 Edit
               </Button>
             )}
             {props.edit === true && (
-              <Button
-                variant="contained"
-                href={`/horse/${props.id}/`}
-              >
+              <Button variant="contained" href={`/horse/${props.id}/`}>
                 Save
               </Button>
             )}
