@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 
 type CreateUserDto = {
   email: string;
+  password: string;
   name?: string;
 };
 
@@ -34,6 +35,7 @@ export class UserController {
   ): Promise<SerializedUser> {
     const createdUser = await this.userService.createUser({
       email: createUserDto.email,
+      password: createUserDto.password,
       name: createUserDto.name,
     });
 
