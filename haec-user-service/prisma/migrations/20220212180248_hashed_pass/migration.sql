@@ -1,7 +1,7 @@
 /*
   Warnings:
 
-  - Added the required column `hashed_pass` to the `User` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `hashedPass` to the `User` table without a default value. This is not possible if the table is not empty.
 
 */
 -- RedefineTables
@@ -10,7 +10,7 @@ CREATE TABLE "new_User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "email" TEXT NOT NULL,
     "name" TEXT,
-    "hashed_pass" TEXT NOT NULL
+    "hashedPass" TEXT NOT NULL
 );
 INSERT INTO "new_User" ("email", "id", "name") SELECT "email", "id", "name" FROM "User";
 DROP TABLE "User";
