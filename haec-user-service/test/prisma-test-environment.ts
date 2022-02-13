@@ -20,8 +20,6 @@ class PrismaTestEnvironment extends NodeEnvironment {
 
     // Generate the pg connection string for ther test schema
     this.databaseUrl = 'file:./test.db';
-
-    console.log(`---------> ${this.databaseUrl}`);
   }
 
   async setup() {
@@ -32,6 +30,11 @@ class PrismaTestEnvironment extends NodeEnvironment {
     await asyncExec('yarn prisma migrate dev');
 
     return super.setup();
+  }
+
+  async teardown() {
+    const asyncExec = util.promisify(exec);
+    await asyncExec('npx prisma migrate reset -f');
   }
 }
 
