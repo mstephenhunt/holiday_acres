@@ -19,15 +19,15 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .post('/user')
       .send({
-          email: "fake.email.com",
-          name: "Mocky McMockerson",
-          password: "password"
+        email: 'fake.email.com',
+        name: 'Mocky McMockerson',
+        password: 'password',
       })
       .expect(201)
       .expect({
         id: 1,
         email: 'fake.email.com',
-        name: 'Mocky McMockerson'
+        name: 'Mocky McMockerson',
       });
   });
 });
