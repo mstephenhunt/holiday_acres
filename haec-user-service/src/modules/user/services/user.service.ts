@@ -37,14 +37,14 @@ export class UserService {
    */
   public async verifyUser(input: {
     email: string;
-    password: string
+    password: string;
   }): Promise<boolean> {
     let user;
     try {
       const user = await this.prisma.user.findUnique({
         where: {
-          email: input.email
-        }
+          email: input.email,
+        },
       });
 
       if (await bcrypt.compare(input.password, user.hashedPass)) {
