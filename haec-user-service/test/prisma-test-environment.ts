@@ -3,7 +3,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Config } from '@jest/types';
 import { nanoid } from 'nanoid';
-import { sqltag } from '@prisma/client/runtime';
 import { ConfigService } from '@nestjs/config';
 const NodeEnvironment = require('jest-environment-node');
 const util = require('util');
@@ -20,9 +19,9 @@ class PrismaTestEnvironment extends NodeEnvironment {
     this.schema = `test_${nanoid()}`;
 
     // Generate the pg connection string for ther test schema
-    this.databaseUrl = new ConfigService()
-      .get<string>('DATABASE_URL')
-      .replace(/(\?schema=).+/i, `$1${this.schema}`);
+    this.databaseUrl = 'file:./test.db';
+
+    console.log(`---------> ${this.databaseUrl}`);
   }
 
   async setup() {
@@ -30,19 +29,9 @@ class PrismaTestEnvironment extends NodeEnvironment {
     this.global.process.env.DATABASE_URL = this.databaseUrl;
 
     const asyncExec = util.promisify(exec);
-    await asyncExec('yarn prisma migrate dev && yarn prisma db seed');
+    await asyncExec('yarn prisma migrate dev');
 
     return super.setup();
-  }
-
-  async teardown() {
-    // Drop the schema after the tests have completed
-    const client = new PrismaClient();
-    await client.$connect();
-    await client.$queryRaw(
-      sqltag([`DROP SCHEMA IF EXISTS "${this.schema}" CASCADE;`]),
-    );
-    await client.$disconnect();
   }
 }
 
