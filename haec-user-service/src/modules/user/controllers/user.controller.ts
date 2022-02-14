@@ -45,4 +45,21 @@ export class UserController {
       name: createdUser.name,
     };
   }
+
+  @Post('/user')
+  @Header('content-type', 'application/json')
+  async verifyUser(
+    @Body() verifyUserDto: VerifyUserDto,
+  ): Promise<SerializedUser> {
+    const verifiedUser = await this.userService.verifyUser({
+      email: verifyUserDto.email,
+      password: verifyUserDto.password,
+    });
+
+    return {
+      id: verifiedUser.id,
+      email: verifiedUser.email,
+      name: verifiedUser.name,
+    };
+  }
 }
