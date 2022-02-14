@@ -61,7 +61,7 @@ export class UserController {
       email: verifyUserDto.email,
       password: verifyUserDto.password,
     });
-
+// return a boolean? What do I want to return? What is calling this function?
     return {
       id: verifiedUser.id,
       email: verifiedUser.email,
