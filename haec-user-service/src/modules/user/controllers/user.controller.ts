@@ -13,7 +13,8 @@ type SerializedUser = {
   name?: string;
 };
 
-type VerifiedUser = {
+type VerifyUserDto = {
+  id: number;
   email: string;
   password: string;
 };
@@ -64,7 +65,6 @@ export class UserController {
     return {
       id: verifiedUser.id,
       email: verifiedUser.email,
-      name: verifiedUser.name,
     };
   }
 }
