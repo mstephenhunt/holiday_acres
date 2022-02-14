@@ -13,6 +13,11 @@ type SerializedUser = {
   name?: string;
 };
 
+type VerifiedUser = {
+  email: string;
+  password: string;
+};
+
 @Controller()
 export class UserController {
   constructor(private userService: UserService) {}
@@ -46,7 +51,7 @@ export class UserController {
     };
   }
 
-  @Post('/user')
+  @Post('/user/verify')
   @Header('content-type', 'application/json')
   async verifyUser(
     @Body() verifyUserDto: VerifyUserDto,
