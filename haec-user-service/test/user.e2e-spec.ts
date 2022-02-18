@@ -33,13 +33,36 @@ describe('AppController (e2e)', () => {
 
   it('can get a user', () => {
     return request(app.getHttpServer())
-      .get('/user/1')
-      // .expect(201)
+    .get('/user/1')
+    .expect(200)
       .expect({
         id: 1,
         email: 'fake.email.com',
         name: 'Mocky McMockerson',
       });
+    });
+
+    it('can verify that a user passes', () => {
+      return request(app.getHttpServer())
+      .post('/user/verify')
+      .send({
+        email: 'fake.email.com',
+        password: 'password',
+      })
+      .expect(201)
+      // .expect(true)
+  });
+
+    it('can verify that a user fails', () => {
+      return request(app.getHttpServer())
+      .post('/user/verify')
+      .send({
+        email: 'fake.email.com',
+        name: 'Mocky McMockerson',
+        password: 'badpw',
+      })
+      .expect(201)
+      // .expect(false);
   });
 
 });
