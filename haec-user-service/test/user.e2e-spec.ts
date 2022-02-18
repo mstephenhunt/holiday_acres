@@ -30,4 +30,16 @@ describe('AppController (e2e)', () => {
         name: 'Mocky McMockerson',
       });
   });
+
+  it('can get a user', () => {
+    return request(app.getHttpServer())
+      .get('/user/1')
+      // .expect(201)
+      .expect({
+        id: 1,
+        email: 'fake.email.com',
+        name: 'Mocky McMockerson',
+      });
+  });
+
 });
