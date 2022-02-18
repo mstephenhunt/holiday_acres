@@ -56,15 +56,11 @@ export class UserController {
   @Header('content-type', 'application/json')
   async verifyUser(
     @Body() verifyUserDto: VerifyUserDto,
-  ): Promise<SerializedUser> {
+  ): Promise<boolean> {
     const verifiedUser = await this.userService.verifyUser({
       email: verifyUserDto.email,
       password: verifyUserDto.password,
     });
-// return a boolean? What do I want to return? What is calling this function?
-    return {
-      id: verifiedUser.id,
-      email: verifiedUser.email,
-    };
+    return verifiedUser;
   }
 }
