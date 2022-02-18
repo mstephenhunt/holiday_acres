@@ -13,6 +13,12 @@ type SerializedUser = {
   name?: string;
 };
 
+type VerifyUserDto = {
+  id: number;
+  email: string;
+  password: string;
+};
+
 @Controller()
 export class UserController {
   constructor(private userService: UserService) {}
@@ -44,5 +50,17 @@ export class UserController {
       email: createdUser.email,
       name: createdUser.name,
     };
+  }
+
+  @Post('/user/verify')
+  @Header('content-type', 'application/json')
+  async verifyUser(
+    @Body() verifyUserDto: VerifyUserDto,
+  ): Promise<boolean> {
+    const verifiedUser = await this.userService.verifyUser({
+      email: verifyUserDto.email,
+      password: verifyUserDto.password,
+    });
+    return verifiedUser;
   }
 }
