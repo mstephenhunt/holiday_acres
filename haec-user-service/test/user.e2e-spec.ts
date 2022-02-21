@@ -15,19 +15,53 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('can create a user', () => {
-    return request(app.getHttpServer())
+  it('can create a user', async () => {
+    const response = await request(app.getHttpServer())
       .post('/user')
       .send({
         email: 'fake.email.com',
         name: 'Mocky McMockerson',
         password: 'password',
       })
-      .expect(201)
-      .expect({
+      expect(response.statusCode).toEqual(201)
+      expect(response.body).toEqual({
         id: 1,
         email: 'fake.email.com',
         name: 'Mocky McMockerson',
       });
+  });
+
+  it('can get a user', async() => {
+    const response = await request(app.getHttpServer())
+    .get('/user/1')
+    expect(response.statusCode).toEqual(200)
+    expect(response.body).toEqual({
+        id: 1,
+        email: 'fake.email.com',
+        name: 'Mocky McMockerson',
+      });
+    });
+
+    it('can verify that a user passes', async() => {
+      const response = await request(app.getHttpServer())
+      .post('/user/verify')
+      .send({
+        email: 'fake.email.com',
+        password: 'password',
+      })
+      expect(response.statusCode).toEqual(201)
+      expect(response.body).toEqual(true)
+  });
+
+    it('can verify that a user fails', async() => {
+      const response = await request(app.getHttpServer())
+      .post('/user/verify')
+      .send({
+        email: 'fake.email.com',
+        name: 'Mocky McMockerson',
+        password: 'badpw',
+      })
+      expect(response.statusCode).toEqual(201)
+      expect(response.body).toEqual(false)
   });
 });
