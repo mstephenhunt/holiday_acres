@@ -7,12 +7,6 @@ from holiday_acres_api.models.Barn_Sections import Barn_Section
 from holiday_acres_api.models.Feeds import Feed
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["id", "username", "first_name", "last_name", "email", "password"]
-
-
 class PaddockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paddock

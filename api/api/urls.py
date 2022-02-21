@@ -19,7 +19,6 @@ from holiday_acres_api import views
 
 router = routers.DefaultRouter()
 # Removed these since we don't need them public
-# router.register(r"users", views.UserViewSet)
 # router.register(r"paddocks", views.PaddockViewSet)
 router.register(r"api/horses", views.HorseViewSet)
 # router.register(r"api/horses/update_horse", views.HorseViewSet.update)
@@ -29,6 +28,4 @@ urlpatterns = [
     path("", include(router.urls)),
     path("api/health", views.health_check),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("users/", include("django.contrib.auth.urls")),
-    path("users/register", views.register_account_request),
 ]
