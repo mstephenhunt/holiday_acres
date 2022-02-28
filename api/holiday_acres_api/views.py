@@ -12,6 +12,7 @@ from holiday_acres_api.models import User, Paddock, Horse, Barn_Section
 from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime
+import requests
 
 # import requests
 
@@ -59,8 +60,13 @@ def register_account_request(request):
     """
     body = request.data
     response = HttpResponse()
+    response.status_code = 200
+    requests.post(
+        "http://localhost:3001/user",
+        data={"email": body["email"], "password": body["password"]},
+    )
 
-    request.post("http://localhost:3001/createUser", params=request.data)
+    return response
 
     # # If required fields are missing, return 500 through api
     # if (
