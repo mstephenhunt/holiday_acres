@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../../../providers/prisma.service';
 import { User } from '.prisma/client';
 import * as bcrypt from 'bcrypt';
+import { stringify } from 'querystring';
 
 @Injectable()
 export class UserService {
@@ -55,5 +56,15 @@ export class UserService {
     }
 
     return false;
+  }
+
+// This will log the user in
+
+  public async loginUser(input: {
+    email: string;
+    password: string;
+  }): Promise<string> {
+    const verified = await this.verifyUser({ email: input.email, password: input.password})
+
   }
 }
