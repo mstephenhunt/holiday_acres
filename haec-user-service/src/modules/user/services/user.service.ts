@@ -65,6 +65,23 @@ export class UserService {
     password: string;
   }): Promise<string> {
     const verified = await this.verifyUser({ email: input.email, password: input.password})
-
+    if (verified == true){
+      const user = await this.prisma.user.findUnique({
+        where: {
+          email: input.email,
+        },
+      })
+      // generate random token
+    const token = "aosjdfp9h3487"
+    user.token = token
+    console.log("user.token is now", user.token)
+    return user.token
+    // save user instance with this token
+  }
+  else {
+    console.log("error")
+    throw new Error()
+  }
+  // return this token all the way to user
   }
 }

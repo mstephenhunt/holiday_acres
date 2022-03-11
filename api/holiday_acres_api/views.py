@@ -72,11 +72,11 @@ def login(request):
     body = request.data
     response = HttpResponse()
     response.status_code = 200
-    requests.post(
+    returnedToken = requests.post(
         "http://localhost:3001/user/login",
         data={"email": body["email"], "password": body["password"]},
     )
-
+    print("user token is", returnedToken)
     return response
 
 
