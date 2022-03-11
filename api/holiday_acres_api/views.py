@@ -67,6 +67,26 @@ def register_account_request(request):
     return response
 
 
+@api_view(["POST"])
+def login(request):
+    body = request.data
+    response = HttpResponse()
+    response.status_code = 200
+    requests.post(
+        "http://localhost:3001/user/login",
+        data={"email": body["email"], "password": body["password"]},
+    )
+
+    return response
+
+
+# path("api/users/login", views.login),
+
+# @api_view(["POST"])
+# def logout(request):
+# path("api/users/logout", views.logout),
+
+
 @api_view(["GET"])
 def health_check(request):
     response = JsonResponse({"current_datetime": datetime.now()})
