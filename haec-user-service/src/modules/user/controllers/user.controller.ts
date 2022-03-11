@@ -19,6 +19,11 @@ type VerifyUserDto = {
   password: string;
 };
 
+type LoginUserDto = {
+  email: string;
+  password: string;
+};
+
 @Controller()
 export class UserController {
   constructor(private userService: UserService) {}
@@ -62,5 +67,17 @@ export class UserController {
       password: verifyUserDto.password,
     });
     return verifiedUser;
+  }
+
+  @Post('/user/login')
+  @Header('content-type', 'application/json')
+  async loginUser(
+    @Body() loginUserDto: LoginUserDto,
+  ): Promise<string> {
+    const loggedInUser = await this.userService.loginUser({
+      email: loginUserDto.email,
+      password: loginUserDto.password,
+    });
+    return loggedInUser;
   }
 }
