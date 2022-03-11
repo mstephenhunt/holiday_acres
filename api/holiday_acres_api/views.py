@@ -76,6 +76,8 @@ def login(request):
         "http://localhost:3001/user/login",
         data={"email": body["email"], "password": body["password"]},
     )
+    # NEED TO: grab token and return token to user
+    # #debugging (I want this to print the token)
     print("user token is", returnedToken)
     return response
 

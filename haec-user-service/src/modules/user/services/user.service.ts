@@ -71,17 +71,16 @@ export class UserService {
           email: input.email,
         },
       })
-      // generate random token
+      // NEED TO: generate random token
     const token = "aosjdfp9h3487"
     user.token = token
+    // #debugging
     console.log("user.token is now", user.token)
     return user.token
-    // save user instance with this token
   }
   else {
     console.log("error")
     throw new Error()
   }
-  // return this token all the way to user
   }
 }
