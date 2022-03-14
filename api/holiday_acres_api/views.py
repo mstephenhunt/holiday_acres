@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -76,9 +77,10 @@ def login(request):
         "http://localhost:3001/user/login",
         data={"email": body["email"], "password": body["password"]},
     )
+    response.body = returnedToken.text
     # NEED TO: grab token and return token to user
     # #debugging (I want this to print the token)
-    print("user token is", returnedToken)
+    print("user token is", response.body)
     return response
 
 
