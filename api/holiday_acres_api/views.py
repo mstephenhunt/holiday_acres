@@ -79,8 +79,6 @@ def login(request):
     )
     response.body = returnedToken.text
     # NEED TO: grab token and return token to user
-    # #debugging (I want this to print the token)
-    print("user token is", response.body)
     return response
 
 

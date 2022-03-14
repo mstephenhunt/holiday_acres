@@ -74,8 +74,6 @@ export class UserService {
       // NEED TO: generate random token
     const token = "aosjdfp9h3487"
     user.token = token
-    // #debugging
-    console.log("user.token is now", user.token)
     return user.token
   }
   else {

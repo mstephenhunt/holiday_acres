@@ -78,8 +78,6 @@ export class UserController {
       email: loginUserDto.email,
       password: loginUserDto.password,
     });
-    // #debugging
-    console.log("returning token:", loggedInUser)
     return loggedInUser;
   }
 }
