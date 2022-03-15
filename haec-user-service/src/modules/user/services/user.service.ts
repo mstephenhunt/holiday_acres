@@ -72,13 +72,29 @@ export class UserService {
         },
       })
       // NEED TO: generate random token
-    const token = "aosjdfp9h3487"
-    user.token = token
+      const token = "aosjdfp9h3487"
+      user.token = token
     return user.token
   }
   else {
     console.log("error")
     throw new Error()
   }
+  }
+
+//this will log the user out
+
+public async logoutUser(input: {
+  email: string;
+}): Promise<string> {
+  //find user by email
+  const logUserOut = await this.prisma.user.findUnique({
+    where: {
+      email: input.email,
+    },
+  })
+  //set user's token to null
+    logUserOut.token = null
+    return logUserOut.token
   }
 }

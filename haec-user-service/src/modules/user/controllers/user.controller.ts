@@ -24,6 +24,11 @@ type LoginUserDto = {
   password: string;
 };
 
+type LogoutUserDto = {
+  email: string;
+  password: string;
+};
+
 @Controller()
 export class UserController {
   constructor(private userService: UserService) {}
@@ -79,5 +84,16 @@ export class UserController {
       password: loginUserDto.password,
     });
     return loggedInUser;
+  }
+
+  @Post('/user/logout')
+  @Header('content-type', 'application/json')
+  async logoutUser(
+    @Body() logoutUserDto: LogoutUserDto,
+  ): Promise<string> {
+    const loggedOutUser = await this.userService.logoutUser({
+      email: logoutUserDto.email,
+    });
+    return loggedOutUser;
   }
 }

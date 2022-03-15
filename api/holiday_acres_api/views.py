@@ -82,6 +82,17 @@ def login(request):
     return response
 
 
+@api_view(["POST"])
+def logout(request):
+    body = request.data
+    response = HttpResponse()
+    response.status_code = 200
+    logout = requests.post(
+        "http://localhost:3001/user/logout", data={"email": body["email"]}
+    )
+    return response
+
+
 # path("api/users/login", views.login),
 
 # @api_view(["POST"])
