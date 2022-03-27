@@ -78,8 +78,11 @@ def login(request):
         data={"email": body["email"], "password": body["password"]},
     )
     response.body = returnedToken.text
-    # NEED TO: grab token and return token to user
-    return response
+    if response.body == '{"statusCode":500,"message":"Internal server error"}':
+        print("error")
+        return response.body
+    print("returning:", response.body)
+    return JsonResponse({"token": response.body})
 
 
 @api_view(["POST"])

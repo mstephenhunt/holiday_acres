@@ -58,7 +58,7 @@ export class UserService {
     return false;
   }
 
-// This will log the user in
+// This will log the user ** IN **
 
   public async loginUser(input: {
     email: string;
@@ -82,19 +82,25 @@ export class UserService {
   }
   }
 
-//this will log the user out
+//this will log the user ** OUT **
 
 public async logoutUser(input: {
   email: string;
 }): Promise<string> {
   //find user by email
-  const logUserOut = await this.prisma.user.findUnique({
+  const user = await this.prisma.user.findUnique({
     where: {
       email: input.email,
     },
   })
+
+  // BUG --- returns user.token as null ---
+
   //set user's token to null
-    logUserOut.token = null
-    return logUserOut.token
+    console.log("logUserOut email:", user.email,)
+    console.log("logged in user's token:", user.token,)
+    // logUserOut.token = null
+    console.log("logged out user's token:", user.token,)
+    return user.token
   }
 }
