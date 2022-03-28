@@ -33,9 +33,8 @@ export class UserService {
     });
   }
 
-  /**
-   * This will either verify the user or throw an exception
-   */
+  // This will either `verify the user` or `throw an exception`
+
   public async verifyUser(input: {
     email: string;
     password: string;
@@ -47,14 +46,12 @@ export class UserService {
           email: input.email,
         },
       });
-
       if (await bcrypt.compare(input.password, user.hashedPass)) {
         return true;
       }
     } catch (error) {
       console.error(error);
     }
-
     return false;
   }
 

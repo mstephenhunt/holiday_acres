@@ -91,7 +91,6 @@ export class UserController {
   async logoutUser(
     @Body() logoutUserDto: LogoutUserDto,
   ): Promise<string> {
-    console.log("email to log out:",logoutUserDto.email)
     const loggedOutUser = await this.userService.logoutUser({
       email: logoutUserDto.email,
     });

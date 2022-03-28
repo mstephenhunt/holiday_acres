@@ -64,7 +64,6 @@ def register_account_request(request):
         "http://localhost:3001/user",
         data={"email": body["email"], "password": body["password"]},
     )
-
     return response
 
 
@@ -78,10 +77,6 @@ def login(request):
         data={"email": body["email"], "password": body["password"]},
     )
     response.body = returnedToken.text
-    if response.body == '{"statusCode":500,"message":"Internal server error"}':
-        print("error")
-        return response.body
-    print("returning:", response.body)
     return JsonResponse({"token": response.body})
 
 
@@ -96,16 +91,8 @@ def logout(request):
     return response
 
 
-# path("api/users/login", views.login),
-
-# @api_view(["POST"])
-# def logout(request):
-# path("api/users/logout", views.logout),
-
-
 @api_view(["GET"])
 def health_check(request):
     response = JsonResponse({"current_datetime": datetime.now()})
     response.status_code = 200
-
     return response
