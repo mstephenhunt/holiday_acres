@@ -68,7 +68,6 @@ export class UserService {
     if (verified == true){
       // Generates random 21 character token with Crypto
       const Crypto = require('crypto')
-
       function randomString(size = 21) {
         return Crypto
           .randomBytes(size)
@@ -87,25 +86,14 @@ export class UserService {
   }
   }
 
-//this will log the user ** OUT **
+// This will log the user ** OUT **
 
 public async logoutUser(input: {
   email: string;
 }): Promise<string> {
-  //find user by email
-  const user = await this.prisma.user.findUnique({
-    where: {
-      email: input.email,
-    },
-  })
-
-  // BUG --- returns user.token as null ---
-
-  //set user's token to null
-    console.log("logUserOut email:", user.email,)
-    console.log("logged in user's token:", user.token,)
-    // logUserOut.token = null
-    console.log("logged out user's token:", user.token,)
-    return user.token
+  await this.prisma.user.update({
+    where: { email: input.email },
+    data: { token: null } })
+  return
   }
 }
