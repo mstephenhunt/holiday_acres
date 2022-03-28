@@ -66,15 +66,20 @@ export class UserService {
   }): Promise<string> {
     const verified = await this.verifyUser({ email: input.email, password: input.password})
     if (verified == true){
-      const user = await this.prisma.user.findUnique({
-        where: {
-          email: input.email,
-        },
-      })
-      // NEED TO: generate random token
-      const token = "aosjdfp9h3487"
-      user.token = token
-    return user.token
+      // Generates random 21 character token with Crypto
+      const Crypto = require('crypto')
+
+      function randomString(size = 21) {
+        return Crypto
+          .randomBytes(size)
+          .toString('base64')
+          .slice(0, size)
+      }
+      const token = randomString()
+      await this.prisma.user.update({
+        where: { email: input.email },
+        data: { token: token } })
+      return token
   }
   else {
     console.log("error")
