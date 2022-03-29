@@ -3,8 +3,18 @@ import { PrismaService } from '../../../providers/prisma.service';
 import { User } from '.prisma/client';
 import * as bcrypt from 'bcrypt';
 import { stringify } from 'querystring';
+import * as Crypto from 'crypto'
+
+
+function randomString(size = 21) {
+  return Crypto
+    .randomBytes(size)
+    .toString('base64')
+    .slice(0, size)
+}
 
 @Injectable()
+
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
@@ -64,13 +74,6 @@ export class UserService {
     const verified = await this.verifyUser({ email: input.email, password: input.password})
     if (verified == true){
       // Generates random 21 character token with Crypto
-      const Crypto = require('crypto')
-      function randomString(size = 21) {
-        return Crypto
-          .randomBytes(size)
-          .toString('base64')
-          .slice(0, size)
-      }
       const token = randomString()
       await this.prisma.user.update({
         where: { email: input.email },
@@ -78,8 +81,7 @@ export class UserService {
       return token
   }
   else {
-    console.log("error")
-    throw new Error()
+    throw new Error("Problem with email/password")
   }
   }
 
@@ -87,10 +89,9 @@ export class UserService {
 
 public async logoutUser(input: {
   email: string;
-}): Promise<string> {
+}): Promise<void> {
   await this.prisma.user.update({
     where: { email: input.email },
     data: { token: null } })
-  return
   }
 }

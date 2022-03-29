@@ -26,7 +26,6 @@ type LoginUserDto = {
 
 type LogoutUserDto = {
   email: string;
-  password: string;
 };
 
 @Controller()
@@ -90,10 +89,9 @@ export class UserController {
   @Header('content-type', 'application/json')
   async logoutUser(
     @Body() logoutUserDto: LogoutUserDto,
-  ): Promise<string> {
+  ): Promise<void> {
     const loggedOutUser = await this.userService.logoutUser({
       email: logoutUserDto.email,
     });
-    return loggedOutUser;
   }
 }

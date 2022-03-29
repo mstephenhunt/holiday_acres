@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -70,14 +69,12 @@ def register_account_request(request):
 @api_view(["POST"])
 def login(request):
     body = request.data
-    response = HttpResponse()
-    response.status_code = 200
     returnedToken = requests.post(
         "http://localhost:3001/user/login",
         data={"email": body["email"], "password": body["password"]},
     )
-    response.body = returnedToken.text
-    return JsonResponse({"token": response.body})
+    token = returnedToken.text
+    return JsonResponse({"token": token})
 
 
 @api_view(["POST"])
