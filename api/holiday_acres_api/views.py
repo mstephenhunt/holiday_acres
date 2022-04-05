@@ -2,6 +2,7 @@ from django.db.models.fields import NullBooleanField
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
+from api.settings import USER_SERVICE
 from holiday_acres_api.serializers import (
     UserSerializer,
     PaddockSerializer,
@@ -59,8 +60,10 @@ def register_account_request(request):
     body = request.data
     response = HttpResponse()
     response.status_code = 200
+    for item in USER_SERVICE:
+        user_service = item
     requests.post(
-        "http://localhost:3001/user",
+        (f"http://{user_service}/user"),
         data={"email": body["email"], "password": body["password"]},
     )
     return response
@@ -69,8 +72,10 @@ def register_account_request(request):
 @api_view(["POST"])
 def login(request):
     body = request.data
+    for item in USER_SERVICE:
+        user_service = item
     returnedToken = requests.post(
-        "http://localhost:3001/user/login",
+        (f"http://{user_service}/user/login"),
         data={"email": body["email"], "password": body["password"]},
     )
     token = returnedToken.text
@@ -82,8 +87,10 @@ def logout(request):
     body = request.data
     response = HttpResponse()
     response.status_code = 200
+    for item in USER_SERVICE:
+        user_service = item
     logout = requests.post(
-        "http://localhost:3001/user/logout", data={"email": body["email"]}
+        (f"http://{user_service}/user/logout"), data={"email": body["email"]}
     )
     return response
 
