@@ -30,8 +30,6 @@ DATABASES = {
     }
 }
 
-USER_SERVICE_HOST = {"localhost": 3001}
-USER_SERVICE = {"localhost:3001"}
 ### End Environment Specific Settings ###
 
 # Quick-start development settings - unsuitable for production

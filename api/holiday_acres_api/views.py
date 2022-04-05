@@ -2,7 +2,6 @@ from django.db.models.fields import NullBooleanField
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
-from api.settings import USER_SERVICE
 from holiday_acres_api.serializers import (
     UserSerializer,
     PaddockSerializer,
@@ -14,6 +13,14 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime
 import requests
+import environ
+import os
+from api.settings import BASE_DIR
+
+# set up port 3001 environment variable
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+user_service_var = env("USER_SERVICE")
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -60,10 +67,8 @@ def register_account_request(request):
     body = request.data
     response = HttpResponse()
     response.status_code = 200
-    for item in USER_SERVICE:
-        user_service = item
     requests.post(
-        (f"http://{user_service}/user"),
+        (f"http://{user_service_var}/user"),
         data={"email": body["email"], "password": body["password"]},
     )
     return response
@@ -72,13 +77,12 @@ def register_account_request(request):
 @api_view(["POST"])
 def login(request):
     body = request.data
-    for item in USER_SERVICE:
-        user_service = item
     returnedToken = requests.post(
-        (f"http://{user_service}/user/login"),
+        (f"http://{user_service_var}/user/login"),
         data={"email": body["email"], "password": body["password"]},
     )
     token = returnedToken.text
+    print(token)
     return JsonResponse({"token": token})
 
 
@@ -87,10 +91,8 @@ def logout(request):
     body = request.data
     response = HttpResponse()
     response.status_code = 200
-    for item in USER_SERVICE:
-        user_service = item
     logout = requests.post(
-        (f"http://{user_service}/user/logout"), data={"email": body["email"]}
+        (f"http://{user_service_var}/user/logout"), data={"email": body["email"]}
     )
     return response
 

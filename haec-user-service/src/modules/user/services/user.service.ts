@@ -6,13 +6,6 @@ import { stringify } from 'querystring';
 import * as Crypto from 'crypto'
 
 
-function randomString(size = 21) {
-  return Crypto
-    .randomBytes(size)
-    .toString('base64')
-    .slice(0, size)
-}
-
 @Injectable()
 
 export class UserService {
@@ -67,6 +60,8 @@ export class UserService {
 
 // This will log the user ** IN **
 
+
+
   public async loginUser(input: {
     email: string;
     password: string;
@@ -74,10 +69,13 @@ export class UserService {
     const verified = await this.verifyUser({ email: input.email, password: input.password})
     if (verified == true){
       // Generates random 21 character token with Crypto
-      const token = randomString()
+      const token = this.randomString()
+      // debug
+      console.log(token)
       await this.prisma.user.update({
         where: { email: input.email },
-        data: { token: token } })
+        // assigning `token variable` throws error that it `cannot accept a Promise value`
+        data: { token: "token"} })
       return token
   }
   else {
