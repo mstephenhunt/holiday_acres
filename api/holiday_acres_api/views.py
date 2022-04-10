@@ -13,8 +13,14 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime
 import requests
+import environ
+import os
+from api.settings import BASE_DIR
 
-# import requests
+# set up port 3001 environment variable
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+user_service_var = env("USER_SERVICE")
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -56,72 +62,42 @@ class BarnSectionViewSet(viewsets.ModelViewSet):
 @api_view(["POST"])
 def register_account_request(request):
     """
-    Passes data from the /users/register route to  Used to create new users in the database.
+    Passes data from the /users/register route to 3001/user to create new users in the database.
     """
     body = request.data
     response = HttpResponse()
     response.status_code = 200
     requests.post(
-        "http://localhost:3001/user",
+        (f"http://{user_service_var}/user"),
         data={"email": body["email"], "password": body["password"]},
     )
-
     return response
 
-    # # If required fields are missing, return 500 through api
-    # if (
-    #     "username" not in body
-    #     or "password" not in body
-    #     or "password_confirmation" not in body
-    #     or "email" not in body
-    #     or "first_name" not in body
-    #     or "last_name" not in body
-    # ):
-    #     response.status_code = 500
-    #     response.reason_phrase = "Missing required fields to register user"
-    #     return response
 
-    # username = body["username"]
-    # password = body["password"]
-    # password_confirmation = body["password_confirmation"]
-    # email = body["email"]
-    # first_name = body["first_name"]
-    # last_name = body["last_name"]
+@api_view(["POST"])
+def login(request):
+    body = request.data
+    returnedToken = requests.post(
+        (f"http://{user_service_var}/user/login"),
+        data={"email": body["email"], "password": body["password"]},
+    )
+    token = returnedToken.text
+    return JsonResponse({"token": token})
 
-    # # If the passwords don't match, reject the creation
-    # if password != password_confirmation:
-    #     response.status_code = 500
-    #     response.reason_phrase = "Password and password confirmation don't match"
-    #     return response
 
-    # # Does this user exist in the database?
-    # queryset = User.objects.all()
-    # # iterate through each User instance, check object.username against username variable
-    # for user in queryset:
-    #     if user.username == username:
-    #         print("username already exists, dude")
-    #         response.status_code = 500
-    #         response.reason_phrase = "Username already exists"
-    #         return response
-
-    # # All good, create the user
-    # new_user = User.objects.create(
-    #     email=email,
-    #     username=username,
-    #     password=password,
-    #     first_name=first_name,
-    #     last_name=last_name,
-    # )
-    # new_user.save()
-
-    # response.status_code = 200
-    # response.reason_phrase == "New user created"
-    # return response
+@api_view(["POST"])
+def logout(request):
+    body = request.data
+    response = HttpResponse()
+    response.status_code = 200
+    logout = requests.post(
+        (f"http://{user_service_var}/user/logout"), data={"email": body["email"]}
+    )
+    return response
 
 
 @api_view(["GET"])
 def health_check(request):
     response = JsonResponse({"current_datetime": datetime.now()})
     response.status_code = 200
-
     return response
