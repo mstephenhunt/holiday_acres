@@ -82,7 +82,6 @@ def login(request):
         data={"email": body["email"], "password": body["password"]},
     )
     token = returnedToken.text
-    print(token)
     return JsonResponse({"token": token})
 
 
