@@ -87,9 +87,6 @@ export class UserService {
       .randomBytes(size)
       .toString('base64')
       .slice(0, size)
-      // const printAddress = async () => {
-      //   const a = await address;
-      //   console.log(a);
       };
 
 // This will log the user ** OUT **
