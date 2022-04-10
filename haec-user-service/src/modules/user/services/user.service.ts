@@ -80,6 +80,8 @@ export class UserService {
   }
   }
 
+  // This generates a unique 21 character token
+
   private async randomString(size = 21): Promise<string> {
     return Crypto
       .randomBytes(size)
