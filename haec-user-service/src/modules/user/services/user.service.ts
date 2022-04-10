@@ -69,13 +69,10 @@ export class UserService {
     const verified = await this.verifyUser({ email: input.email, password: input.password})
     if (verified == true){
       // Generates random 21 character token with Crypto
-      const token = this.randomString()
-      // debug
-      console.log(token)
+      const token = await this.randomString()
       await this.prisma.user.update({
         where: { email: input.email },
-        // assigning `token variable` throws error that it `cannot accept a Promise value`
-        data: { token: "token"} })
+        data: { token: token} })
       return token
   }
   else {
@@ -83,13 +80,23 @@ export class UserService {
   }
   }
 
+  private async randomString(size = 21): Promise<string> {
+    return Crypto
+      .randomBytes(size)
+      .toString('base64')
+      .slice(0, size)
+      // const printAddress = async () => {
+      //   const a = await address;
+      //   console.log(a);
+      };
+
 // This will log the user ** OUT **
 
-public async logoutUser(input: {
-  email: string;
-}): Promise<void> {
-  await this.prisma.user.update({
-    where: { email: input.email },
-    data: { token: null } })
-  }
-}
+    public async logoutUser(input: {
+      email: string;
+    }): Promise<void> {
+      await this.prisma.user.update({
+        where: { email: input.email },
+        data: { token: null } })
+      }
+    }
