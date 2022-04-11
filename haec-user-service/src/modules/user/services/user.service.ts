@@ -36,6 +36,8 @@ export class UserService {
 
   // This will either `verify the user` or `throw an exception`
 
+  // export declare function redirect(res: NextApiResponse, statusOrUrl: string | number, url?: string): NextApiResponse<any>;
+
   public async verifyUser(input: {
     email: string;
     password: string;
