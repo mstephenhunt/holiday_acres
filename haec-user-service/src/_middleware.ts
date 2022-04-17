@@ -2,10 +2,12 @@ import { Injectable, NestMiddleware, Request, Response } from '@nestjs/common';
 import { NextFunction } from 'express';
 import { redirect } from 'next/dist/server/api-utils';
 import * as bcrypt from 'bcrypt';
-// import { verifyUser } from './modules/user/services/user.service';
+import { UserService } from './modules/user/services/user.service';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
+  constructor(private userService: UserService) {}
+
   use(req: Request, res: Response, next: NextFunction) {
     console.log('AuthCheck is running');
     function authCheck (req, res, next) {
@@ -23,6 +25,8 @@ export class LoggerMiddleware implements NestMiddleware {
       email: string;
       password: string;
     }): Promise<boolean> {
+      await this.userService.verifyUser()
+
       let user;
       try {
         const user = await this.prisma.user.findUnique({
@@ -40,7 +44,6 @@ export class LoggerMiddleware implements NestMiddleware {
     }
 
 }
-module.exports = { authCheck, verifyUser }
   }
 }
 
