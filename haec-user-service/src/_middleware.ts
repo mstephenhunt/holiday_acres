@@ -5,12 +5,13 @@ import { NextFunction } from 'express';
 export class LoggerMiddleware implements NestMiddleware {
 
   use(req: Request, res: Response, next: NextFunction) {
-    console.log('`Use` is running!');
-    console.log(req.headers);
-    next();
+    console.log("Middleware Authentication is running");
+    if (req.headers["haec-auth-token"] === "neither-is-this-a-secret-key") {
+      console.log("success!!");
+      next();
+    }
+    // Add in rejection case
+    // console.log("error");
+    // next();
   }
 }
-
-
-
-// QUESTION: if the token is passed through the browser as a header, do we need to avoid escape characters?
