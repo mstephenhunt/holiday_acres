@@ -21,6 +21,7 @@ from api.settings import BASE_DIR
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 user_service_var = env("USER_SERVICE")
+django_secret_key = env("SECRET_MIDDLE_KEY")
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -80,7 +81,7 @@ def login(request):
     returnedToken = requests.post(
         (f"http://{user_service_var}/user/login"),
         data={"email": body["email"], "password": body["password"]},
-        headers={"haec-auth-token": "value" """value inside env variable"""},
+        headers={"haec-auth-token": django_secret_key},
     )
     token = returnedToken.text
     return JsonResponse({"token": token})
