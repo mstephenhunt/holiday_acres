@@ -80,6 +80,7 @@ def login(request):
     returnedToken = requests.post(
         (f"http://{user_service_var}/user/login"),
         data={"email": body["email"], "password": body["password"]},
+        headers={"haec-auth-token": "value" """value inside env variable"""},
     )
     token = returnedToken.text
     return JsonResponse({"token": token})
