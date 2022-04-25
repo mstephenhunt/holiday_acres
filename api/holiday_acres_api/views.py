@@ -71,7 +71,9 @@ def register_account_request(request):
     requests.post(
         (f"http://{user_service_var}/user"),
         data={"email": body["email"], "password": body["password"]},
+        headers={"haec-auth-token": django_secret_key},
     )
+    print("New User Created")
     return response
 
 
