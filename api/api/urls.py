@@ -19,7 +19,7 @@ from holiday_acres_api import views
 
 router = routers.DefaultRouter()
 # Removed these since we don't need them public
-# router.register(r"users", views.UserViewSet)
+router.register(r"owner", views.OwnerViewSet)
 # router.register(r"paddocks", views.PaddockViewSet)
 router.register(r"api/horses", views.HorseViewSet)
 # router.register(r"api/horses/update_horse", views.HorseViewSet.update)
@@ -33,4 +33,5 @@ urlpatterns = [
     path("api/users/register", views.register_account_request),
     path("api/users/login", views.login),
     path("api/users/logout", views.logout),
+    path("api/owner/create", views.create_new_owner),
 ]

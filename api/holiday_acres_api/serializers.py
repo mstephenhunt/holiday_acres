@@ -1,17 +1,17 @@
 from rest_framework import serializers
 from django.http import HttpResponse
 
-# from holiday_acres_api.models.Owner import Owner
+from holiday_acres_api.models.Owners import Owner
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
 from holiday_acres_api.models.Barn_Sections import Barn_Section
 from holiday_acres_api.models.Feeds import Feed
 
 
-# class OwnerSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Owner
-#         fields = ["id", "first_name", "last_name", "email", "phone"]
+class OwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Owner
+        fields = ["id", "first_name", "last_name", "email", "phone"]
 
 
 class PaddockSerializer(serializers.ModelSerializer):
@@ -28,8 +28,6 @@ class FeedSerializer(serializers.ModelSerializer):
     amount = serializers.FloatField()
 
 
-# https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
-# some people have had this issue
 class HorseSerializer(serializers.ModelSerializer):
     feed = FeedSerializer(many=True)
 

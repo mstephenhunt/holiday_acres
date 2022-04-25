@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
 from holiday_acres_api.serializers import (
-    # OwnerSerializer,
+    OwnerSerializer,
     PaddockSerializer,
     HorseSerializer,
     BarnSectionSerializer,
@@ -29,7 +29,7 @@ class OwnerViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Owner.objects.all()
-    # serializer_class = OwnerSerializer
+    serializer_class = OwnerSerializer
 
 
 class PaddockViewSet(viewsets.ModelViewSet):
@@ -93,6 +93,16 @@ def logout(request):
     logout = requests.post(
         (f"http://{user_service_var}/user/logout"), data={"email": body["email"]}
     )
+    return response
+
+
+@api_view(["POST"])
+def create_new_owner(request):
+    # body = request.data
+    # response = JsonResponse({"current_datetime": datetime.now()})
+    # response.status_code = 200
+    response = "Add new owner"
+    print(response)
     return response
 
 
