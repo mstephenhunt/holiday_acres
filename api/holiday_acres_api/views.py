@@ -93,7 +93,9 @@ def logout(request):
     response = HttpResponse()
     response.status_code = 200
     logout = requests.post(
-        (f"http://{user_service_var}/user/logout"), data={"email": body["email"]}
+        (f"http://{user_service_var}/user/logout"),
+        data={"email": body["email"]},
+        headers={"haec-auth-token": django_secret_key},
     )
     return response
 
