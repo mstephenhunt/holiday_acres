@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
 from holiday_acres_api.serializers import (
-    OwnerSerializer,
+    # OwnerSerializer,
     PaddockSerializer,
     HorseSerializer,
     BarnSectionSerializer,
@@ -29,7 +29,7 @@ class OwnerViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Owner.objects.all()
-    serializer_class = OwnerSerializer
+    # serializer_class = OwnerSerializer
 
 
 class PaddockViewSet(viewsets.ModelViewSet):
