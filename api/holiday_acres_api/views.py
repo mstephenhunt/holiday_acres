@@ -4,7 +4,6 @@ from rest_framework import viewsets
 from django.http import HttpResponse
 from holiday_acres_api.serializers import (
     OwnerSerializer,
-    PaddockSerializer,
     HorseSerializer,
     BarnSectionSerializer,
 )
@@ -22,23 +21,23 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 user_service_var = env("USER_SERVICE")
 
-
+# ViewSets
 class OwnerViewSet(viewsets.ModelViewSet):
     """
-    Dummy endpoint to return all user models in the DB
+    Dummy endpoint to return all owner models in the DB
     """
 
     queryset = Owner.objects.all()
     serializer_class = OwnerSerializer
 
 
-class PaddockViewSet(viewsets.ModelViewSet):
-    """
-    Dummy endpoint to return all paddock models in the DB
-    """
+# class PaddockViewSet(viewsets.ModelViewSet):
+#     """
+#     Dummy endpoint to return all paddock models in the DB
+#     """
 
-    queryset = Paddock.objects.all()
-    serializer_class = PaddockSerializer
+#     queryset = Paddock.objects.all()
+#     serializer_class = PaddockSerializer
 
 
 class HorseViewSet(viewsets.ModelViewSet):
@@ -46,6 +45,7 @@ class HorseViewSet(viewsets.ModelViewSet):
     Dummy endpoint to return all horse models in the DB
     """
 
+    print("horse.update")
     queryset = Horse.objects.all()
     serializer_class = HorseSerializer
 
@@ -59,6 +59,7 @@ class BarnSectionViewSet(viewsets.ModelViewSet):
     serializer_class = BarnSectionSerializer
 
 
+# views
 @api_view(["POST"])
 def register_account_request(request):
     """
@@ -93,16 +94,6 @@ def logout(request):
     logout = requests.post(
         (f"http://{user_service_var}/user/logout"), data={"email": body["email"]}
     )
-    return response
-
-
-@api_view(["POST"])
-def create_new_owner(request):
-    # body = request.data
-    # response = JsonResponse({"current_datetime": datetime.now()})
-    # response.status_code = 200
-    response = "Add new owner"
-    print(response)
     return response
 
 

@@ -1,5 +1,6 @@
 from django.db import models
 from .Barn_Sections import Barn_Section
+from .Owners import Owner
 from django.db.models.deletion import SET_DEFAULT, SET_NULL
 
 
@@ -10,6 +11,10 @@ class Horse(models.Model):
     # one-to-many relation (one Barn_Section to many Horses)
     barn_section = models.ForeignKey(
         Barn_Section, related_name="horses", null=True, on_delete=SET_NULL
+    )
+    # one-to-many relation (one Owner to many Horses)
+    owner = models.ForeignKey(
+        Owner, related_name="horses", null=True, on_delete=SET_NULL
     )
     # relationship to Feeds (many horses to one feed)
     # HORSE DATA

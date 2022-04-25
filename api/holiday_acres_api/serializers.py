@@ -2,7 +2,8 @@ from rest_framework import serializers
 from django.http import HttpResponse
 
 from holiday_acres_api.models.Owners import Owner
-from holiday_acres_api.models.Paddocks import Paddock
+
+# from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
 from holiday_acres_api.models.Barn_Sections import Barn_Section
 from holiday_acres_api.models.Feeds import Feed
@@ -13,11 +14,25 @@ class OwnerSerializer(serializers.ModelSerializer):
         model = Owner
         fields = ["id", "first_name", "last_name", "email", "phone"]
 
+    def update(self, owner, data):
+        if "first_name" in data.keys():
+            Owner.first_name = data["first_name"]
+        if "last_name" in data.keys():
+            Owner.last_name = data["last_name"]
+        if "email" in data.keys():
+            Owner.email = data["email"]
+        if "phone" in data.keys():
+            Owner.phone = data["phone"]
 
-class PaddockSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Paddock
-        fields = ["id", "paddock_name", "paddock_tier"]
+        Owner.save()
+
+        return Owner
+
+
+# class PaddockSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Paddock
+#         fields = ["id", "paddock_name", "paddock_tier"]
 
 
 class FeedSerializer(serializers.ModelSerializer):
@@ -34,6 +49,16 @@ class HorseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Horse
         fields = ["id", "name", "owner", "feed", "stall", "special_instructions"]
+
+    def create(self, horse, data):
+        Horse.objects.create(
+            name=data["name"],
+            owner=data["owner"],
+            stall=data["stall"],
+            special_instructions=data["special_instructions"],
+        )
+        horse.save()
+        print(horse)
 
     def update(self, horse, data):
         if "name" in data.keys():
