@@ -1,16 +1,16 @@
 from rest_framework import serializers
 from django.http import HttpResponse
-from holiday_acres_api.models.Users import User
+from holiday_acres_api.models.Owner import Owner
 from holiday_acres_api.models.Paddocks import Paddock
 from holiday_acres_api.models.Horses import Horse
 from holiday_acres_api.models.Barn_Sections import Barn_Section
 from holiday_acres_api.models.Feeds import Feed
 
 
-class UserSerializer(serializers.ModelSerializer):
+class OwnerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ["id", "username", "first_name", "last_name", "email", "password"]
+        model = Owner
+        fields = ["id", "first_name", "last_name", "email", "phone"]
 
 
 class PaddockSerializer(serializers.ModelSerializer):
@@ -34,14 +34,13 @@ class HorseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Horse
-        # instead of hardcoding all of the fields, would a function make more sense?
-        fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
+        fields = ["id", "name", "owner", "feed", "stall", "special_instructions"]
 
     def update(self, horse, data):
         if "name" in data.keys():
             horse.name = data["name"]
-        if "user" in data.keys():
-            horse.user = data["user"]
+        if "owner" in data.keys():
+            horse.user = data["owner"]
         if "stall" in data.keys():
             horse.stall = data["stall"]
         if "special_instructions" in data.keys():

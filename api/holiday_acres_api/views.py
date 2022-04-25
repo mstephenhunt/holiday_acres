@@ -3,12 +3,12 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
 from holiday_acres_api.serializers import (
-    UserSerializer,
+    OwnerSerializer,
     PaddockSerializer,
     HorseSerializer,
     BarnSectionSerializer,
 )
-from holiday_acres_api.models import User, Paddock, Horse, Barn_Section
+from holiday_acres_api.models import Owner, Paddock, Horse, Barn_Section
 from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime
@@ -23,13 +23,13 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 user_service_var = env("USER_SERVICE")
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class OwnerViewSet(viewsets.ModelViewSet):
     """
     Dummy endpoint to return all user models in the DB
     """
 
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = Owner.objects.all()
+    serializer_class = OwnerSerializer
 
 
 class PaddockViewSet(viewsets.ModelViewSet):

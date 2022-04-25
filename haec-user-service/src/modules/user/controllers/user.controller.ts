@@ -63,9 +63,7 @@ export class UserController {
 
   @Post('/user/verify')
   @Header('content-type', 'application/json')
-  async verifyUser(
-    @Body() verifyUserDto: VerifyUserDto,
-  ): Promise<boolean> {
+  async verifyUser(@Body() verifyUserDto: VerifyUserDto): Promise<boolean> {
     const verifiedUser = await this.userService.verifyUser({
       email: verifyUserDto.email,
       password: verifyUserDto.password,
@@ -75,9 +73,7 @@ export class UserController {
 
   @Post('/user/login')
   @Header('content-type', 'application/json')
-  async loginUser(
-    @Body() loginUserDto: LoginUserDto,
-  ): Promise<string> {
+  async loginUser(@Body() loginUserDto: LoginUserDto): Promise<string> {
     const loggedInUser = await this.userService.loginUser({
       email: loginUserDto.email,
       password: loginUserDto.password,
@@ -87,9 +83,7 @@ export class UserController {
 
   @Post('/user/logout')
   @Header('content-type', 'application/json')
-  async logoutUser(
-    @Body() logoutUserDto: LogoutUserDto,
-  ): Promise<void> {
+  async logoutUser(@Body() logoutUserDto: LogoutUserDto): Promise<void> {
     const loggedOutUser = await this.userService.logoutUser({
       email: logoutUserDto.email,
     });

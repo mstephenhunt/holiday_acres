@@ -11,73 +11,65 @@ request = factory.post('/a/test/path/', data, content_type='application/json')
 
 
 @pytest.mark.django_db(transaction=True)
-def test_create_user_view():
-    request = RequestFactory().post("/users/register")
+def test_create_owner_view():
+    request = RequestFactory().post("/owners/register")
     response = register_account_request(request)
 
     assert response.status_code == 500
-    assert response.reason_phrase == "Missing required fields to register user"
+    assert response.reason_phrase == "Missing required fields to register owner"
 
 
 @pytest.mark.django_db(transaction=True)
-def test_password_mismatch():
+def test_owner_info():
     data = {
-        "username": "test_username",
-        "password": "12345",
-        "password_confirmation": "67890",
-        "email": "anemailaddress",
         "first_name": "Jon",
         "last_name": "hunt",
+        "email": "anemailaddress",
+        "phone": "0123456789",
     }
     request = RequestFactory().post(
-        "/users/register", data, content_type="application/json"
+        "/owners/register", data, content_type="application/json"
     )
     response = register_account_request(request)
     assert response.status_code == 500
-    assert response.reason_phrase == "Password and password confirmation don't match"
+    assert response.reason_phrase == "owners information doesn't match"
 
 
 @pytest.mark.django_db(transaction=True)
-def test_duplicate_user():
-    # register example user
+def test_duplicate_owner():
+    # register example owner
     data = {
-        "username": "test_username",
-        "password": "12345",
-        "password_confirmation": "12345",
-        "email": "anemailaddress",
         "first_name": "Jon",
         "last_name": "hunt",
+        "email": "anemailaddress",
+        "phone": "0123456789",
     }
     request = RequestFactory().post(
-        "/users/register", data, content_type="application/json"
+        "/owners/register", data, content_type="application/json"
     )
     response = register_account_request(request)
     # register duplicate user
     data = {
-        "username": "test_username",
-        "password": "12345",
-        "password_confirmation": "12345",
-        "email": "anemailaddress",
         "first_name": "Jon",
         "last_name": "hunt",
+        "email": "anemailaddress",
+        "phone": "0123456789",
     }
     request2 = RequestFactory().post(
-        "/users/register", data, content_type="application/json"
+        "/owners/register", data, content_type="application/json"
     )
     response = register_account_request(request2)
     assert response.status_code == 500
-    assert response.reason_phrase == "Username already exists"
+    assert response.reason_phrase == "Owner already exists"
     # register a second, non-duplicate user
     data = {
-        "username": "test_username2",
-        "password": "12345",
-        "password_confirmation": "12345",
-        "email": "anemailaddress",
-        "first_name": "Jon",
-        "last_name": "hunt",
+        "first_name": "Someone",
+        "last_name": "Else",
+        "email": "anewemailaddress",
+        "phone": "9876534210",
     }
     request3 = RequestFactory().post(
-        "/users/register", data, content_type="application/json"
+        "/owners/register", data, content_type="application/json"
     )
     response = register_account_request(request3)
     assert response.status_code == 200

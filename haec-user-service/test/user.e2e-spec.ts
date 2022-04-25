@@ -16,52 +16,49 @@ describe('AppController (e2e)', () => {
   });
 
   it('can create a user', async () => {
-    const response = await request(app.getHttpServer())
-      .post('/user')
-      .send({
-        email: 'fake.email.com',
-        name: 'Mocky McMockerson',
-        password: 'password',
-      })
-      expect(response.statusCode).toEqual(201)
-      expect(response.body).toEqual({
-        id: 1,
-        email: 'fake.email.com',
-        name: 'Mocky McMockerson',
-      });
+    const response = await request(app.getHttpServer()).post('/user').send({
+      email: 'fake.email.com',
+      name: 'Mocky McMockerson',
+      password: 'password',
+    });
+    expect(response.statusCode).toEqual(201);
+    expect(response.body).toEqual({
+      id: 1,
+      email: 'fake.email.com',
+      name: 'Mocky McMockerson',
+    });
   });
 
-  it('can get a user', async() => {
-    const response = await request(app.getHttpServer())
-    .get('/user/1')
-    expect(response.statusCode).toEqual(200)
+  it('can get a user', async () => {
+    const response = await request(app.getHttpServer()).get('/user/1');
+    expect(response.statusCode).toEqual(200);
     expect(response.body).toEqual({
-        id: 1,
-        email: 'fake.email.com',
-        name: 'Mocky McMockerson',
-      });
+      id: 1,
+      email: 'fake.email.com',
+      name: 'Mocky McMockerson',
     });
+  });
 
-    it('can verify that a user passes', async() => {
-      const response = await request(app.getHttpServer())
+  it('can verify that a user passes', async () => {
+    const response = await request(app.getHttpServer())
       .post('/user/verify')
       .send({
         email: 'fake.email.com',
         password: 'password',
-      })
-      expect(response.statusCode).toEqual(201)
-      expect(response.body).toEqual(true)
+      });
+    expect(response.statusCode).toEqual(201);
+    expect(response.body).toEqual(true);
   });
 
-    it('can verify that a user fails', async() => {
-      const response = await request(app.getHttpServer())
+  it('can verify that a user fails', async () => {
+    const response = await request(app.getHttpServer())
       .post('/user/verify')
       .send({
         email: 'fake.email.com',
         name: 'Mocky McMockerson',
         password: 'badpw',
-      })
-      expect(response.statusCode).toEqual(201)
-      expect(response.body).toEqual(false)
+      });
+    expect(response.statusCode).toEqual(201);
+    expect(response.body).toEqual(false);
   });
 });
