@@ -6,12 +6,14 @@ export class LoggerMiddleware implements NestMiddleware {
 
   use(req: Request, res: Response, next: NextFunction) {
     console.log("Middleware Authentication is running");
+    // Middleware Authentication FAIL
     if (req.headers["haec-auth-token"] === "neither-is-this-a-secret-key") {
-      console.log("success!!");
+      console.log("Middleware Authentication Passed");
       next();
     }
-    // Need to add in rejection case
-    // console.log("error");
-    // next();
+    // Middleware Authentication SUCCESS
+    else {
+      throw("Middleware Authentication Failed")
+      }
   }
 }
