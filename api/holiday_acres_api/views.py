@@ -45,7 +45,6 @@ class HorseViewSet(viewsets.ModelViewSet):
     Dummy endpoint to return all horse models in the DB
     """
 
-    print("horse.update")
     queryset = Horse.objects.all()
     serializer_class = HorseSerializer
 
