@@ -3,12 +3,11 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
 from holiday_acres_api.serializers import (
-    UserSerializer,
-    PaddockSerializer,
+    OwnerSerializer,
     HorseSerializer,
     BarnSectionSerializer,
 )
-from holiday_acres_api.models import User, Paddock, Horse, Barn_Section
+from holiday_acres_api.models import Owner, Paddock, Horse, Barn_Section
 from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime
@@ -23,23 +22,23 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 user_service_var = env("USER_SERVICE")
 django_secret_key = env("SECRET_MIDDLE_KEY")
 
-
-class UserViewSet(viewsets.ModelViewSet):
+# ViewSets
+class OwnerViewSet(viewsets.ModelViewSet):
     """
-    Dummy endpoint to return all user models in the DB
-    """
-
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class PaddockViewSet(viewsets.ModelViewSet):
-    """
-    Dummy endpoint to return all paddock models in the DB
+    Dummy endpoint to return all owner models in the DB
     """
 
-    queryset = Paddock.objects.all()
-    serializer_class = PaddockSerializer
+    queryset = Owner.objects.all()
+    serializer_class = OwnerSerializer
+
+
+# class PaddockViewSet(viewsets.ModelViewSet):
+#     """
+#     Dummy endpoint to return all paddock models in the DB
+#     """
+
+#     queryset = Paddock.objects.all()
+#     serializer_class = PaddockSerializer
 
 
 class HorseViewSet(viewsets.ModelViewSet):
@@ -60,6 +59,7 @@ class BarnSectionViewSet(viewsets.ModelViewSet):
     serializer_class = BarnSectionSerializer
 
 
+# views
 @api_view(["POST"])
 def register_account_request(request):
     """

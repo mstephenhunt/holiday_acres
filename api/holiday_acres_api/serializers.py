@@ -1,22 +1,48 @@
 from rest_framework import serializers
 from django.http import HttpResponse
-from holiday_acres_api.models.Users import User
-from holiday_acres_api.models.Paddocks import Paddock
+
+# from holiday_acres_api.models.Paddocks import Paddock
+
+from holiday_acres_api.models.Owners import Owner
 from holiday_acres_api.models.Horses import Horse
 from holiday_acres_api.models.Barn_Sections import Barn_Section
 from holiday_acres_api.models.Feeds import Feed
 
 
-class UserSerializer(serializers.ModelSerializer):
+class OwnerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ["id", "username", "first_name", "last_name", "email", "password"]
+        model = Owner
+        fields = ["id", "first_name", "last_name", "email", "phone"]
+
+    def create(self, owner, data):
+        Owner.objects.create(
+            first_name=data["first_name"],
+            last_name=data["last_name"],
+            email=data["email"],
+            phone=data["phone"],
+        )
+        owner.save()
+        print(owner)
+
+    def update(self, owner, data):
+        if "first_name" in data.keys():
+            Owner.first_name = data["first_name"]
+        if "last_name" in data.keys():
+            Owner.last_name = data["last_name"]
+        if "email" in data.keys():
+            Owner.email = data["email"]
+        if "phone" in data.keys():
+            Owner.phone = data["phone"]
+
+        Owner.save()
+
+        return Owner
 
 
-class PaddockSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Paddock
-        fields = ["id", "paddock_name", "paddock_tier"]
+# class PaddockSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Paddock
+#         fields = ["id", "paddock_name", "paddock_tier"]
 
 
 class FeedSerializer(serializers.ModelSerializer):
@@ -27,21 +53,28 @@ class FeedSerializer(serializers.ModelSerializer):
     amount = serializers.FloatField()
 
 
-# https://stackoverflow.com/questions/59882167/nameerror-name-serializers-is-not-defined
-# some people have had this issue
 class HorseSerializer(serializers.ModelSerializer):
     feed = FeedSerializer(many=True)
 
     class Meta:
         model = Horse
-        # instead of hardcoding all of the fields, would a function make more sense?
-        fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
+        fields = ["id", "name", "owner", "feed", "stall", "special_instructions"]
+
+    def create(self, horse, data):
+        Horse.objects.create(
+            name=data["name"],
+            owner=data["owner"],
+            stall=data["stall"],
+            special_instructions=data["special_instructions"],
+        )
+        horse.save()
+        print(horse)
 
     def update(self, horse, data):
         if "name" in data.keys():
             horse.name = data["name"]
-        if "user" in data.keys():
-            horse.user = data["user"]
+        if "owner" in data.keys():
+            horse.user = data["owner"]
         if "stall" in data.keys():
             horse.stall = data["stall"]
         if "special_instructions" in data.keys():
