@@ -8,7 +8,7 @@ import { AuthenticationMiddleware } from './_middleware';
 
 
 @Module({
-  imports: [UserModule, ConfigModule.forRoot({ isGlobal: true, cache: true }), UserModule],
+  imports: [UserModule, ConfigModule.forRoot({ isGlobal: true, cache: true })],
   controllers: [],
   providers: [PrismaService, UserService],
 })
