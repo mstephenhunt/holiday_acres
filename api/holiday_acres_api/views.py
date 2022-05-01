@@ -21,6 +21,7 @@ from api.settings import BASE_DIR
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 user_service_var = env("USER_SERVICE")
+django_secret_key = env("SECRET_MIDDLE_KEY")
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -70,7 +71,9 @@ def register_account_request(request):
     requests.post(
         (f"http://{user_service_var}/user"),
         data={"email": body["email"], "password": body["password"]},
+        headers={"haec-auth-token": django_secret_key},
     )
+    print("New User Created")
     return response
 
 
@@ -80,6 +83,7 @@ def login(request):
     returnedToken = requests.post(
         (f"http://{user_service_var}/user/login"),
         data={"email": body["email"], "password": body["password"]},
+        headers={"haec-auth-token": django_secret_key},
     )
     token = returnedToken.text
     return JsonResponse({"token": token})
@@ -91,7 +95,9 @@ def logout(request):
     response = HttpResponse()
     response.status_code = 200
     logout = requests.post(
-        (f"http://{user_service_var}/user/logout"), data={"email": body["email"]}
+        (f"http://{user_service_var}/user/logout"),
+        data={"email": body["email"]},
+        headers={"haec-auth-token": django_secret_key},
     )
     return response
 

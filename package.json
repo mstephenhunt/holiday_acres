@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/mstephenhunt/holiday_acres#readme",
   "dependencies": {
-    "lint-staged": ">=10"
+    "lint-staged": ">=10",
+    "next": "^12.1.4"
   },
   "lint-staged": {
     "*.{js,json,css,scss,html,md}": [
