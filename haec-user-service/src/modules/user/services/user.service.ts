@@ -56,6 +56,29 @@ export class UserService {
     return false;
   }
 
+  // This will either verify the user's token or throw an exception
+  public async verifyUserToken(input: {
+    email: string;
+    token: string;
+  }): Promise<boolean> {
+    let user;
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: {
+          email: input.email,
+        },
+      });
+      if (await (input.token == user.token)) {
+        console.log(true)
+        return true;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    console.log(false)
+    return false;
+  }
+
   // This will log the user ** IN **
 
   public async loginUser(input: {

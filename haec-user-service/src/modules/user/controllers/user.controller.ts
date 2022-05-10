@@ -19,6 +19,11 @@ type VerifyUserDto = {
   password: string;
 };
 
+type VerifyUserTokenDto = {
+  email: string;
+  token: string;
+};
+
 type LoginUserDto = {
   email: string;
   password: string;
@@ -69,6 +74,16 @@ export class UserController {
       password: verifyUserDto.password,
     });
     return verifiedUser;
+  }
+
+  @Post('/user/verifyToken')
+  @Header('content-type', 'application/json')
+  async verifyUserToken(@Body() verifyUserTokenDto: VerifyUserTokenDto): Promise<boolean> {
+    const verifiedUserToken = await this.userService.verifyUserToken({
+      email: verifyUserTokenDto.email,
+      token : verifyUserTokenDto.token,
+    });
+    return verifiedUserToken;
   }
 
   @Post('/user/login')
