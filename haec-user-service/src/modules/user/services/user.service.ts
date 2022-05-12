@@ -69,13 +69,11 @@ export class UserService {
         },
       });
       if (await (input.token == user.token)) {
-        console.log(true)
         return true;
       }
     } catch (error) {
       console.error(error);
     }
-    console.log(false)
     return false;
   }
 

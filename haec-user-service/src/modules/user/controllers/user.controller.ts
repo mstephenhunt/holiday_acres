@@ -83,7 +83,7 @@ export class UserController {
       email: verifyUserTokenDto.email,
       token : verifyUserTokenDto.token,
     });
-    return verifiedUserToken;
+  return verifiedUserToken
   }
 
   @Post('/user/login')
