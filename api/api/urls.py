@@ -33,4 +33,6 @@ urlpatterns = [
     path("api/users/register", views.register_account_request),
     path("api/users/login", views.login),
     path("api/users/logout", views.logout),
+    path("api/users/dummy", views.dummy),
+    path("api/redirect", views.user_auth_fail),
 ]

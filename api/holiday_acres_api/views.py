@@ -1,5 +1,5 @@
 from django.db.models.fields import NullBooleanField
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.http import HttpResponse
 from holiday_acres_api.serializers import (
@@ -60,6 +60,9 @@ class BarnSectionViewSet(viewsets.ModelViewSet):
     serializer_class = BarnSectionSerializer
 
 
+# User may access these at any time
+
+
 @api_view(["POST"])
 def register_account_request(request):
     """
@@ -89,16 +92,42 @@ def login(request):
     return JsonResponse({"token": token})
 
 
+# User must be logged in to access these views
+
+
 @api_view(["POST"])
 def logout(request):
     body = request.data
-    response = HttpResponse()
-    response.status_code = 200
+    token = body["token"]
+    # verify user auth token
+    verify = requests.post(
+        (f"http://{user_service_var}/user/verifyToken"),
+        data={"email": body["email"], "token": token},
+        headers={"haec-auth-token": django_secret_key},
+    )
+    if (verify.text) == "false":
+        return redirect(user_auth_fail)
+    # logout user
     logout = requests.post(
         (f"http://{user_service_var}/user/logout"),
         data={"email": body["email"]},
         headers={"haec-auth-token": django_secret_key},
     )
+    user_email = body["email"]
+    response = HttpResponse(f"{user_email} has been successfully logged out")
+    response.status_code = 200
+    return response
+
+
+@api_view(["GET"])
+def dummy(request):
+    return HttpResponse("This is a dummy page")
+
+
+@api_view(["GET"])
+def user_auth_fail(request):
+    print("...redirecting...")
+    response = redirect(dummy)
     return response
 
 
