@@ -28,6 +28,7 @@ type VerifyUserTokenDto = {
 type LoginUserDto = {
   email: string;
   password: string;
+  invalid_after: string;
 };
 
 type LogoutUserDto = {
@@ -93,7 +94,8 @@ export class UserController {
   async loginUser(@Body() loginUserDto: LoginUserDto): Promise<string> {
     const loggedInUser = await this.userService.loginUser({
       email: loginUserDto.email,
-      password: loginUserDto.password
+      password: loginUserDto.password,
+      invalid_after: loginUserDto.invalid_after,
     });
     return loggedInUser;
   }

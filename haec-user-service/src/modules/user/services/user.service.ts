@@ -89,11 +89,14 @@ export class UserService {
   public async loginUser(input: {
     email: string;
     password: string;
+    invalid_after: string;
   }): Promise<string> {
+    // verifies user vs password
     const verified = await this.verifyUser({
       email: input.email,
       password: input.password,
     });
+    // generate new token, generate ttl, log user in
     if (verified == true) {
       // Generates random 21 character token with Crypto
       const token = await this.randomString();
@@ -103,6 +106,7 @@ export class UserService {
       console.log(invalid_after)
       let text = invalid_after.toString();
       console.log(text)
+      // update user in prisma
       await this.prisma.user.update({
         where: { email: input.email },
         data: { token: token },
