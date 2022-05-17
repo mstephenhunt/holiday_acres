@@ -64,7 +64,7 @@ Currently only setup to use SQLite. Run `poetry run manage.py migrate` to put in
 
 ### Prisma DB migration (in /haec-user-service)
 
-yarn prisma migrate dev
+`yarn prisma migrate dev`
 
 ### Create dummy initial admin account
 
