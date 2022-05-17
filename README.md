@@ -62,6 +62,10 @@ Copy the existing `.env.example` to `.env`
 
 Currently only setup to use SQLite. Run `poetry run manage.py migrate` to put in base tables.
 
+### Prisma DB migration (in /haec-user-service)
+
+yarn prisma migrate dev
+
 ### Create dummy initial admin account
 
 ```bash
