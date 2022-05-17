@@ -73,6 +73,8 @@ export class UserService {
       if (await (input.token == user.token)) {
         // if (await (input.invalid_after < user.invalid_after)){
         //   user.invalid_after.setMinutes(10);
+          console.log(user)
+          console.log(input.invalid_after)
           return true;
         // }
       }
@@ -95,6 +97,12 @@ export class UserService {
     if (verified == true) {
       // Generates random 21 character token with Crypto
       const token = await this.randomString();
+      // Generates a timestamp 10 minutes in the future
+      const invalid_after = new Date();
+      invalid_after.setMinutes(invalid_after.getMinutes() + 10);
+      console.log(invalid_after)
+      let text = invalid_after.toString();
+      console.log(text)
       await this.prisma.user.update({
         where: { email: input.email },
         data: { token: token },

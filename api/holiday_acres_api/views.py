@@ -99,10 +99,11 @@ def login(request):
 def logout(request):
     body = request.data
     token = body["token"]
+    invalid_after = body["invalid_after"]
     # verify user auth token
     verify = requests.post(
         (f"http://{user_service_var}/user/verifyToken"),
-        data={"email": body["email"], "token": token},
+        data={"email": body["email"], "token": token, "invalid_after": invalid_after},
         headers={"haec-auth-token": django_secret_key},
     )
     if (verify.text) == "false":

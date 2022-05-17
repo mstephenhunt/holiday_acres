@@ -22,6 +22,7 @@ type VerifyUserDto = {
 type VerifyUserTokenDto = {
   email: string;
   token: string;
+  invalid_after: string;
 };
 
 type LoginUserDto = {
@@ -81,7 +82,8 @@ export class UserController {
   async verifyUserToken(@Body() verifyUserTokenDto: VerifyUserTokenDto): Promise<boolean> {
     const verifiedUserToken = await this.userService.verifyUserToken({
       email: verifyUserTokenDto.email,
-      token : verifyUserTokenDto.token,
+      token: verifyUserTokenDto.token,
+      invalid_after: verifyUserTokenDto.invalid_after,
     });
   return verifiedUserToken
   }
@@ -91,7 +93,7 @@ export class UserController {
   async loginUser(@Body() loginUserDto: LoginUserDto): Promise<string> {
     const loggedInUser = await this.userService.loginUser({
       email: loginUserDto.email,
-      password: loginUserDto.password,
+      password: loginUserDto.password
     });
     return loggedInUser;
   }
