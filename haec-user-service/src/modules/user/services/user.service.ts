@@ -57,9 +57,11 @@ export class UserService {
   }
 
   // This will either verify the user's token or throw an exception
+
   public async verifyUserToken(input: {
     email: string;
     token: string;
+    invalid_after: string;
   }): Promise<boolean> {
     let user;
     try {
@@ -69,7 +71,10 @@ export class UserService {
         },
       });
       if (await (input.token == user.token)) {
-        return true;
+        // if (await (input.invalid_after < user.invalid_after)){
+        //   user.invalid_after.setMinutes(10);
+          return true;
+        // }
       }
     } catch (error) {
       console.error(error);
