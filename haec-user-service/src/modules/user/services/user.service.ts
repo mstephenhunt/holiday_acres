@@ -64,7 +64,7 @@ export class UserService {
   }): Promise<boolean> {
     let user;
     const now_time = new Date()
-    console.log("now is", now_time)
+    console.log("strange:",now_time)
     try {
       const user = await this.prisma.user.findUnique({
         where: {
@@ -73,9 +73,24 @@ export class UserService {
       });
       if (input.token == user.token) {
         if (now_time < user.invalid_after){
-          console.log("nowtime is:",now_time, "and usertime is", user.invalid_after)
-          user.invalid_after.setMinutes(now_time.getMinutes() + 10);
-          console.log("usertime is now", user.invalid_after)
+          // user.invalid_after.setMinutes(now_time.getMinutes() + 10);
+          console.log("user:",user.invalid_after, "... now:",now_time)
+          let user_update = (id, data) => {
+            return this.prisma.user.update({
+              where: {
+                id
+              },
+              data: {
+                ...data,
+                user: {
+                  update: {
+                    updatedAt: now_time.setMinutes(+ 10)
+                  }
+                }
+              }
+            })
+          }
+          console.log("db ---->",user.invalid_after)
           return true;
         }
       }
