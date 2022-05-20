@@ -99,21 +99,20 @@ def login(request):
 def logout(request):
     body = request.data
     token = body["token"]
-    invalid_after = body["invalid_after"]
     # verify user auth token
     verify = requests.post(
         (f"http://{user_service_var}/user/verifyToken"),
-        data={"email": body["email"], "token": token, "invalid_after": invalid_after},
+        data={"email": body["email"], "token": token},
         headers={"haec-auth-token": django_secret_key},
     )
     if (verify.text) == "false":
         return redirect(user_auth_fail)
     # logout user
-    logout = requests.post(
-        (f"http://{user_service_var}/user/logout"),
-        data={"email": body["email"]},
-        headers={"haec-auth-token": django_secret_key},
-    )
+    # logout = requests.post(
+    #     (f"http://{user_service_var}/user/logout"),
+    #     data={"email": body["email"]},
+    #     headers={"haec-auth-token": django_secret_key},
+    # )
     user_email = body["email"]
     response = HttpResponse(f"{user_email} has been successfully logged out")
     response.status_code = 200

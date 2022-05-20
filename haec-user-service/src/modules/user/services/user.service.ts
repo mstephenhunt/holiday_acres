@@ -61,22 +61,23 @@ export class UserService {
   public async verifyUserToken(input: {
     email: string;
     token: string;
-    invalid_after: string;
   }): Promise<boolean> {
     let user;
+    const now_time = new Date()
+    console.log("now is", now_time)
     try {
       const user = await this.prisma.user.findUnique({
         where: {
           email: input.email,
         },
       });
-      if (await (input.token == user.token)) {
-        // if (await (input.invalid_after < user.invalid_after)){
-        //   user.invalid_after.setMinutes(10);
-          console.log(user)
-          console.log(input.invalid_after)
+      if (input.token == user.token) {
+        if (now_time < user.invalid_after){
+          console.log("nowtime is:",now_time, "and usertime is", user.invalid_after)
+          user.invalid_after.setMinutes(now_time.getMinutes() + 10);
+          console.log("usertime is now", user.invalid_after)
           return true;
-        // }
+        }
       }
     } catch (error) {
       console.error(error);
@@ -89,7 +90,6 @@ export class UserService {
   public async loginUser(input: {
     email: string;
     password: string;
-    invalid_after: string;
   }): Promise<string> {
     // verifies user vs password
     const verified = await this.verifyUser({
@@ -103,14 +103,16 @@ export class UserService {
       // Generates a timestamp 10 minutes in the future
       const invalid_after = new Date();
       invalid_after.setMinutes(invalid_after.getMinutes() + 10);
-      console.log(invalid_after)
-      let text = invalid_after.toString();
-      console.log(text)
+      console.log(invalid_after);
       // update user in prisma
-      await this.prisma.user.update({
+      const user = await this.prisma.user.update({
         where: { email: input.email },
-        data: { token: token },
+        data: {
+          token: token,
+          invalid_after: invalid_after
+        },
       });
+      console.log('--->'+user.invalid_after)
       return token;
     } else {
       throw new Error('Problem with email/password');
