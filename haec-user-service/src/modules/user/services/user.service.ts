@@ -63,17 +63,13 @@ export class UserService {
     token: string;
   }): Promise<boolean> {
     let user;
-    const now_time = new Date()
-    console.log(now_time)
     try {
       let user = await this.prisma.user.findUnique({
         where: {
           email: input.email,
         },
       });
-      console.log("current invalid_after time:",user.invalid_after)
-      if (input.token == user.token && now_time < user.invalid_after) {
-        console.log("user:",user.invalid_after, "... now:",now_time)
+      if (input.token == user.token && new Date() < user.invalid_after) {
         const invalid_after = new Date();
         invalid_after.setMinutes(invalid_after.getMinutes() + 10);
         // update user in prisma
@@ -83,7 +79,6 @@ export class UserService {
             invalid_after: invalid_after
           },
         });
-          console.log("db ---->",user.invalid_after)
           return true;
       }
     } catch (error) {
@@ -137,7 +132,7 @@ export class UserService {
   public async logoutUser(input: { email: string }): Promise<void> {
     await this.prisma.user.update({
       where: { email: input.email },
-      data: { token: null },
+      data: { token: null, invalid_after: null },
     });
   }
 }
