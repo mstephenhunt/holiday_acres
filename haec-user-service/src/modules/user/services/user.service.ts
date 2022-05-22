@@ -105,7 +105,6 @@ export class UserService {
       // Generates a timestamp 10 minutes in the future
       const invalidAfter = new Date();
       invalidAfter.setMinutes(invalidAfter.getMinutes() + 10);
-      console.log(invalidAfter);
       // update user in prisma
       const user = await this.prisma.user.update({
         where: { email: input.email },
