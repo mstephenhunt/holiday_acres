@@ -14,5 +14,5 @@ model User {
   name                String?
   hashedPass          String
   token               String?
-  invalid_after       DateTime?
+  invalidAfter       DateTime?
 }

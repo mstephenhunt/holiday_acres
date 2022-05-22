@@ -22,13 +22,11 @@ type VerifyUserDto = {
 type VerifyUserTokenDto = {
   email: string;
   token: string;
-  invalid_after: string;
 };
 
 type LoginUserDto = {
   email: string;
   password: string;
-  invalid_after: string;
 };
 
 type LogoutUserDto = {

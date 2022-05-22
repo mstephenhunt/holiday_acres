@@ -69,14 +69,14 @@ export class UserService {
           email: input.email,
         },
       });
-      if (input.token == user.token && new Date() < user.invalid_after) {
-        const invalid_after = new Date();
-        invalid_after.setMinutes(invalid_after.getMinutes() + 10);
+      if (input.token == user.token && new Date() < user.invalidAfter) {
+        const invalidAfter = new Date();
+        invalidAfter.setMinutes(invalidAfter.getMinutes() + 10);
         // update user in prisma
         user = await this.prisma.user.update({
           where: { email: input.email },
           data: {
-            invalid_after: invalid_after
+            invalidAfter: invalidAfter
           },
         });
           return true;
@@ -103,18 +103,18 @@ export class UserService {
       // Generates random 21 character token with Crypto
       const token = await this.randomString();
       // Generates a timestamp 10 minutes in the future
-      const invalid_after = new Date();
-      invalid_after.setMinutes(invalid_after.getMinutes() + 10);
-      console.log(invalid_after);
+      const invalidAfter = new Date();
+      invalidAfter.setMinutes(invalidAfter.getMinutes() + 10);
+      console.log(invalidAfter);
       // update user in prisma
       const user = await this.prisma.user.update({
         where: { email: input.email },
         data: {
           token: token,
-          invalid_after: invalid_after
+          invalidAfter: invalidAfter
         },
       });
-      console.log('--->'+user.invalid_after)
+      console.log('--->'+user.invalidAfter)
       return token;
     } else {
       throw new Error('Problem with email/password');
@@ -132,7 +132,7 @@ export class UserService {
   public async logoutUser(input: { email: string }): Promise<void> {
     await this.prisma.user.update({
       where: { email: input.email },
-      data: { token: null, invalid_after: null },
+      data: { token: null, invalidAfter: null },
     });
   }
 }
