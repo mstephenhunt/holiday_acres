@@ -64,35 +64,27 @@ export class UserService {
   }): Promise<boolean> {
     let user;
     const now_time = new Date()
-    console.log("strange:",now_time)
+    console.log(now_time)
     try {
-      const user = await this.prisma.user.findUnique({
+      let user = await this.prisma.user.findUnique({
         where: {
           email: input.email,
         },
       });
-      if (input.token == user.token) {
-        if (now_time < user.invalid_after){
-          // user.invalid_after.setMinutes(now_time.getMinutes() + 10);
-          console.log("user:",user.invalid_after, "... now:",now_time)
-          let user_update = (id, data) => {
-            return this.prisma.user.update({
-              where: {
-                id
-              },
-              data: {
-                ...data,
-                user: {
-                  update: {
-                    updatedAt: now_time.setMinutes(+ 10)
-                  }
-                }
-              }
-            })
-          }
+      console.log("current invalid_after time:",user.invalid_after)
+      if (input.token == user.token && now_time < user.invalid_after) {
+        console.log("user:",user.invalid_after, "... now:",now_time)
+        const invalid_after = new Date();
+        invalid_after.setMinutes(invalid_after.getMinutes() + 10);
+        // update user in prisma
+        user = await this.prisma.user.update({
+          where: { email: input.email },
+          data: {
+            invalid_after: invalid_after
+          },
+        });
           console.log("db ---->",user.invalid_after)
           return true;
-        }
       }
     } catch (error) {
       console.error(error);
