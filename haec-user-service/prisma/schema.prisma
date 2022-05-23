@@ -9,9 +9,10 @@ generator client {
 }
 
 model User {
-  id           Int     @id @default(autoincrement())
-  email        String  @unique
-  name         String?
-  hashedPass   String
-  token        String?
+  id                  Int         @id @default(autoincrement())
+  email               String      @unique
+  name                String?
+  hashedPass          String
+  token               String?
+  invalidAfter       DateTime?
 }

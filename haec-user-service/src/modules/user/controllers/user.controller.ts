@@ -81,7 +81,7 @@ export class UserController {
   async verifyUserToken(@Body() verifyUserTokenDto: VerifyUserTokenDto): Promise<boolean> {
     const verifiedUserToken = await this.userService.verifyUserToken({
       email: verifyUserTokenDto.email,
-      token : verifyUserTokenDto.token,
+      token: verifyUserTokenDto.token
     });
   return verifiedUserToken
   }
@@ -91,7 +91,7 @@ export class UserController {
   async loginUser(@Body() loginUserDto: LoginUserDto): Promise<string> {
     const loggedInUser = await this.userService.loginUser({
       email: loginUserDto.email,
-      password: loginUserDto.password,
+      password: loginUserDto.password
     });
     return loggedInUser;
   }

@@ -57,19 +57,29 @@ export class UserService {
   }
 
   // This will either verify the user's token or throw an exception
+
   public async verifyUserToken(input: {
     email: string;
     token: string;
   }): Promise<boolean> {
     let user;
     try {
-      const user = await this.prisma.user.findUnique({
+      let user = await this.prisma.user.findUnique({
         where: {
           email: input.email,
         },
       });
-      if (await (input.token == user.token)) {
-        return true;
+      if (input.token == user.token && new Date() < user.invalidAfter) {
+        const invalidAfter = new Date();
+        invalidAfter.setMinutes(invalidAfter.getMinutes() + 10);
+        // update user in prisma
+        user = await this.prisma.user.update({
+          where: { email: input.email },
+          data: {
+            invalidAfter: invalidAfter
+          },
+        });
+          return true;
       }
     } catch (error) {
       console.error(error);
@@ -83,16 +93,25 @@ export class UserService {
     email: string;
     password: string;
   }): Promise<string> {
+    // verifies user vs password
     const verified = await this.verifyUser({
       email: input.email,
       password: input.password,
     });
+    // generate new token, generate ttl, log user in
     if (verified == true) {
       // Generates random 21 character token with Crypto
       const token = await this.randomString();
-      await this.prisma.user.update({
+      // Generates a timestamp 10 minutes in the future
+      const invalidAfter = new Date();
+      invalidAfter.setMinutes(invalidAfter.getMinutes() + 10);
+      // update user in prisma
+      const user = await this.prisma.user.update({
         where: { email: input.email },
-        data: { token: token },
+        data: {
+          token: token,
+          invalidAfter: invalidAfter
+        },
       });
       return token;
     } else {
@@ -111,7 +130,7 @@ export class UserService {
   public async logoutUser(input: { email: string }): Promise<void> {
     await this.prisma.user.update({
       where: { email: input.email },
-      data: { token: null },
+      data: { token: null, invalidAfter: null },
     });
   }
 }

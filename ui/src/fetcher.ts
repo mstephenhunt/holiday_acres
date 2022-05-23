@@ -24,7 +24,6 @@ export const fetcher = async (
 ): Promise<Response> => {
   const timeout = 5000;
   const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}${path}`;
-
   // Promise.race used for either timeout or request resolution
   return Promise.race([
     fetch(url.toString(), { method, body: JSON.stringify(body) }),
