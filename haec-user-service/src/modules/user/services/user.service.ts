@@ -113,7 +113,6 @@ export class UserService {
           invalidAfter: invalidAfter
         },
       });
-      console.log('--->'+user.invalidAfter)
       return token;
     } else {
       throw new Error('Problem with email/password');
