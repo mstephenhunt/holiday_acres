@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.deletion import SET_DEFAULT, SET_NULL
 
 
 class Paddock(models.Model):
