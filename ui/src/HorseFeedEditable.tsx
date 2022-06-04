@@ -1,4 +1,3 @@
-import * as React from "react";
 import { FeedType, FeedUnit } from "./types";
 import { feedTypeToLabelMap, feedUnitToLabelMap } from "./feedHelpers";
 import Box from "@mui/material/Box";
@@ -11,13 +10,14 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 type HorseFeedEditableComponentProps = {
   id: number;
-  setFeedLabel: React.Dispatch<React.SetStateAction<FeedType>>;
-  setFeedAmount: React.Dispatch<React.SetStateAction<number | undefined>>;
-  setFeedUnit: React.Dispatch<React.SetStateAction<FeedUnit>>;
+  setFeedLabel: Function;
+  setFeedAmount: Function;
+  setFeedUnit: Function;
   feedLabel: string;
   feedAmount: number | undefined;
   feedUnit: string;
   feedType?: FeedType;
+  feedRowDeleteHandler: Function;
 };
 
 export default function HorseFeedEditable(
@@ -107,7 +107,11 @@ export default function HorseFeedEditable(
         </Box>
       </Grid>
       <Grid item xs={1}>
-        <CancelIcon color="action" sx={{ marginTop: '15px', marginLeft: '7px' }} />
+        <CancelIcon
+          color="action"
+          sx={{ marginTop: '15px', marginLeft: '7px' }}
+          onClick={() => props.feedRowDeleteHandler(props.id)}
+        />
       </Grid>
     </Grid>
   );
