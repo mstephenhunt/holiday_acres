@@ -20,7 +20,7 @@ export default function HorseDetails() {
       return;
     }
 
-    const response = await fetcher(`/api/horses/${id}/`);
+    const response = await fetcher({ path: `/api/horses/${id}/` });
     const horse = await response.json();
 
     if (horse && horse.detail !== "Not found.") {

@@ -47,17 +47,19 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     : "None";
 
   const updateHorse = async () => {
-    console.log('----> Update horse!');
+    await fetcher({
+      path: `/api/horses/${props.id}/`,
+      method: RequestType.PATCH,
+      body: {
+        name: 'Tiger'
+      },
+      requestHeaders: [{
+        headerKey: 'content-type',
+        headerValue: 'application/json'
+      }]
+    })
 
-    await fetcher(
-      `/horse/${props.id}/`,
-      RequestType.PATCH,
-      {
-        someJunk: 'someData'
-      }
-    )
-
-    await router.push(`/horse/${props.id}/`)
+    // await router.push(`/horse/${props.id}/`)
   };
 
   return (
