@@ -55,7 +55,7 @@ export default function HorseInfoDetailsHeading(
               </Button>
             )}
             {props.edit === true && props.updateHorse !== undefined && (
-              <Button variant="contained" /*href={`/horse/${props.id}/`}*/ onClick={() => { props.updateHorse(); }}>
+              <Button variant="contained" onClick={() => { props.updateHorse(); }}>
                 Save
               </Button>
             )}
