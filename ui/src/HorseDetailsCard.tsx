@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { useRouter } from 'next/router';
 import { fetcher, RequestType } from './fetcher';
+import Button from '@mui/material/Button';
 
 type HorseDetailsCardProps = {
   id: number;
@@ -126,6 +127,15 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
                 feedType={feed.feed_type}
               />
             ))}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", justifyContent: "right", paddingTop: '10px' }}
+        >
+          <Button variant="outlined">
+            Add Feed
+          </Button>
         </Grid>
         <Grid
           item
