@@ -128,7 +128,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
               />
             ))}
         </Grid>
-        <Grid
+        {props.edit && <Grid
           item
           xs={12}
           sx={{ display: "flex", justifyContent: "right", paddingTop: '10px' }}
@@ -136,7 +136,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
           <Button variant="outlined">
             Add Feed
           </Button>
-        </Grid>
+        </Grid>}
         <Grid
           item
           xs={12}
