@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 type HorseFeedEditableComponentProps = {
   id: number;
@@ -72,7 +73,7 @@ export default function HorseFeedEditable(
           </FormControl>
         </Box>
       </Grid>
-      <Grid item xs={2.5} sx={{ paddingLeft: "5px", paddingRight: "5px" }}>
+      <Grid item xs={2} sx={{ paddingLeft: "5px", paddingRight: "5px" }}>
         <TextField
           id="outlined-number"
           value={props.feedAmount}
@@ -80,7 +81,7 @@ export default function HorseFeedEditable(
           onChange={handleFeedAmountChange}
         />
       </Grid>
-      <Grid item xs={4.5}>
+      <Grid item xs={4}>
         <Box>
           <FormControl fullWidth>
             <Select
@@ -104,6 +105,9 @@ export default function HorseFeedEditable(
             </Select>
           </FormControl>
         </Box>
+      </Grid>
+      <Grid item xs={1}>
+        <CancelIcon color="action" sx={{ marginTop: '15px', marginLeft: '7px' }} />
       </Grid>
     </Grid>
   );

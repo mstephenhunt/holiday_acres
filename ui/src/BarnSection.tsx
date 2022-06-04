@@ -30,7 +30,7 @@ export default function BarnSection() {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <Container sx={{ py: 2 }} maxWidth="md">
+      <Container sx={{ py: 2 }} maxWidth="xs" disableGutters>
         {barnSections != undefined && (
           <Grid container spacing={4}>
             {barnSections.map((barnSection) => (
