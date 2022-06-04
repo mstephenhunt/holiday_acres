@@ -47,19 +47,31 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     : "None";
 
   const updateHorse = async () => {
+    // @TODO: Right now this is only set up to update feed, the ui needs to be set
+    // up to edit other fields.
+    const body = {
+      feed: feedLabelHandlers.map((feedLabelHandler) => {
+        return {
+          amount: feedLabelHandler.feedAmount,
+          feed_type: feedLabelHandler.feedLabel,
+          unit: feedLabelHandler.feedUnit
+        }
+      })
+    }
+
+    console.log(JSON.stringify(body, null, 2))
+
     await fetcher({
       path: `/api/horses/${props.id}/`,
       method: RequestType.PATCH,
-      body: {
-        name: 'Tiger'
-      },
+      body,
       requestHeaders: [{
         headerKey: 'content-type',
         headerValue: 'application/json'
       }]
     })
 
-    // await router.push(`/horse/${props.id}/`)
+    await router.push(`/horse/${props.id}/`)
   };
 
   return (
