@@ -59,8 +59,6 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
       })
     }
 
-    console.log(JSON.stringify(body, null, 2))
-
     await fetcher({
       path: `/api/horses/${props.id}/`,
       method: RequestType.PATCH,
