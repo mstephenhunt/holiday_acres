@@ -18,7 +18,7 @@ export default function BarnSection() {
   });
 
   const getBarnSections = async () => {
-    const response = await fetcher("/api/barn_sections/");
+    const response = await fetcher({ path: '/api/barn_sections/' });
     const barnSections = await response.json();
 
     if (barnSections) {

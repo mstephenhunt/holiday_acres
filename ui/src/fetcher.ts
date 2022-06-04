@@ -17,16 +17,34 @@ export enum RequestType {
 /**
  * Docs for fetch(): https://developer.mozilla.org/en-US/docs/Web/API/fetch
  */
-export const fetcher = async (
+export const fetcher = async (input: {
   path: string,
-  method = RequestType.GET,
-  body?: object
-): Promise<Response> => {
+  method?: RequestType,
+  body?: object,
+  requestHeaders?: {
+    headerKey: string,
+    headerValue: string,
+  }[],
+}): Promise<Response> => {
   const timeout = 5000;
-  const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}${path}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}${input.path}`;
+
+  const requestMethod = input.method ? input.method : RequestType.GET;
+
+  const headers = new Headers();
+  if (input.requestHeaders) {
+    for (const requestHeader of input.requestHeaders) {
+      headers.append(requestHeader.headerKey, requestHeader.headerValue);
+    }
+  }
+
   // Promise.race used for either timeout or request resolution
   return Promise.race([
-    fetch(url.toString(), { method, body: JSON.stringify(body) }),
+    fetch(url.toString(), {
+      method: requestMethod,
+      body: JSON.stringify(input.body),
+      headers
+    }),
     responseTimeout(timeout),
   ]);
 };

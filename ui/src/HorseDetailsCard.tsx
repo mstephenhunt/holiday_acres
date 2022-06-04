@@ -7,6 +7,8 @@ import { Feed, FeedUnit, FeedType } from "./types";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { useRouter } from 'next/router';
+import { fetcher, RequestType } from './fetcher';
 
 type HorseDetailsCardProps = {
   id: number;
@@ -18,6 +20,8 @@ type HorseDetailsCardProps = {
 };
 
 export default function HorseDetailsCard(props: HorseDetailsCardProps) {
+  const router = useRouter();
+
   // Since there's a list of feed that this horse has, we need a handler for each horse/field
   const feedLabelHandlers = props.feed.map((feed) => {
     // These fields should be initialized to whatever is currently on the horse
@@ -42,6 +46,32 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     ? props.specialInstructions
     : "None";
 
+  const updateHorse = async () => {
+    // @TODO: Right now this is only set up to update feed, the ui needs to be set
+    // up to edit other fields.
+    const body = {
+      feed: feedLabelHandlers.map((feedLabelHandler) => {
+        return {
+          amount: feedLabelHandler.feedAmount,
+          feed_type: feedLabelHandler.feedLabel,
+          unit: feedLabelHandler.feedUnit
+        }
+      })
+    }
+
+    await fetcher({
+      path: `/api/horses/${props.id}/`,
+      method: RequestType.PATCH,
+      body,
+      requestHeaders: [{
+        headerKey: 'content-type',
+        headerValue: 'application/json'
+      }]
+    })
+
+    await router.push(`/horse/${props.id}/`)
+  };
+
   return (
     <Card
       sx={{
@@ -58,6 +88,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
             name={props.name}
             stall={props.stall}
             imagePath="some junk"
+            updateHorse={updateHorse}
           />
         </Grid>
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>

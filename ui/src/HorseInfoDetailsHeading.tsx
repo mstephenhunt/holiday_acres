@@ -9,6 +9,7 @@ type HorseInfoDetailsHeadingProps = {
   name: string;
   stall: string;
   imagePath: string;
+  updateHorse?: Function;
 };
 
 export default function HorseInfoDetailsHeading(
@@ -53,8 +54,8 @@ export default function HorseInfoDetailsHeading(
                 Edit
               </Button>
             )}
-            {props.edit === true && (
-              <Button variant="contained" href={`/horse/${props.id}/`}>
+            {props.edit === true && props.updateHorse !== undefined && (
+              <Button variant="contained" onClick={() => { props.updateHorse(); }}>
                 Save
               </Button>
             )}
