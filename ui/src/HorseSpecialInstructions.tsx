@@ -1,10 +1,16 @@
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
 export default function HorseSpecialInstructions(props: {
   edit: boolean;
-  specialInstructions: string;
+  specialInstructions?: string;
+  updateHandler: Function;
 }) {
+  const handleSpecialInstructionsChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.updateHandler(event.target.value)
+  }
+
   return (
     <Grid container sx={{ flexGrow: "column" }}>
       <Grid item xs={12}>
@@ -13,14 +19,24 @@ export default function HorseSpecialInstructions(props: {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography
-          variant="body2"
-          display="block"
-          gutterBottom
-          sx={{ color: "#606060" }}
-        >
-          {props.specialInstructions}
-        </Typography>
+        {
+          !props.edit &&
+          <Typography
+            variant="body2"
+            display="block"
+            gutterBottom
+            sx={{ color: "#606060" }}
+          >
+          { !!props.specialInstructions  ? props.specialInstructions : 'None' }
+        </Typography>}
+        {
+          props.edit &&
+          <TextField
+            defaultValue={props.specialInstructions}
+            fullWidth
+            multiline
+            onChange={handleSpecialInstructionsChanged}
+          />}
       </Grid>
     </Grid>
   );
