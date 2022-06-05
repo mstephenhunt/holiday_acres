@@ -7,7 +7,6 @@ function responseTimeout(milliseconds: number) {
     }, milliseconds);
   });
 }
-
 export enum RequestType {
   GET = "GET",
   POST = "POST",

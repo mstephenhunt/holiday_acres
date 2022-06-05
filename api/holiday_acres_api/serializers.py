@@ -34,7 +34,6 @@ class HorseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Horse
-        # instead of hardcoding all of the fields, would a function make more sense?
         fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
 
     def update(self, horse, data):
