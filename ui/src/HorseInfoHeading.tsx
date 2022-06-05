@@ -1,27 +1,39 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import BedroomBabyIcon from '@mui/icons-material/BedroomBaby';
 
 type HorseInfoHeadingProps = {
   name: string;
   stall: string;
-  imagePath: string;
+  imagePath?: string;
 };
 
 export default function HorseInfoHeading(props: HorseInfoHeadingProps) {
   return (
     <Grid container spacing={0}>
       <Grid item xs={3}>
+        {
+          !!props.imagePath ?
         <CardMedia
-          component="img"
+            component="img"
+            sx={{
+              width: 80,
+              height: 80,
+              boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
+            }}
+            image={props.imagePath}
+            alt={props.name}
+          />
+          :
+        <BedroomBabyIcon
           sx={{
             width: 80,
             height: 80,
             boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
           }}
-          image="https://source.unsplash.com/random"
-          alt={props.name}
         />
+        }
       </Grid>
       <Grid
         item

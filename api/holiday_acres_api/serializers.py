@@ -34,7 +34,15 @@ class HorseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Horse
-        fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
+        fields = [
+            "id",
+            "name",
+            "user",
+            "feed",
+            "stall",
+            "special_instructions",
+            "public_photo_url",
+        ]
 
     def update(self, horse, data):
         if "name" in data.keys():

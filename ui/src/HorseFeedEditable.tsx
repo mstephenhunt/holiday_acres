@@ -1,4 +1,3 @@
-import * as React from "react";
 import { FeedType, FeedUnit } from "./types";
 import { feedTypeToLabelMap, feedUnitToLabelMap } from "./feedHelpers";
 import Box from "@mui/material/Box";
@@ -7,33 +6,47 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 type HorseFeedEditableComponentProps = {
   id: number;
-  setFeedLabel: React.Dispatch<React.SetStateAction<FeedType>>;
-  setFeedAmount: React.Dispatch<React.SetStateAction<number | undefined>>;
-  setFeedUnit: React.Dispatch<React.SetStateAction<FeedUnit>>;
-  feedLabel: string;
-  feedAmount: number | undefined;
+  feedType: FeedType;
+  feedAmount: number;
   feedUnit: string;
-  feedType?: FeedType;
+  feedRowUpdateHandler: Function;
+  feedRowDeleteHandler: Function;
 };
 
 export default function HorseFeedEditable(
   props: HorseFeedEditableComponentProps
 ) {
   const handleFeedTypeChange = (event: SelectChangeEvent) => {
-    props.setFeedLabel(event.target.value as FeedType);
+    props.feedRowUpdateHandler({
+      id: props.id,
+      feedType: event.target.value as FeedType,
+      feedAmount: props.feedAmount,
+      feedUnit: props.feedUnit,
+    });
   };
 
   const handleFeedAmountChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    props.setFeedAmount(event.target.valueAsNumber);
+    props.feedRowUpdateHandler({
+      id: props.id,
+      feedType: props.feedType,
+      feedAmount: event.target.valueAsNumber,
+      feedUnit: props.feedUnit,
+    });
   };
 
   const handleFeedUnitChange = (event: SelectChangeEvent) => {
-    props.setFeedUnit(event.target.value as FeedUnit);
+    props.feedRowUpdateHandler({
+      id: props.id,
+      feedType: props.feedType,
+      feedAmount: props.feedAmount,
+      feedUnit: event.target.value as FeedUnit,
+    });
   };
 
   return (
@@ -44,7 +57,7 @@ export default function HorseFeedEditable(
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
-              value={props.feedLabel}
+              value={props.feedType}
               onChange={handleFeedTypeChange}
             >
               <MenuItem value={FeedType.PELLETS}>
@@ -72,7 +85,7 @@ export default function HorseFeedEditable(
           </FormControl>
         </Box>
       </Grid>
-      <Grid item xs={2.5} sx={{ paddingLeft: "5px", paddingRight: "5px" }}>
+      <Grid item xs={2} sx={{ paddingLeft: "5px", paddingRight: "5px" }}>
         <TextField
           id="outlined-number"
           value={props.feedAmount}
@@ -80,7 +93,7 @@ export default function HorseFeedEditable(
           onChange={handleFeedAmountChange}
         />
       </Grid>
-      <Grid item xs={4.5}>
+      <Grid item xs={4}>
         <Box>
           <FormControl fullWidth>
             <Select
@@ -104,6 +117,13 @@ export default function HorseFeedEditable(
             </Select>
           </FormControl>
         </Box>
+      </Grid>
+      <Grid item xs={1}>
+        <CancelIcon
+          color="action"
+          sx={{ marginTop: '15px', marginLeft: '7px' }}
+          onClick={() => props.feedRowDeleteHandler(props.id)}
+        />
       </Grid>
     </Grid>
   );

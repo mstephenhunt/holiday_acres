@@ -43,10 +43,7 @@ class PaddockViewSet(viewsets.ModelViewSet):
 
 
 class HorseViewSet(viewsets.ModelViewSet):
-    """
-    Dummy endpoint to return all horse models in the DB
-    """
-
+    http_method_names = ["get", "patch", "options"]
     queryset = Horse.objects.all()
     serializer_class = HorseSerializer
 
@@ -58,9 +55,6 @@ class BarnSectionViewSet(viewsets.ModelViewSet):
 
     queryset = Barn_Section.objects.all()
     serializer_class = BarnSectionSerializer
-
-
-# User may access these at any time
 
 
 @api_view(["POST"])

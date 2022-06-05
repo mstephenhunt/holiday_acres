@@ -2,13 +2,15 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import BedroomBabyIcon from '@mui/icons-material/BedroomBaby';
 
 type HorseInfoDetailsHeadingProps = {
   id: number;
   edit: boolean;
   name: string;
   stall: string;
-  imagePath: string;
+  imagePath?: string;
+  updateHorse?: Function;
 };
 
 export default function HorseInfoDetailsHeading(
@@ -17,16 +19,27 @@ export default function HorseInfoDetailsHeading(
   return (
     <Grid container spacing={0}>
       <Grid item xs={3}>
-        <CardMedia
-          component="img"
+        {
+          !!props.imagePath ?
+          <CardMedia
+            component="img"
+            sx={{
+              width: 80,
+              height: 80,
+              boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
+            }}
+            image={props.imagePath}
+            alt={props.name}
+          />
+          :
+        <BedroomBabyIcon
           sx={{
             width: 80,
             height: 80,
             boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
           }}
-          image="https://source.unsplash.com/random"
-          alt={props.name}
         />
+                }
       </Grid>
       <Grid
         item
@@ -46,15 +59,15 @@ export default function HorseInfoDetailsHeading(
         </Typography>
       </Grid>
       <Grid item xs={3} sx={{ display: "flex" }}>
-        <Grid container>
+        <Grid container sx={{ justifyContent: 'end' }}>
           <Grid item>
             {props.edit === false && (
               <Button variant="outlined" href={`/horse/edit/${props.id}/`}>
                 Edit
               </Button>
             )}
-            {props.edit === true && (
-              <Button variant="contained" href={`/horse/${props.id}/`}>
+            {props.edit === true && props.updateHorse !== undefined && (
+              <Button variant="contained" onClick={() => { props.updateHorse(); }}>
                 Save
               </Button>
             )}

@@ -18,7 +18,7 @@ export default function BarnSection() {
   });
 
   const getBarnSections = async () => {
-    const response = await fetcher("/api/barn_sections/");
+    const response = await fetcher({ path: '/api/barn_sections/' });
     const barnSections = await response.json();
 
     if (barnSections) {
@@ -30,7 +30,7 @@ export default function BarnSection() {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <Container sx={{ py: 2 }} maxWidth="md">
+      <Container sx={{ py: 2 }} maxWidth="xs" disableGutters>
         {barnSections != undefined && (
           <Grid container spacing={4}>
             {barnSections.map((barnSection) => (
@@ -61,6 +61,7 @@ export default function BarnSection() {
                           stall={horse.stall}
                           feed={horse.feed}
                           specialInstructions={horse.special_instructions}
+                          publicPhotoUrl={horse.public_photo_url}
                         />
                       ))}
                     </Grid>

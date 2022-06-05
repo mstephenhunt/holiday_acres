@@ -20,7 +20,7 @@ export default function HorseEdit() {
       return;
     }
 
-    const response = await fetcher(`/api/horses/${id}/`);
+    const response = await fetcher({ path: `/api/horses/${id}/` });
     const horse = await response.json();
 
     if (horse && horse.detail !== "Not found.") {
@@ -36,21 +36,23 @@ export default function HorseEdit() {
 
   if (!horse) {
     return <h1>Loading...</h1>;
-  } else {
-    return (
-      <Container disableGutters>
-        <ButtonAppBar />
-        <Container sx={{ py: 2 }} maxWidth="md">
-          <HorseDetailsCard
-            id={horse.id}
-            edit={true}
-            name={horse.name}
-            stall={horse.stall}
-            feed={horse.feed}
-            specialInstructions={horse.special_instructions}
-          />
-        </Container>
-      </Container>
-    );
   }
+
+  return (
+    <Container disableGutters>
+      <ButtonAppBar />
+      <Container sx={{ py: 2 }} maxWidth="xs" disableGutters>
+        <HorseDetailsCard
+          id={horse.id}
+          edit={true}
+          name={horse.name}
+          stall={horse.stall}
+          feed={horse.feed}
+          specialInstructions={horse.special_instructions}
+          publicPhotoUrl={horse.public_photo_url}
+        />
+      </Container>
+    </Container>
+  );
+
 }
