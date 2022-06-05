@@ -35,7 +35,15 @@ class HorseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Horse
         # instead of hardcoding all of the fields, would a function make more sense?
-        fields = ["id", "name", "user", "feed", "stall", "special_instructions"]
+        fields = [
+            "id",
+            "name",
+            "user",
+            "feed",
+            "stall",
+            "special_instructions",
+            "public_photo_url",
+        ]
 
     def update(self, horse, data):
         if "name" in data.keys():
