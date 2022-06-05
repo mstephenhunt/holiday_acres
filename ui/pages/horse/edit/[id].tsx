@@ -40,7 +40,7 @@ export default function HorseEdit() {
     return (
       <Container disableGutters>
         <ButtonAppBar />
-        <Container sx={{ py: 2 }} maxWidth="md">
+        <Container sx={{ py: 2 }} maxWidth="xs" disableGutters>
           <HorseDetailsCard
             id={horse.id}
             edit={true}

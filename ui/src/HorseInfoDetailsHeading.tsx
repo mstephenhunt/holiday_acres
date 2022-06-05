@@ -47,7 +47,7 @@ export default function HorseInfoDetailsHeading(
         </Typography>
       </Grid>
       <Grid item xs={3} sx={{ display: "flex" }}>
-        <Grid container>
+        <Grid container sx={{ justifyContent: 'end' }}>
           <Grid item>
             {props.edit === false && (
               <Button variant="outlined" href={`/horse/edit/${props.id}/`}>
