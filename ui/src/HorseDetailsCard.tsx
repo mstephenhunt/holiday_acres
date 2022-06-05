@@ -22,91 +22,127 @@ type HorseDetailsCardProps = {
 
 type FeedDetails = {
   id: number;
-  feedLabel: FeedType;
-  setFeedLabel: Function;
+  feedType: FeedType;
   feedAmount: number;
-  setFeedAmount: Function;
   feedUnit: FeedUnit;
-  setFeedUnit: Function;
-  deleted: boolean;
 }
 
 export default function HorseDetailsCard(props: HorseDetailsCardProps) {
   const router = useRouter();
-  const [editFeedHandlers, setEditFeedHandlers] = useState<FeedDetails[]>();
-  const feedLabelsHooks = props.feed.map(feed => { return useState<FeedType>(feed.feed_type) });
-  const feedAmountHooks = props.feed.map(feed => { return useState<number>(feed.amount ? feed.amount : 0) });
-  const feedUnitHooks = props.feed.map(feed => { return useState<FeedUnit>(feed.unit) });
 
-  const getEditFeedLabelHandlers = () => {
-    // Since there's a list of feed that this horse has, we need a handler for each horse/field
-    setEditFeedHandlers(props.feed.map((feed, index) => {
-      // These fields should be initialized to whatever is currently on the horse
-      // const [feedLabel, setFeedLabel] = useState<FeedType>(feed.feed_type);
-      // const [feedAmount, setFeedAmount] = useState<number | undefined>(
-      //   feed.amount
-      // );
-      const [feedLabel, setFeedLabel] = feedLabelsHooks[index];
-      const [feedAmount, setFeedAmount] = feedAmountHooks[index];
-      const [feedUnit, setFeedUnit] = feedUnitHooks[index];
+  // let feedStates: FeedDetails[] = [];
+  const [feedHandlers, setFeedHandlers] = useState<FeedDetails[]>();
 
+  const initializeFeedHandlers = () => {
+    setFeedHandlers(props.feed.map((feed) => {
       return {
         id: feed.id,
-        feedLabel,
-        setFeedLabel,
-        feedAmount: feedAmount ? feedAmount : 0,
-        setFeedAmount,
-        feedUnit,
-        setFeedUnit,
-        deleted: false
-      };
+        feedType: feed.feed_type,
+        feedAmount: feed.amount ? feed.amount : 0,
+        feedUnit: feed.unit
+      }
     }));
-  }
+  };
 
   useEffect(() => {
-    if (!editFeedHandlers) {
-      getEditFeedLabelHandlers();
+    if (feedHandlers === undefined) {
+      initializeFeedHandlers();
     }
-  })
+  });
 
   /**
-   * Deletes whatever row in the feedLabelHandlers array has the passed feed id
+   * Whenever any value is updated for a feed row, this function is executed.
    */
-  const feedRowDeleteHandler = (feedId: number) => {
-    if (!editFeedHandlers) {
-      throw new Error('Unable to update, missing edit feed handlers');
+  const updateFeedState = (input: {
+    id: number,
+    feedType: FeedType,
+    feedAmount: number,
+    feedUnit: FeedUnit
+  }) => {
+    console.log(`Called update with: ${JSON.stringify(input, null, 2)}`)
+
+    if (feedHandlers === undefined) {
+      throw new Error('Unable to update row, feed handlers not initialized');
     }
 
-    const index = editFeedHandlers.findIndex(feedLabelHandler => {
-      return feedId === feedLabelHandler.id;
+    const index = feedHandlers.findIndex((feedState) => {
+      return feedState.id === input.id;
     });
 
     if (index === -1) {
-      throw new Error('Unable to find edit feed handler')
+      throw new Error('Unable to update row, cannot find id');
     }
 
-    const updatedHandlers = [...editFeedHandlers];
-    updatedHandlers[index].deleted = true;
+    feedHandlers[index].feedType = input.feedType;
+    feedHandlers[index].feedAmount = input.feedAmount;
+    feedHandlers[index].feedUnit = input.feedUnit;
 
-    setEditFeedHandlers(updatedHandlers);
-  }
+    const newFeedHandlers = [...feedHandlers];
+    newFeedHandlers[index].feedType = input.feedType;
+    newFeedHandlers[index].feedAmount = input.feedAmount;
+    newFeedHandlers[index].feedUnit = input.feedUnit;
+
+    setFeedHandlers(newFeedHandlers);
+  };
+
+  /**
+   * Used whenever you click the 'x' button, removes the entry from the state array
+   */
+  const removeFeedRow = (id: number) => {
+    if (feedHandlers === undefined) {
+      throw new Error('Unable to remove row, feed handlers not initialized');
+    }
+
+    const index = feedHandlers.findIndex((feedState) => {
+      return feedState.id === id;
+    });
+
+    if (index === -1) {
+      throw new Error('Unable to update row, cannot find id');
+    }
+
+    const newFeedHandlers = [...feedHandlers];
+    newFeedHandlers.splice(index, 1);
+
+    setFeedHandlers(newFeedHandlers);
+  };
+
+  /**
+   * Used whenever you click the 'add feed' button, adds a new row to the table
+   */
+  const addFeedRow = () => {
+    if (feedHandlers === undefined) {
+      throw new Error('Unable to add row, feed handlers not initialized');
+    }
+
+    const newRow: FeedDetails = {
+      id: feedHandlers.length + 1,
+      feedType: FeedType.PELLETS,
+      feedAmount: 0,
+      feedUnit: FeedUnit.SCOOP,
+    };
+
+    const newFeedHandlers = [...feedHandlers, newRow];
+
+    setFeedHandlers(newFeedHandlers);
+  };
 
   const specialInstructions = props.specialInstructions
     ? props.specialInstructions
     : "None";
 
   const updateHorse = async () => {
-    if (!editFeedHandlers) {
+    if (feedHandlers === undefined) {
       throw new Error('Unable to update, missing edit feed handlers');
     }
 
     // @TODO: Right now this is only set up to update feed, the ui needs to be set
     // up to edit other fields.
     const body = {
-      feed: editFeedHandlers.map((feedLabelHandler) => {
+      feed: feedHandlers.map((feedLabelHandler) => {
         return {
           amount: feedLabelHandler.feedAmount,
-          feed_type: feedLabelHandler.feedLabel,
+          feed_type: feedLabelHandler.feedType,
           unit: feedLabelHandler.feedUnit
         }
       })
@@ -125,7 +161,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     await router.push(`/horse/${props.id}/`)
   };
 
-  if (!editFeedHandlers) {
+  if (feedHandlers === undefined) {
     return <h1>Loading...</h1>
   }
 
@@ -172,18 +208,15 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
               />
             ))}
           {props.edit &&
-            props.feed.map((feed, index) => (
-              editFeedHandlers[index].deleted === false && <HorseFeedEditable
-                key={feed.id}
-                id={feed.id}
-                setFeedLabel={editFeedHandlers[index].setFeedLabel}
-                setFeedAmount={editFeedHandlers[index].setFeedAmount}
-                setFeedUnit={editFeedHandlers[index].setFeedUnit}
-                feedLabel={editFeedHandlers[index].feedLabel}
-                feedUnit={editFeedHandlers[index].feedUnit}
-                feedAmount={editFeedHandlers[index].feedAmount}
-                feedType={feed.feed_type}
-                feedRowDeleteHandler={feedRowDeleteHandler}
+            feedHandlers.map((feedState) => (
+              <HorseFeedEditable
+                key={feedState.id}
+                id={feedState.id}
+                feedType={feedState.feedType}
+                feedUnit={feedState.feedUnit}
+                feedAmount={feedState.feedAmount}
+                feedRowUpdateHandler={updateFeedState}
+                feedRowDeleteHandler={removeFeedRow}
               />
             ))}
         </Grid>
@@ -192,7 +225,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
           xs={12}
           sx={{ display: "flex", justifyContent: "right", paddingTop: '10px' }}
         >
-          <Button variant="outlined">
+          <Button variant="outlined" onClick={() => addFeedRow()}>
             Add Feed
           </Button>
         </Grid>}

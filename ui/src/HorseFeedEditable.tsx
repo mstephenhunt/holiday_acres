@@ -10,13 +10,10 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 type HorseFeedEditableComponentProps = {
   id: number;
-  setFeedLabel: Function;
-  setFeedAmount: Function;
-  setFeedUnit: Function;
-  feedLabel: string;
-  feedAmount: number | undefined;
+  feedType: FeedType;
+  feedAmount: number;
   feedUnit: string;
-  feedType?: FeedType;
+  feedRowUpdateHandler: Function;
   feedRowDeleteHandler: Function;
 };
 
@@ -24,17 +21,32 @@ export default function HorseFeedEditable(
   props: HorseFeedEditableComponentProps
 ) {
   const handleFeedTypeChange = (event: SelectChangeEvent) => {
-    props.setFeedLabel(event.target.value as FeedType);
+    props.feedRowUpdateHandler({
+      id: props.id,
+      feedType: event.target.value as FeedType,
+      feedAmount: props.feedAmount,
+      feedUnit: props.feedUnit,
+    });
   };
 
   const handleFeedAmountChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    props.setFeedAmount(event.target.valueAsNumber);
+    props.feedRowUpdateHandler({
+      id: props.id,
+      feedType: props.feedType,
+      feedAmount: event.target.valueAsNumber,
+      feedUnit: props.feedUnit,
+    });
   };
 
   const handleFeedUnitChange = (event: SelectChangeEvent) => {
-    props.setFeedUnit(event.target.value as FeedUnit);
+    props.feedRowUpdateHandler({
+      id: props.id,
+      feedType: props.feedType,
+      feedAmount: props.feedAmount,
+      feedUnit: event.target.value as FeedUnit,
+    });
   };
 
   return (
@@ -45,7 +57,7 @@ export default function HorseFeedEditable(
             <Select
               labelId="feed-select-label"
               // id="demo-simple-select" // what is this for?
-              value={props.feedLabel}
+              value={props.feedType}
               onChange={handleFeedTypeChange}
             >
               <MenuItem value={FeedType.PELLETS}>
