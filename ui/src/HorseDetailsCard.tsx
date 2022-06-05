@@ -59,8 +59,6 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     feedAmount: number,
     feedUnit: FeedUnit
   }) => {
-    console.log(`Called update with: ${JSON.stringify(input, null, 2)}`)
-
     if (feedHandlers === undefined) {
       throw new Error('Unable to update row, feed handlers not initialized');
     }
