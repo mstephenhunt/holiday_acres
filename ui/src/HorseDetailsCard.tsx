@@ -137,9 +137,20 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     setHorseDetailsHandler(newHorseDetailsHandler);
   };
 
+  const updateSpecialInstructions = (specialInstructions: string) => {
+    if (!horseDetailsHandler) {
+      throw new Error('Unable to update, horse details handler not initialized');
+    }
+
+    const newHorseDetailsHandler = { ...horseDetailsHandler };
+    newHorseDetailsHandler.specialInstructions = specialInstructions;
+
+    setHorseDetailsHandler(newHorseDetailsHandler);
+  }
+
   const updateHorse = async () => {
     if (!horseDetailsHandler) {
-      throw new Error('Unable to add row, horse details handler not initialized');
+      throw new Error('Unable to update, horse details handler not initialized');
     }
 
     const body = {
@@ -168,10 +179,6 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
   if (!horseDetailsHandler) {
     return <h1>Loading...</h1>
   }
-
-  const specialInstructions = props.specialInstructions
-    ? props.specialInstructions
-    : "None";
 
   return (
     <Card
@@ -256,11 +263,11 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
         <Grid item xs={12}>
           <HorseSpecialInstructions
             edit={props.edit}
-            specialInstructions={specialInstructions}
+            specialInstructions={horseDetailsHandler.specialInstructions}
+            updateHandler={updateSpecialInstructions}
           />
         </Grid>
       </Grid>
     </Card>
   );
-
 }
