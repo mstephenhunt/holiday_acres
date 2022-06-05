@@ -17,6 +17,7 @@ type HorseDetailsCardProps = {
   name: string;
   stall: string;
   feed: Feed[];
+  publicPhotoUrl?: string;
   specialInstructions?: string;
 };
 
@@ -196,7 +197,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
             edit={props.edit}
             name={props.name}
             stall={props.stall}
-            imagePath="some junk"
+            imagePath={props.publicPhotoUrl}
             updateHorse={updateHorse}
           />
         </Grid>

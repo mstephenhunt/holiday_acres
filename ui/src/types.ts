@@ -28,6 +28,7 @@ export type Horse = {
   feed: Feed[];
   stall: string;
   special_instructions?: string;
+  public_photo_url?: string;
 };
 
 export type BarnSectionType = {

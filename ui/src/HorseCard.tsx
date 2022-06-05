@@ -13,6 +13,7 @@ type HorseCardProps = {
   stall: string;
   feed: Feed[];
   specialInstructions?: string;
+  publicPhotoUrl?: string;
 };
 
 export default function HorseCard(props: HorseCardProps) {
@@ -31,7 +32,7 @@ export default function HorseCard(props: HorseCardProps) {
               <HorseInfoHeading
                 name={props.name}
                 stall={props.stall}
-                imagePath="some junk"
+                imagePath={props.publicPhotoUrl}
               />
             </Grid>
             <Grid

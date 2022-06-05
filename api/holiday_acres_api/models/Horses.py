@@ -19,3 +19,4 @@ class Horse(models.Model):
     name = models.CharField(max_length=200)
     stall = models.TextField()
     special_instructions = models.TextField(null=True)
+    public_photo_url = models.TextField(null=True)

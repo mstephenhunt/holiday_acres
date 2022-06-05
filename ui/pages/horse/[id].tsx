@@ -48,6 +48,7 @@ export default function HorseDetails() {
             stall={horse.stall}
             feed={horse.feed}
             specialInstructions={horse.special_instructions}
+            publicPhotoUrl={horse.public_photo_url}
           />
         </Container>
       </Container>

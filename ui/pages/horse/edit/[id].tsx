@@ -36,21 +36,23 @@ export default function HorseEdit() {
 
   if (!horse) {
     return <h1>Loading...</h1>;
-  } else {
-    return (
-      <Container disableGutters>
-        <ButtonAppBar />
-        <Container sx={{ py: 2 }} maxWidth="xs" disableGutters>
-          <HorseDetailsCard
-            id={horse.id}
-            edit={true}
-            name={horse.name}
-            stall={horse.stall}
-            feed={horse.feed}
-            specialInstructions={horse.special_instructions}
-          />
-        </Container>
-      </Container>
-    );
   }
+
+  return (
+    <Container disableGutters>
+      <ButtonAppBar />
+      <Container sx={{ py: 2 }} maxWidth="xs" disableGutters>
+        <HorseDetailsCard
+          id={horse.id}
+          edit={true}
+          name={horse.name}
+          stall={horse.stall}
+          feed={horse.feed}
+          specialInstructions={horse.special_instructions}
+          publicPhotoUrl={horse.public_photo_url}
+        />
+      </Container>
+    </Container>
+  );
+
 }

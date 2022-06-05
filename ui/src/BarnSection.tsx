@@ -61,6 +61,7 @@ export default function BarnSection() {
                           stall={horse.stall}
                           feed={horse.feed}
                           specialInstructions={horse.special_instructions}
+                          publicPhotoUrl={horse.public_photo_url}
                         />
                       ))}
                     </Grid>
