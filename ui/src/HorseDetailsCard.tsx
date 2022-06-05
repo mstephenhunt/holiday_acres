@@ -154,6 +154,7 @@ export default function HorseDetailsCard(props: HorseDetailsCardProps) {
     }
 
     const body = {
+      special_instructions: !!horseDetailsHandler.specialInstructions ? horseDetailsHandler.specialInstructions : null,
       feed: horseDetailsHandler.feedDetails.map((feedLabelHandler) => {
         return {
           amount: feedLabelHandler.feedAmount,
