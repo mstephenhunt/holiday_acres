@@ -67,6 +67,7 @@ export default function HorseInfoDetailsHeading(
               </Button>
             )}
             {props.edit === true && props.updateHorse !== undefined && (
+              // @ts-ignore
               <Button variant="contained" onClick={() => { props.updateHorse(); }}>
                 Save
               </Button>

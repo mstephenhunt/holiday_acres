@@ -5,9 +5,12 @@ import TextField from "@mui/material/TextField";
 export default function HorseSpecialInstructions(props: {
   edit: boolean;
   specialInstructions?: string;
-  updateHandler: Function;
+  updateHandler?: Function;
 }) {
   const handleSpecialInstructionsChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!props.updateHandler) {
+      throw new Error('Unable to update special instructions, no handler provided');
+    }
     props.updateHandler(event.target.value)
   }
 
