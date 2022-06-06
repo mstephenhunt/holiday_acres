@@ -13,4 +13,3 @@ RUN poetry cache clear --all pypi
 RUN poetry cache clear --all private
 RUN poetry install
 RUN poetry run python ./manage.py migrate
-RUN poetry run python ./manage.py loaddata ./holiday_acres_api/seeds/0001_initial_seed.json
