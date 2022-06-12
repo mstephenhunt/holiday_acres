@@ -2,6 +2,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import Button from '@material-ui/core/Button';
 
 
 export default function LoginPage() {
@@ -50,6 +51,14 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 />
             </Box>
+            <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            >
+            Sign In
+            </Button>
             <Box
             sx={{
             marginTop: 8,
