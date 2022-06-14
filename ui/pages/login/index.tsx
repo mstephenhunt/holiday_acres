@@ -15,6 +15,11 @@ export default function LoginPage() {
         });
     };
 
+
+    const handleLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <Box
@@ -56,6 +61,7 @@ export default function LoginPage() {
             fullWidth
             variant="contained"
             color="primary"
+            onClick={() => { handleLogin(); }}
             >
             Sign In
             </Button>
