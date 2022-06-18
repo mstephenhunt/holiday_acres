@@ -1,0 +1,30 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Anaconda Python Builder",
+			"selector": "source.python",
+			"shell_cmd": "\"/Users/matthunt/Library/Caches/pypoetry/virtualenvs/barn-api-service-4hWRF-Pk-py3.9/bin/python3.9\" -u \"$file\"",
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "/Users/matthunt/development/holiday_acres",
+		},
+		{
+			"path": ".",
+		}
+	],
+    "settings":
+    {
+        "anaconda_linting": true,
+        "anaconda_linting_behaviour": "always",
+        "pep257": false,
+        "python_interpreter": "~/Library/Caches/pypoetry/virtualenvs/barn-api-service-4hWRF-Pk-py3.9/bin/python3.9",
+        "test_command": "python -m unittest discover",
+        "use_pylint": false,
+        "validate_imports": true,
+    },
+}
