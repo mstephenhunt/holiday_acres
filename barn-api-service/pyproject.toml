@@ -8,6 +8,7 @@ authors = ["Matt Hunt <mstephenhunt@gmail.com>"]
 python = "^3.9"
 uvicorn = "^0.17.6"
 fastapi = "^0.78.0"
+SQLAlchemy = "^1.4.37"
 
 [tool.poetry.dev-dependencies]
 
