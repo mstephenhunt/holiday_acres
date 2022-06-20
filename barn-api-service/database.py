@@ -16,3 +16,11 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
+
+def db():
+    db = SessionLocal()
+    try:
+        return db
+    finally:
+        db.close()
