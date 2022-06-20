@@ -18,8 +18,8 @@ def get_db():
 async def root():
     results = await barn_service.get_barn_sections(get_db())
 
+    names = []
     for result in results:
-        print(result.name)
-    # users = crud.get_users(db, skip=skip, limit=limit)
-    # return users
-    return {"message": "Hello World"}
+        names.append(result.name)
+
+    return {"barn_sections": names}
