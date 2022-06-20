@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from database import SessionLocal
-
-# from services import barn_service
+from modules.barn.routers.barn_router import barn_router
 from modules.barn.services.barn_service import get_barn_sections
 
 
@@ -14,6 +13,9 @@ def get_db():
         return db
     finally:
         db.close()
+
+
+app.include_router(barn_router)
 
 
 @app.get("/")
