@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 # Created from:
 # https://fastapi.tiangolo.com/tutorial/sql-databases/
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///../api/db.sqlite3"
+SQLALCHEMY_DATABASE_URL = "sqlite:///db.sqlite3"
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
 engine = create_engine(

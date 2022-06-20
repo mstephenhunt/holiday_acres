@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
-from models import BarnSection
+from models.BarnSection import BarnSection
 
 
-def get_barn_sections(db: Session):
+async def get_barn_sections(db: Session):
     return db.query(BarnSection).all()
 
 
