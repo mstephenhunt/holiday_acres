@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from database import SessionLocal
-from services import barn_service
+
+# from services import barn_service
+from modules.barn.services.barn_service import get_barn_sections
 
 
 app = FastAPI()
@@ -16,7 +18,7 @@ def get_db():
 
 @app.get("/")
 async def root():
-    results = await barn_service.get_barn_sections(get_db())
+    results = await get_barn_sections(get_db())
 
     names = []
     for result in results:
