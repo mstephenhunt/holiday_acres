@@ -23,10 +23,3 @@ class Feed(Base):
     amount = Column(Float)
     horse_id = Column(Integer)
     unit = Column(String)
-
-
-
-
-
-
-
