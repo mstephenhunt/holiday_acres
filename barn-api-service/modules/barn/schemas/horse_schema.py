@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class HorseSchema(BaseModel):
-    #id: int
+    id: int
     name: str
    
     class Config:

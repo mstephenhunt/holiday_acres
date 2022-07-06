@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class FeedSchema(BaseModel):
-    #id: int
+    id: int
     feed_type: str
     amount: float
     horse_id: int
