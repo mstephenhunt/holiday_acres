@@ -3,23 +3,51 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@material-ui/core/Button';
+import { useState, useEffect } from "react";
+import { fetcher, RequestType } from "../../src/fetcher";
 
+
+type UserCredentials = {
+    username: string;
+    password: string;
+}
 
 export default function LoginPage() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        });
-    };
+
+    const [userCredentials, setUserCredentials] = useState<UserCredentials>();
+
+    useEffect(() => {
+        if (!userCredentials) {
+            setUserCredentials({username: "", password: ""});
+        }
+    });
 
 
-    const handleLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value)
+    const handleUsernameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUserCredentials({username: event.target.value, password: userCredentials.password})
     }
 
+    const handlePasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUserCredentials({username:  userCredentials.username, password: event.target.value})
+    }
+
+
+    const handleLogin = async () => {
+        const response = await fetcher({
+            path: "/api/users/login",
+            method: RequestType.POST,
+            body: {email: userCredentials.username, password: userCredentials.password},
+            requestHeaders: [{
+                headerKey: 'content-type',
+                headerValue: 'application/json'
+            }]
+        })
+        const jsonResponse = await response.json()
+        const token = jsonResponse.token
+        document.cookie = "token="+token
+        console.log(document.cookie.substring(82, document.cookie.length))
+
+    }
     return (
         <Container component="main" maxWidth="xs">
             <Box
@@ -34,7 +62,7 @@ export default function LoginPage() {
                 Sign in
                 </Typography>
                 </Box>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box sx={{ mt: 1 }}>
                 <TextField
                 margin="normal"
                 required
@@ -44,6 +72,7 @@ export default function LoginPage() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={handleUsernameChanged}
                 />
                 <TextField
                 margin="normal"
@@ -54,6 +83,7 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handlePasswordChanged}
                 />
             </Box>
             <Button

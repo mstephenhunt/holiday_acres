@@ -29,6 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
     Dummy endpoint to return all user models in the DB
     """
 
+    http_method_names = ["get", "post", "options"]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

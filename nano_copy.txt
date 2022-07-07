@@ -1,0 +1,10 @@
+ENVIRONMENT=production
+DB_ENGINE="django.db.backends.postgresql"
+DB_NAME="haec_prod"
+DB_USER="postgres"
+DB_PASSWORD="k-zJ6ySqgCa_sLWJb2LBnTfVqNUQyvtGQzrjKQE0zhs"
+DB_HOST="haec-prod.ciuyn8folfpf.us-east-2.rds.amazonaws.com"
+DB_PORT=5432
+DJANGO_SECRET_KEY="B3nXdNEC95Z2X7xwdFOilfZAnOClrASYfQ6Ik4YZ_R8"
+USER_SERVICE="localhost:3001"
+SECRET_MIDDLE_KEY="asdf"
