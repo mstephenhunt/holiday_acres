@@ -1,5 +1,8 @@
 node_modules
 
+#misc
+nano_copy.txt
+
 # user service
 haec-user-service/node_modules
 haec-user-service/dist
