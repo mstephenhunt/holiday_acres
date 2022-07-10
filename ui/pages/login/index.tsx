@@ -27,6 +27,13 @@ export default function LoginPage() {
         }
     });
 
+    const [userCredentials, setUserCredentials] = useState<UserCredentials>();
+
+    useEffect(() => {
+        if (!userCredentials) {
+            setUserCredentials({username: "", password: ""});
+        }
+    });
 
     const handleUsernameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserCredentials({username: event.target.value, password: userCredentials.password})
