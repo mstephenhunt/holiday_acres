@@ -27,14 +27,6 @@ export default function LoginPage() {
         }
     });
 
-    const [userCredentials, setUserCredentials] = useState<UserCredentials>();
-
-    useEffect(() => {
-        if (!userCredentials) {
-            setUserCredentials({username: "", password: ""});
-        }
-    });
-
     const handleUsernameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserCredentials({username: event.target.value, password: userCredentials.password})
     }
@@ -45,7 +37,6 @@ export default function LoginPage() {
 
 
     const handleLogin = async () => {
-        setDisplayInvalidLogin(true)
         const response = await fetcher({
             path: "/api/users/login",
             method: RequestType.POST,
@@ -56,10 +47,18 @@ export default function LoginPage() {
             }]
         })
         const jsonResponse = await response.json()
-        const token = jsonResponse.token
-        document.cookie = "token="+token
-        console.log(document.cookie.substring(82, document.cookie.length))
-
+        // const token = jsonResponse.token
+        // document.cookie = "token="+token
+        // console.log(document.cookie.substring(82, document.cookie.length))
+        console.log(jsonResponse)
+        if (jsonResponse.token.length === 21) {
+            console.log("this is a good token")
+            setDisplayInvalidLogin(false)
+        }
+        else {
+            console.log("invalid token")
+            setDisplayInvalidLogin(true)
+        }
     }
     return (
         <Container component="main" maxWidth="xs">
