@@ -40,6 +40,8 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
+# or
+$ yarn dev
 
 # production mode
 $ npm run start:prod
