@@ -1,12 +1,15 @@
 from database import Base
-from sqlalchemy import Column, Integer, String, Float, Table, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, Table, ForeignKey, DateTime
 from sqlalchemy.orm import declarative_base, relationship
+from datetime import datetime
 
 Base = declarative_base()
 
 class BarnSection(Base):
     __tablename__ = "holiday_acres_api_barn_section"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
     name = Column(String)
     horses = relationship("Horse")
 

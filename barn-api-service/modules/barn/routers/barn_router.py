@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from modules.barn.services.barn_service import get_barn_sections, get_horses, get_feeds
-from modules.barn.schemas.barn_schema import BarnSchema
+from modules.barn.services.barn_service import get_barn_sections, create_barn_section, get_horses, get_feeds
+from modules.barn.schemas.barn_schema import BarnSchema, BarnInputSchema
 from modules.barn.schemas.feed_schema import FeedSchema
 from modules.barn.schemas.horse_schema import HorseSchema
 
@@ -10,6 +10,10 @@ barn_router = APIRouter()
 @barn_router.get("/barn_sections/", response_model=list[BarnSchema])
 async def barn_sections():
     return await get_barn_sections()
+
+@barn_router.post("/barn_sections/", response_model=BarnSchema)
+async def post_barn_sections(barn_section: BarnInputSchema):
+    return await create_barn_section(barn_section)
 
 @barn_router.get("/horses", response_model=list[HorseSchema])
 async def horses():
