@@ -1,14 +1,12 @@
 from sqlalchemy.orm import Query
 from pydantic import BaseModel, conlist, ValidationError
 from typing import List
-from modules.barn.schemas.horse_schema import HorseSchema 
-from modules.barn.models.BarnSection import Horse
-
+from modules.barn.schemas.horse_schema import HorseSchema
 
 class BarnSchema(BaseModel):
     id: int
     name: str
-    horse: List[Horse]
+    horses: List[HorseSchema]
 
     class Config:
         orm_mode = True

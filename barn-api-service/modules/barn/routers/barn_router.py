@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from modules.barn.services.barn_service import get_barn_sections, get_horses, get_feeds 
+from modules.barn.services.barn_service import get_barn_sections, get_horses, get_feeds
 from modules.barn.schemas.barn_schema import BarnSchema
 from modules.barn.schemas.feed_schema import FeedSchema
 from modules.barn.schemas.horse_schema import HorseSchema
