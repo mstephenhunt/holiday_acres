@@ -19,6 +19,7 @@ class Horse(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     barn_section_id = Column(Integer, ForeignKey("holiday_acres_api_barn_section.id"))
+    feed = relationship("Feed")
 
 
 class Feed(Base):
@@ -26,5 +27,5 @@ class Feed(Base):
     id = Column(Integer, primary_key=True, index=True)
     feed_type = Column(String)
     amount = Column(Float)
-    horse_id = Column(Integer)
+    horse_id = Column(Integer, ForeignKey("holiday_acres_api_horse.id"))
     unit = Column(String)
